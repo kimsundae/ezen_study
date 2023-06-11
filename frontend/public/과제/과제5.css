@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.title{
+	border-left: solid 5px green; /*왼쪽 테두리*/
+	padding-left: 10px;       		/*왼쪽 안쪽 여백*/
+}
+.content{
+	border: solid 1px gray;
+	width: 400px;
+	background-color:  #e8e8e8;
+	border-radius: 10px;	
+	padding: 40px;
+}
+.contli{
+	margin-bottom: 15px;
+}
+.info{
+	border: solid 2px gray;
+	width: 300px;
+	border-radius: 20px;
+	padding: 20px;
+	margin: 20px 40px;
+}
+.line{
+	border-bottom: dotted 1px gray;
+	padding-bottom:10px; 
+}
+.right{
+	text-align: right;
+}
