@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.number1{
+	display: inline-block;
+	font-size: 50px;
+	color: orange;
+	
+}
+.forfont1{
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bold;
+}
+.forfont2{
+	display:inline-block;
+	color: orange;
+}
+
+.box1{
+	color: white;	
+	background-color:  #126978;
+	width: 500px;	
+	padding:20px;	
+}
