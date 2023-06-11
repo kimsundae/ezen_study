@@ -31,29 +31,37 @@
 				4. disabled="disabled" : 사용금지모드
 				5. autofocus="autofocus" : 포커스[커서] 이동
 				6. maxlength = "최대문자길이"
+				7. placeholder = "가이드라인 텍스트
 				
 			<select>  : 목록 상자
 			<option>  :	목록 상자의 항목[아이템]
 			
 			<textarea> : 긴 글 텍스트 상자
 				rows : 행 글자수	cols : 열 글자수
+			<fieldset> : 입력상자들을 그룹
+				<legend> : 그룹 제목
 						
 					
 		  -->		 
 	<form>
-		입력상자    :   <input value="유재석" readonly="readonly">            	   	    <br/>
-		텍스트     :	  <input type="text" value="인사과" disabled="disabled">			<br/>
-		패스워드    :	  <input type="password" autofocus="autofocus">		<br/>
-		이메일     :	  <input type="email" maxlength="5">			<br/>
+		<fieldset>
+			<legend> 그룹 제목 </legend>
+			<input type="text" placeholder="자기소개">									<br/>
+			입력상자    :   <input value="유재석" readonly="readonly">            	   	    <br/>
+			텍스트     :	  <input type="text" value="인사과" disabled="disabled">			<br/>
+			패스워드    :	  <input type="password" autofocus="autofocus">					<br/>
+			이메일     :	  <input type="email" maxlength="5">							<br/>
+		</fieldset>
 		원형체크버튼[단일선택] :	  
 						<input type="radio" name="confirm">예
-						<input type="radio" name="confirm">아니오				<br/>
+						<input type="radio" name="confirm">아니오							<br/>
 		네모체크버튼[복수선택] :	  
 						<input type="checkbox">뉴스
-						<input type="checkbox">드라마			<br/>
+						<input type="checkbox">드라마					<br/>
 		첨부파일    :	 
 				 		<input type="file">
 						 <input type="file" multiple="multiple">	<br/>
+		<hr />				 
 		색상       :	  <input type="color">					<br/>			
 		날짜		  :	  <input type="date">					<br/>	
 		날짜/시간	  :	  <input type="datetime-local">			<br/>
@@ -72,7 +80,7 @@
 			<option> 네이트 </option>
 		</select>
 	
-	<textarea rows="5" cols="20"></textarea>
+		<textarea rows="5" cols="20"></textarea>
 	
 	
 	</form>
