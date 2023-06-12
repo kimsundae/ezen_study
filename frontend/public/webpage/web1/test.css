@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+#up{
+	display: flex;
+	width:1200px; height: 100px;
+	margin: 0 auto;	
+	justify-content: space-between;
+}
+.up_logo img{
+	padding: 15px;
+	margin-left: 35px;
+}
+.menu{ 
+	display:flex;
+	flex-direction: column;		
+}
+.menu1{
+	padding: 10px;
+	font-size: 15px;
+	text-align: right;
+	
+}
+.menu2{
+	font-size: 15px;
+	text-align: right;
+	word-spacing: 100px;	
+	
+}
+
+.up_img img{
+	width: 100%; height: 200px;
+}
+#middle{
+	width: 1200px;
+	margin: 0 auto;
+}
+

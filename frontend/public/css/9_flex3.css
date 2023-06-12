@@ -8,7 +8,7 @@
 /* 자식요소들의 크기가 더 커지면 자동 줄 바꿈 처리  */
 .flexbox1{ flex-wrap: wrap; align-items: flex-start; }  /* 윗변 정렬 */
 .flexbox2{ align-items: center; }						/* 가운데 정렬 */
-.flexbox3{ align-items: flex-end; }						/* 밑변 정렬 */
+.flexbox3{ align-items: flex-end; }		ㄴ				/* 밑변 정렬 */
 .flexbox4{ align-items: stretch; } 						/* 높이 생략시 최소 높이 자동할당*/
 .flexbox5{ flex-wrap: wrap; align-items: baseline; }	/* 모든 요소들 중 밑변 기준으로 정렬 */
 
@@ -24,4 +24,4 @@
 .box2 { width: 100px; height: 100px; display: inline-block; align-items: center;}
 
 .box4 { width: 50px; height: 80px; }
-.box5 { width: 100px; height: 150px; display: inline-flex; align-items: cen}
+.box5 { width: 100px; height: 150px; display: inline-flex; align-items: center;}

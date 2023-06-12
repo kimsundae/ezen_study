@@ -10,7 +10,7 @@
 .flex_box1{
 	border: 1px solid red;		padding:5px;
 	display: flex;				/* 하위 요소 배치방법 */
-	flex-direction: column;		/* 방향 : row 기본값 */
+	flex-direction: row;		/* 방향 : row 기본값 */
 }
 /* 2. 세로배치할 요소들의 부모요소에 flex*/
 .flex_box2{
