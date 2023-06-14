@@ -1,0 +1,49 @@
+@charset "UTF-8";
+*{ padding: 0px; margin: 0px;}
+li{ list-style-type: none;}
+a{/* 모든 a태그 적용  */
+	color: black;
+	text-decoration: none /* 밑줄,윗줄,취소선 */
+}
+/* 액션 속성  */
+a:hover{ /* 해당 요소에 마우스를 올렸을 때 */
+	color:orange;	
+	background-color: black
+}
+a:active{/* 해당 요소를 클릭했을 때 css */
+	color:blue;
+	
+}
+a:visited{ /* 해당 요소를 클릭한 적이 있으면 css */
+	color: red;
+}
+/* ------- */
+#header{
+	background-color:#eeeeee;
+	display: flex;
+	justify-content: center;
+}
+.drop_menu{
+	display: inline-block;
+	margin-left: 30px;
+	position: relative;
+	
+	
+	
+}
+.sub_menu{
+	display: none; 
+	position: absolute;
+	top:20px; width: 80px;
+	padding-top: 10px;
+	border-bottom: 1px solid #eeeeee;
+	border-right: 1px solid #eeeeee;
+	border-left: 1px solid #eeeeee;
+}
+.drop_menu:hover .sub_menu{
+	display: block;
+	
+}
+
+
+

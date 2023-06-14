@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+*{padding: 0px; margin: 0px; list-style-type: none;}
+
+#middle{/* 본문 구역 */
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.top_img img{		/* 이미지 크기 */
+	height: 200px;
+	width: 100%;
+}
+.intro1_size {
+	margin: 30px 20px 0px 0px;
+}
+.intro1_size img, .intro2_size img{
+	width: 500px; height: 250px;
+}
+.intro2_size{
+	margin-left: 30px;
+}
+.middle_box{
+	display: flex;
+	flex-direction: column;
+}
+.middle_top_box{
+	display: flex;
+	align-items: center;
+	height: 350px;
+}
+
+.middle_top_text{
+		
+}
+.middle_bottom_text{
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+/* 본문 하단 */
+.middle_bottom_box{
+	display: flex;
+	align-items: center;	
+	height: 350px;
+	
+}
+
+
+
+
