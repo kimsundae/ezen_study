@@ -6,10 +6,49 @@
     font-weight: 400;
     font-style: normal;
 }
+a{
+	color: black;
+	text-decoration: none;	
+}
+
+
+
+#header{ /* 헤더 */
+   width: 1200px; /*가로사이즈*/
+   margin: 0 auto; /* 구역 가로가운데정렬 */
+   display: flex;   /* 하위요소 배치방법*/
+   justify-content: space-between; /* 가로 균등배치 */
+}
+.header_box{
+   width: 100%;
+   border: solid 1px white;
+   background-color: #e8e8e8;
+}
+.logo{
+   padding: 30px;
+   padding-top: 40px;
+   margin-left: 100px;
+}
+
+/* 본 메뉴 */
+.main_menu li{ 
+   display: inline-block;      /* li요소들 가로 배치 */
+   margin-left: 60px;         /* 바깥 왼쪽 여백 */
+   font-size: 12px;
+   padding-top: 40px;
+   padding-left: 30px;
+}/* 헤더end */
+
+
+
+
 .mid_top_box{		/* 상단 이미지 구역 */
 	width: 1200px;	
 	margin: 0 auto;
 	display: flex;
+	margin-top: 20px;
+	justify-content: space-around;
+	
 }
 .mid_top_img{ width: 1400px; margin-left: 180px;}
 .mid_top_img img{		/* 이미지 크기 */
@@ -19,9 +58,88 @@
 .mid_bt_left{
 	display: flex;
 	padding: 20px;
+	align-items: center;	
+}
+.mid_bt_right{
+	display: flex;
+	align-items: center;
+	margin-left: 30px;
+}
+
+.mid_bottom{
+	width: 100%;
+	background-color:#EEEEEE;
+	height: 220px;
+	padding-top: 30px;
+}
+.mid_bottom_size{
+	width:850px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+.mid_bottom_content{
+	display: flex;
+	flex-direction: column;
+}
+.mid_bottom_content img{
+	width: 200px;
+}
+.mid_text_color{
+	background: white;
+	font-size: 15px;
+	padding: 5px;
 }
 
 
+
+.icon_size{
+	margin-right: 20px;
+}
+
+#footer{		/* 푸터 */
+   background-color: #2C2A29;      /* 배경색 */
+   color:white;               /* 글꼴 색 */
+   width: 100%; height: 150px;      /* 크기 */
+              
+}
+.ft_box{
+   width: 1200px;               /* 가로 길이 */
+   margin: 0 auto;               /* 구역 가운데 정렬 */
+   display: flex;               /* 하위 요소 배치 방법 */
+   justify-content: space-between;   /* 하위 요소 가로 정렬 */
+   align-items: center;         
+   padding: 10px;
+   font-size: 12px;
+   padding-top: 20px
+}
+.font{
+   color: #6bafe9;
+}
+.ft_box li{
+   display: flex;
+   justify-content: space-between;
+    }
+.icon{
+   display: flex;
+   justify-content: space-between;
+   padding-top: 20px;
+}
+.ft_menu{
+   padding-top:20px;
+   margin-right: 10px;
+}
+
+.foter_box{
+   background-color: #e8e8e8; 
+}
+.text_color{
+   color: #ffe3f0;
+   padding-top:15px;
+}
+.ft_middle{
+   padding-top:15px;
+}
 
 
 

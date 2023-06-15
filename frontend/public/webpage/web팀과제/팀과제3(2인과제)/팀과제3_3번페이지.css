@@ -1,11 +1,5 @@
 @charset "UTF-8";
-@font-face {
-    font-family: 'SUITE-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-*{padding: 0px; margin: 0px; list-style-type: none;}
+*{padding: 0px; margin: 0px; }
 a{
 	color: black;
 	text-decoration: none;	
@@ -37,74 +31,69 @@ a{
    padding-left: 30px;
 }
 
-#middle{/* 본문 구역 */
-	width: 1200px;
-	margin: 0 auto;height: 400px;
-}
-#footer{	/* 하단구역 */
-	width: 100%;  height: 480px;
-	background-color: #EEEEEE;
-}
 
-.top_img img{		/* 이미지 크기 */
-	height: 280px;
-	width: 100%;
+
+
+.mid_content{
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+}
+.sq{
+	background-color: black;
+	width: 5px; height: 18px;
+	margin-right: 7px;
+}
+.mid_ct_top{
 	
+}
+.mid_left_text{	text-align: center;}
+.mid_left_text p{font-size: 13px;}
+.mid_top_head{
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;	
+}
+.mid_left{					/* 달력 구역 */
+	background-color: #FCF9EA;
+	width: 700px; height: 500px;
+	display: flex;
+	flex-direction:column;
+	justify-content: center;
+	margin:80px 0px 20px 60px; 
+}
+.color_red{ color: red;}   /* 달력 일요일 색깔 */
+.mid_left .mid_cr{			/* 달력 색,크기 */
+	background-color:white;
+	border-collapse: collapse;
+	width: 500px; height: 300px;
+	margin-left: 80px;
 	
 }
-.intro1_size {
-	margin: 30px 20px 0px 0px;
+.mid_left .mid_cr , .mid_cr th , .mid_cr td{	/* 테두리선 */
+	border: solid 2px black;
 }
-.intro1_size img, .intro2_size img{
-	width: 550px; height: 300px;
-	
+.mid_cr td{	
+	width: 80px; height: 70px;
+	 align-items: center;
+	 margin-bottom: 10px;
 }
-.intro2_size img{
-	margin-left: 20px;
-}
-.intro2_size{
-	margin-left: 30px;
-}
-.middle_box{
+.mid_right{				/* 본문 텍스트 구역 */
 	display: flex;
 	flex-direction: column;
-}
-.middle_top_box{
-	display: flex;
-	align-items: center;
-	height: 350px;
-}
-
-.middle_top_text{
-		font-family: 'SUITE-Regular';
-		font-size: 30px;
-		margin-left: 50px
-}
-.middle_botom_botom_text2{
-	font-family: 'SUITE-Regular';
-	font-size: 30px;
-}
-.middle_bottom_text{
-	font-size: 20px;
-	margin-top: 10px;
-	font-family: 'SUITE-Regular';
-	
+	margin: 80px 0px 0px 50px;
+}	
+.info{
+	color: #9CBAA4;
+	font-size: 10px;
+	margin: 5px 5px 0px 0px;
 }
 
-/* 본문 하단 */
-.middle_bottom_box{
-	display: flex;
-	align-items: center;
-	width: 1200px;
-	margin: 0 auto;	
-	height: 350px;
-	padding-top: 30px;
-}
-#footer_{
+#footer{
    background-color: #2C2A29;      /* 배경색 */
    color:white;               /* 글꼴 색 */
-   width: 100%; height: 158px;      /* 크기 */
-                /* 바깥여백 */
+   width: 100%; height: 150px;      /* 크기 */
+   margin-top: 30px;             /* 바깥여백 */
 }
 .ft_box{
    width: 1200px;               /* 가로 길이 */
@@ -142,8 +131,9 @@ a{
 }
 .ft_middle{
    padding-top:15px;
-}
-
-
-
-
+}	
+	
+	
+	
+	
+	
