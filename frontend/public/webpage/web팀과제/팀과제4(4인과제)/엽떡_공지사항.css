@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+*{ padding: 0px; margin: 0px; list-style: none;}
+
+
+/*--------본문 구역---------  */
+.mid{		/* 본문 구역 */
+	width: 1200px;
+	margin: 0 auto;
+}
+.notice_text{color: #8c6239;}	/* 공지사항 텍스트 박스 */	
+.notice_text h3{				/* 공지사항 텍스트 */
+	font-size: 40px;
+	font-weight: bold;
+	margin: 20px 0px 20px 0px;
+	text-align: left;	
+}	
+.notice_text p{					/* 공지사항 텍스트 */
+	font-size: 30px;
+	text-align: left;	
+}
+.search_box{					/* 검색 영역 */
+	display: flex;
+	justify-content: flex-end;
+	margin: 30px 0px 8px 0px;
+}
+
+.search_text input{			/* 검색창 크기 */
+	width: 140px;
+	height: 38px; 
+	border:1px solid #ced4da; 
+	padding-left: 8px;
+}
+.search_box .search_text{margin-left: 5px;}	
+.search_box .search_button{margin-left: 5px; }
+.search_button input{			/* 검색 버튼 크기 */
+	width: 70px; 
+	height:40px; 
+	background-color: #8c6239; 
+	border: none; 	
+	color: white;
+}
+.search_title{				/* 제목창 크기 */
+	width: 140px;
+	height: 40px; 
+	border:1px solid #ced4da;
+	padding-left: 8px;
+}
+
+/*--------- 테이블 상자--------- */
+.table_box {			
+	border: none;	
+	width: 1200px;
+	border-collapse: collapse
+}
+.table_box th{			/* 테이블 제목 */
+	color: white;
+	background-color: #8c6239;
+	padding: 15px;
+}
+.table_box td{	padding: 20px 0px 20px 0px;}
+.td_size{text-align: center;}					/* 행 텍스트 정렬 */	
+.tr_border{	border-bottom: solid 1px #DDDDDD;	}		/* tr 밑 선  */	
+.page_number{
+	display: flex;
+	margin: 0 auto;
+	justify-content: center;
+}
+.page_ul_number{						/* 페이지 번호 */
+	display: flex;	
+	justify-content: space-around;
+	width:400px;
+	margin:50px 0px;
+	color: #bbbbbb;
+}
+/* 본문 끝 */
+
+
+
+
+
+

@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+*{padding: 0px; margin: 0px; list-style-type: none;}
+a{/* 모든 a태그 적용  */
+	color:white;	
+	text-decoration: none /* 밑줄,윗줄,취소선 */
+}
+.drop_box_content a:hover{
+	color:#ffc107;
+}
+.header_top_menu a,.header_top_logo a{
+	color:black;
+}
+/* 호버 */
+.header_box:hover + .drop_box , .drop_box:hover
+{
+	display: block;
+}
+/* 호버 */
+#header{
+	width: 100%; 
+	border: solid 1px rgba(33, 37, 41, 0.1)}
+.header_box{
+	width: 1200px;
+	margin: 0 auto; 
+	display: flex;
+	justify-content: space-between;		
+}
+
+.header_right{					/* 오른쪽 구역 */
+	display:flex;
+	flex-direction:column;
+	width: 900px;
+}
+.header_logo{padding-top: 10px;}
+.header_box img{width: 200px;}
+.header_top_logo{				/* 헤더 상단 로그인 */
+	display: flex;
+	justify-content: space-around;
+	width: 400px;
+	margin: 10px 0px 0px 500px;
+	font-size: 15px;
+	align-items: center;
+}
+.header_top_logo img{			/* 아이콘 사이즈 */
+	width: 25px;
+}
+.header_top_menu{				/* 로그인 , 회원가입 */
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+.gift{							/* 상품 이미지 박스 */
+	background-color: #faebd7;
+    padding: 1px 10px 0px 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 3px #e8cfb3;
+    display: flex;
+    margin-bottom: 2px;
+    color: #de1d24;
+}
+.gift img{
+	height: 23px;  
+	width: 30px;       	     	
+}
+.gift div{
+	padding: 3px 3px 0px 0px;
+}
+.drop_box{
+	width: 100%;
+	background-color: #212529;
+	padding: 10px 0px;
+	display: none; 	
+}
+.bbbb{ display: none;  background-color: red}
+.header_top_menu:hover .bbbb{
+	display: block;
+}
+.drop_box_content{		/* 컨텐츠 표시 구역 */
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	color: white;
+	font-size: 15px;
+	justify-content: center;		
+	position: relative;
+}
+.drop_box_content ul{
+	margin-right: 20px;
+}
+.drop_box_content li{
+	margin: 15px 0px 15px 0px;
+}
+.drop_box_menu1{
+	position: relative;
+	left: 115px;
+	text-align: center;
+}
+.drop_box_menu2{
+	position: relative;
+	left: 140px;
+	text-align: center;
+}
+.drop_box_menu3{
+	position: relative;
+	left: 165px;
+	text-align: center;
+}
+.drop_box_menu4{
+	position: relative;
+	left: 195px;
+	text-align: center;
+}
+.drop_box_menu5{
+	position: relative;
+	left: 197px;
+	text-align: center;
+}
+.drop_box_menu6{
+	position: relative;
+	left: 190px;
+	text-align: center;
+}
+.drop_box_menu7{
+	position: relative;
+	left: 205px;
+	text-align: center;
+}
+.gift_notic a,.gift_notic a:hover{
+	color:salmon;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
