@@ -1,0 +1,201 @@
+@charset "UTF-8";
+/*기본 세팅*/
+*{ padding:0px; margin:0px; }
+*:focus{outline: none;}
+a {color:black; text-decoration: none;}
+li{list-style: none;}
+input{border:none;}
+/* 로그인 */
+#login_wrap {
+	width:400px;
+	margin: 0 auto;
+	color:#666666;
+	font-size: 14px;
+	padding:0 10px;
+}
+#login_wrap h3 {
+	padding:30px 0;
+	text-align: center;
+	color:black;
+}
+.logo {
+	border-bottom:solid 1px #E7E7E7;
+	
+	text-align: center;
+	padding:5px 0px;
+}
+.logo img { width:110px;}
+.login_info {	
+	line-height:16pt;
+	padding:5px 15px; 
+}
+.txt_b_red{ font-weight: bold; color: #E71F26; }
+
+/*로그인 입력*/
+.wrap_input{ margin:20px 10px;}
+.wrap_input .input{
+	display:inline-block;	
+	border:solid 1px #DCDCDC;
+	border-radius: 12px;
+	background-color: white;
+	width:380px;
+	margin-bottom:8px;		
+}
+.input_text{
+	margin:20px 10px;
+	font-size:16px;
+	font-weight: bold;
+	color:#D0D0D0;	
+}
+/*이메일 저장*/
+.wrap_save{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding:5px 0;
+}
+.save_check{
+	display:inline-block;
+	background-image: url('팀플과제4img/sp_mobile.png');
+	background-repeat:no-repeat;
+	background-position: -22px -167px;
+    background-size: 200px 200px;
+	width: 24px;
+    height: 24px;    
+    margin-top: 1px;	
+}
+.text_b_gray {
+	color:#5A5D5A;
+	font-weight: bolder;
+	font-size:12px;
+	margin-left: 10px;	
+}
+
+/*버튼*/
+.input_btn {	
+	background-color:#E21F26;
+	border-radius: 12px;
+	margin:15px 0px;
+	font-size:16px; 
+	font-weight: bold;
+	color:white;
+	height:60px;	
+	width:380px;
+	margin-bottom:8px;	
+	text-align: center;
+}
+
+/* 아이디 찾기 등*/
+.text_btn {
+	font-size: 13px;
+	text-align: center;
+	padding:20px 0 10px 0;
+}
+.bar{
+	display:inline-block;
+	color:#E5E5E5;
+	width:2px;
+	height:13px;
+	margin:0 8px;
+}
+/* 하단 */
+.or { 
+	display:inline-block;
+	width:350px;
+	border-bottom: solid 1px #F0F0F0; 
+	margin-bottom: 60px;
+}
+.or_text{ 
+	display:inline-block;
+	position: relative;
+	left:160px;
+	top:7px;
+	color:#909090;
+	background-color:white;
+	font-size: 11px;
+	text-align:center;
+	width:30px;	
+}
+
+/*타계정으로 로그인*/
+.or_login_box_red { 
+	display:inline-block;	
+	border:solid 1px #E21F26;
+	border-radius: 12px;
+	background-color: white;
+	margin-bottom:8px;	
+	padding:18px 0px;
+	width:380px;
+	height:20px;
+	text-align: center;
+	
+}
+.or_login_box {
+	display:inline-block;	
+	border:solid 1px #DCDCDC;
+	border-radius: 12px;
+	background-color: white;
+	margin-bottom:8px;	
+	padding:18px 0px;
+	width:380px;
+	height:20px;
+	text-align: center;
+}
+.login_item{
+	background: url('팀플과제4img/sp_mobile.png');
+	background-repeat: no-repeat;
+    background-size: 200px 200px;
+    vertical-align: middle;
+    line-height: 300px;   
+}
+.payco {	
+	background-position: 0 -47px;
+	display: inline-block;
+	width: 59px;
+    height: 13px;
+    margin-top: -4px;  
+}
+.naver {
+	background-position: 0 -62px;
+	display: inline-block;
+	width: 69px;
+    height: 13px;
+    margin-top: -4px;   
+}
+.kakao {
+	background-position: 0 -77px;
+	display: inline-block;
+	width: 50px;
+    height: 15px;
+    margin-top: -4px;   
+}
+.apple {
+	background-position: 0 -132px;
+	display: inline-block;
+	width: 67px;
+    height: 17px;
+    margin-top: 0px;
+}
+.google {
+	background-position: 0 -111px;
+	display: inline-block;
+	width: 56px;
+    height: 19px;
+    margin-top: -4px;
+}
+.account_red {
+	font-size: 16px;
+	color:#E21F26;
+	margin-left: 6px;
+}
+.account_black {
+	font-size: 16px;
+	color:black;
+	margin-left: 6px;
+}
+
+
+
+
+
+
