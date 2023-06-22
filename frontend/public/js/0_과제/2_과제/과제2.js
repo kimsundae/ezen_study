@@ -18,7 +18,7 @@ function creat(){
 			alert('로그인 실패')			
 		}	
 		id.value = ""
-			password.value = ""		
+		password.value = ""		
 }
 function login(){
 	
