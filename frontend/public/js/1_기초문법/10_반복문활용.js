@@ -172,8 +172,33 @@ console.log(output)
 //  * *
 // *   *
 //*     *
+let input10 = prompt('입력 : ')
+output= ``
 
-
+for(let i = 1; i < input10; i++){
+	for(let y = 1; y < i; y++){
+		output += ` `;
+	}
+	output += `*`
+	for(let z = i-1; z <= input10 - i; z++){
+		output += ` `;
+	}
+	i == input10-1 ? null : output+= `*`
+	output += `\n`	
+}
+for(let i = 1; i < input10-1; i++){
+	for(let y = i; y < input10 - i; y++){
+		output += ` `
+	}
+	output += `*`;
+	
+	for(let z = 0; z <= i; z++){
+		output += ` `;
+	}
+		output += `*`;
+		output += `\n`;
+}
+console.log(output)
 
 	
 
