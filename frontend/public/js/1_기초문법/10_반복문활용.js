@@ -180,25 +180,34 @@ for(let i = 1; i < input10; i++){
 		output += ` `;
 	}
 	output += `*`
-	for(let z = i-1; z <= input10 - i; z++){
+	for(let z = i; z <= input10+2-i; z++){
 		output += ` `;
 	}
 	i == input10-1 ? null : output+= `*`
 	output += `\n`	
 }
 for(let i = 1; i < input10-1; i++){
-	for(let y = i; y < input10 - i; y++){
+	for(let y = 2; y < input10 - i; y++){
 		output += ` `
 	}
 	output += `*`;
 	
-	for(let z = 0; z <= i; z++){
+	for(let z = 0; z < i*2-1; z++){
 		output += ` `;
 	}
 		output += `*`;
 		output += `\n`;
 }
 console.log(output)
+
+let input11 = prompt('입력 : ')
+output = ``;
+
+for(let i = 1; i < input11; i++){
+	
+	
+	
+}
 
 	
 
