@@ -1,4 +1,4 @@
-// 문제1) 입력받은 수 만큼 * 출력 
+/*// 문제1) 입력받은 수 만큼 * 출력 
 let input = prompt('별 입력 : ')
 let output = ``;
 for(let i = 1; i <= input; i++){
@@ -174,11 +174,11 @@ console.log(output)
 //*     *
 
 
+*/
 
-
-let input10 = prompt('입력 : ');
+let input10 = Number(prompt('입력 : '));
 output= ``;
-
+let b = 1;
 for(let i = 1; i < input10; i++){
 	
 	for(let y = 1; y < i; y++){
@@ -187,17 +187,16 @@ for(let i = 1; i < input10; i++){
 	
 	output += `*`
 	
-	for(let z = 1; z < (input10+2) - (i*2-1); z++){
+	for(let z = b; z <= input10; z++){
 		output += ` `;		
 	}
-	
-	
+	b += 2
 	i == input10-1 ? null : output += `*`;
 	
 	output += `\n`;	
 	
 }
-console.log(output)
+
 for(let i = 1; i < input10-1; i++){
 	for(let y = 2; y < input10 - i; y++){
 		output += ` `
@@ -210,7 +209,7 @@ for(let i = 1; i < input10-1; i++){
 		output += `*`;
 		output += `\n`;
 }
-
+console.log(output)
 
 let input11 = prompt('입력 : ')
 output = ``;
