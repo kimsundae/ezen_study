@@ -172,20 +172,32 @@ console.log(output)
 //  * *
 // *   *
 //*     *
-let input10 = prompt('입력 : ')
-output= ``
+
+
+
+
+let input10 = prompt('입력 : ');
+output= ``;
 
 for(let i = 1; i < input10; i++){
+	
 	for(let y = 1; y < i; y++){
 		output += ` `;
 	}
+	
 	output += `*`
-	for(let z = i; z <= input10+2-i; z++){
-		output += ` `;
+	
+	for(let z = 1; z < (input10+2) - (i*2-1); z++){
+		output += ` `;		
 	}
-	i == input10-1 ? null : output+= `*`
-	output += `\n`	
+	
+	
+	i == input10-1 ? null : output += `*`;
+	
+	output += `\n`;	
+	
 }
+console.log(output)
 for(let i = 1; i < input10-1; i++){
 	for(let y = 2; y < input10 - i; y++){
 		output += ` `
@@ -198,7 +210,7 @@ for(let i = 1; i < input10-1; i++){
 		output += `*`;
 		output += `\n`;
 }
-console.log(output)
+
 
 let input11 = prompt('입력 : ')
 output = ``;
