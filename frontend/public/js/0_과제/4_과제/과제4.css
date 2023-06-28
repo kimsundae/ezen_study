@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 .wrap {
-	display: flex;
-	
+	display: flex;	
 }
 .writePage , .listPage , .inpage{
 	width: 500px;
@@ -22,7 +21,7 @@
 	flex-direction: column;
 	height: 100px;
 }	
-.look{
+.inPageContent{
 	display: flex;
 	flex-direction: column;
 	height: 50px;
