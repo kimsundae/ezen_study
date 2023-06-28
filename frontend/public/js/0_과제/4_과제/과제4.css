@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.wrap {
+	display: flex;
+	
+}
+.writePage , .listPage , .inpage{
+	width: 500px;
+}
+
+.contentBox {
+	width: 400px;
+	height: 300px;
+}
+.writePage button{
+	width: 70px;
+	height: 30px;
+}
+
+.inPage{
+	display: flex;
+	flex-direction: column;
+	height: 100px;
+}	
+.look{
+	display: flex;
+	flex-direction: column;
+	height: 50px;
+	
+}
+.table td{
+	margin-right: 10px;
+}

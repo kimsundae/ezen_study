@@ -9,19 +9,13 @@
 	width: 1000px;
 	margin: 50px;	
 }
-.테이블 th{
-	border : solid 1px gray;
-}
 .테이블 td{
 	text-align: center;
 	border : solid 1px gray;
 }
-.테이블 input{
-	border:none
-}
-.total {
-	display: flex;
-}
+.테이블 th{border : solid 1px gray;}
+.테이블 input{border:none}
+.total {display: flex;}
 .box{
 	display: flex;
 	justify-content: space-around;
