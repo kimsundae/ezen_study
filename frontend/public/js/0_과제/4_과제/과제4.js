@@ -46,14 +46,14 @@ function info(num){
 												<p>제목:${작성정보[num].writeHead}</p>
 												<p>내용:${작성정보[num].contentBox}<p>
 												<p>작성자:${작성정보[num].writeName}<p>
-												<p><button onclick='delite(${num})'>삭제</button><p>
+												<p><button onclick='deletePost(${num})'>삭제</button><p>
 											</div>`;
 	// 객체 view 속성의 값을 1++ 후 list()실행
 	작성정보[num].view++
 	list();															
 }
 // 삭제버튼 온클릭 함수
-function delite(num){
+function deletePost(num){
 	if(작성정보[num].writePassword == prompt('비밀번호를 입력해주세요 : ')){
 		alert('[삭제 완료]')
 		//삭제버튼 입력시 해당 객체 삭제
