@@ -11,9 +11,16 @@
 	width: 400px;
 	height: 300px;
 }
+.writePage{
+	position: relative;
+}
 .writePage button{
 	width: 70px;
 	height: 30px;
+	border: none;
+	position: absolute;
+	right: 45px;
+	bottom: -50px;	
 }
 
 .inPage{
@@ -27,6 +34,9 @@
 	height: 50px;
 	
 }
-.table td{
-	margin-right: 10px;
+.thContent span {
+	margin-right : 7px; 
+	color : gray;
 }
+
+	
