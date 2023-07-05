@@ -27,37 +27,23 @@
 		<div class="kioskcontent"><!-- 본문 : 제품 출력/장바구니 출력 구역 -->
 		
 			<div class="productbox"><!-- 제품구역 -->
-			
-				<div class="product">	<!-- 제품 1개 기준 -->
-					<img src="../img/헬로디아블로와퍼.png"/>		<!-- 제품이미지 -->
-					<div class="pinfo">
-						<div class="pname">헬로 디아블로 와퍼</div> <!-- 제품이름 -->
-						<div class="pprice">15,000</div>		<!-- 제품가격 -->
-					</div>	
-				</div>				
-						
+				<!-- 제품 1개 들어갈 위치  -->
 			</div><!-- 제품구역 end  -->
 			
 			<div class="cartbox"><!-- 카트구역 -->
 				<div class="cartcontent">	<!-- 제품개수/가격 , 제품정보 출력 -->
 					<div class="carttop"><!-- 제품개수/총가격  -->
-						<div> 카트 <span class="ccount" >3</span> </div>
-						<div> 총 주문금액 <span class="ctotal" >31,000</span> </div>
+						<div> 카트 <span class="ccount" >0</span> </div>
+						<div> 총 주문금액 <span class="ctotal" >0</span> </div>
 					</div>
 					<div class="cartbottom">	<!-- 제품정보 출력 구역  -->
-					
-						<div class="citem"><!-- 카트내 제품 1개  -->							
-							<div class="iname">더블비프불고기버거</div>	<!-- 제품명 -->
-							<div class="iprice">12,000원</div>	<!-- 제품가격  -->
-							<span class="icencel"> X </span>	<!-- 제품 개별취소  -->
-						</div>
-						
+							<!-- innerHTML -->				
 					</div>
 				
 				</div>	
 				<div class="cartbtn" id="여기">	<!-- 버튼 구역 -->
-					<button class="cancelbtn">취소하기</button>
-					<button class="orderbtn">주문하기</button>
+					<button onclick="cartCancel()" class="cancelbtn">취소하기</button>
+					<button onclick="productOrder()" class="orderbtn">주문하기</button>
 				</div>	
 			</div><!-- 카트구역 end  -->
 			
