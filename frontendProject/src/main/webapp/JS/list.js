@@ -2,6 +2,7 @@
 
 // 1. 쿠키에 있는 배열 호출 [ 페이지 열리면 ]
 let boardList = JSON.parse(localStorage.getItem('boardList'));
+console.log(boardList);
 	// 쿠키/세션에 저장된 객체/배열 호출 시 JSON.parse()
 	// 쿠키/세션에 저장된 객체/배열 호출 시 JSON.stringify()	
 if( boardList == null ) boardList = [ ] // 만약에 쿠키가 비어 있으면 비어 있는 배열 대입
@@ -16,8 +17,8 @@ function boardPrint(){
 		for( let i = 0 ; i < boardList.length; i ++){
 			let board = boardList[i]; // i번째 게시물 호출
 			html += `<tr>
-						<td> ${ board.no } </td> <td> ${ board.title} </td> <th> ${ board.writer } </th>
-						<td> ${ board.content } </td> <td> ${ board.view } </td> <th> ${ board.like } </th>
+						<td> ${ board.no } </td> <td onclick="onViewLoad(${ board.no })"> ${ board.title} </td> <th> ${ board.writer } </th>
+						<td> ${ board.date } </td> <td> ${ board.view } </td> <th> ${ board.like } </th>
 					</tr>`
 		}
 	// 3. 대입
@@ -25,18 +26,41 @@ function boardPrint(){
 }
 
 
-
-
-
-
-/*html = ``;
-for(let i = 0; i < boardList.length; i++){
-	html += `<tr>
-				<td> ${boardList[i].no} </td> <td> ${boardList[i].title} </td> <th> ${boardList[i].writer} </th>
-				<td> ${boardList[i].content} </td> <td> ${boardList[i].view} </td> <th> ${boardList[i].like} </th>
-			</tr>`		
+// 2. 상세 페이지로 이동 [ 실행조건 : 클릭한 게시물 제목 ]
+function onViewLoad( no ){
+	console.log('현재 클릭된 제목(게시물)의 번호 : ' +  no );
+	// 클릭된 결과를 다른페이지로 옮기는방법
+		//JS는 페이지가 전환/새로고침 초기화 -> // 세션/쿠키
+	//1. 클릭된 게시물번호 세션에 저장
+		sessionStorage.setItem( 'no',no )
+		// * 조회수 증가 함수 호출
+		increaseView( no )
+	//2. 페이지 이동
+		location.href="../board/view.jsp"
+		
 }
-document.querySelector('.tbody').innerHTML = html;*/
+// 3. 조회수 증가함수 [ 실행조건 : 제목 클릭 후 페이지 전환 전에]
+function increaseView( no ){
+	// 1. 클릭된 게시물번호의 게시물찾기
+	for(let i = 0; i < boardList.length; i++){
+		if( boardList[i].no == no ){
+			// 조회수 1 증가
+			boardList[i].view++
+			// * 만약에 세선/쿠키를 사용 중이라면 업데이트
+			localStorage.setItem('boardList' , JSON.stringify( boardList ))
+			break;
+		}
+	}
+	/*for( let i = 0; i < boardList.length; i++){
+			let b = boardList[i]
+			if( b.no == no ){
+				b.view++
+				localStorage.setItem( 'boardList' , JSON.stringify(boardList) );				
+				break;
+				
+			}
+	}	*/
+}
 
 
 

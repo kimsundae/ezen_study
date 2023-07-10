@@ -31,7 +31,7 @@
 	height: 450px; /* height 생략시 기본값 auto : 내용물 크기만 자동으로 늘어감 */
 	display: flex; flex-wrap: wrap;
 	overflow-y: scroll;/* 만약에 자식 요소들이 현재 구역보다 사이즈가 더 커지면 세로 스크롤 */
-}
+}	
 	/* 제품 1개 */
 		/* 전체 가로사이즈 : width: 700px; /가로당 제품 수 */
 .product { width: 30%; text-align: center; margin: 5px 10px 30px 10px;}
