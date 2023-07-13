@@ -5,6 +5,7 @@ public class Ex4_입출력 { // class s
 
 	public static void main(String[] args) { // main s
 		
+		
 		// 1. 출력 : syso
 			// 1. System.out.print("출력하고싶은말" 또는 변수명); : 출력만
 		System.out.print(" 출력문구1 ");
