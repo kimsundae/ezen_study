@@ -1,10 +1,10 @@
-package 과제.과제2.Level1.ex9;
+package 과제.과제3.Level2.ex3;
 
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Level1_9 {
+public class Level2_3 {
 	
 	public static void main(String[] args) {
 		System.out.println(" >> Level2_3 answer >> ");
@@ -18,9 +18,27 @@ public class Level1_9 {
 		System.out.println("국어\t영어\t수학\t합계\t평균\t3배수\t8배수\t홀짝\t결과");
 		
 		/* 문제풀이 위치 */
-		System.out.println(kor+"\t"+eng+"\t"+mat+"\t"+(kor+eng+mat)+"\t"+((kor+eng+mat)/3.0)
-											+"\t"+((kor+eng+mat)%3 == 0)+"\t"+((kor+eng+mat)%8 == 0)+"\t"+
-														((kor+eng+mat)%2 == 0 ? "짝수" : "홀수")+"\t"+((kor+eng+mat)>=65 ? "합격" : "탈락")	);
+		//홀짝 판단
+		String holzhak = "";
+		if(((kor+eng+mat)%2 == 0)) {
+			holzhak = "짝수";
+		}else if (((kor+eng+mat)%2 == 1)) {
+			holzhak = "홀수";
+		}
+		
+		//합격 여부
+		String pass ="";
+		if((kor+eng+mat) >= 65) {
+			pass = "합격";
+		}else {
+			pass ="탈락";
+		}
+			
+		System.out.println(kor + "\t" + eng + "\t" + mat + "\t" + (kor+eng+mat)
+										+"\t"+ ((kor+eng+mat)/3.0) + "\t" + ((kor+eng+mat)%3==0) + "\t" + ((kor+eng+mat)%8 == 0)+"\t"
+															+ holzhak +  "\t" + pass);
+		
+		
 		/* ----------- */
 	}
 }
