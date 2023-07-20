@@ -44,13 +44,18 @@ public class 팀과제2_도서대여 {
 			   			books[books.length-1] = newBooks; break;		   					   			
 			   		case 2: // 도서목록
 			   			System.out.println("---------------------도서목록---------------------");
-			   			for(int i =1, k = 1; i <= books.length; i++) {		  
+			   			System.out.println("\t도서명\t\t\t대여여부");
+			   			System.out.println("-----------------------------------------------");
+			   			for(int i =1; i <= books.length; i++) {		  
 			   				if(books[i-1].equals("0")) continue;
-			   				System.out.print(books[i-1] + " | "); 
+			   				System.out.print("\t"+books[i-1]+"\t\t\t" );	
+			   				if(status[i-1] == true) {
+			   					System.out.println("대여 중\t");
+			   				}else {
+			   					System.out.println("대여 가능");
+			   				}
 			   				
-			   				if(k % 3 == 0)
-			   					System.out.println();
-			   				k++;
+
 			   			}
 			   			System.out.println();
 			   			break;
