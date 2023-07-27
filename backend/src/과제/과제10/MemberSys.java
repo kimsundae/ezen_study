@@ -1,7 +1,8 @@
 package 과제.과제10;
 
-import java.util.Arrays;
-import java.util.Scanner;
+							
+
+import java.util.*;	// 해당 패키지내 모든 클래스 호출
 
 
 
@@ -43,8 +44,8 @@ public class MemberSys {
 					memberList[i] = member;
 					System.out.println("회원가입이 완료되었습니다.");
 					return;
-			}//if
-		}// for
+			}//if e
+		}// for e
 	}// 회원가입 끝
 	static void 로그인 ()
 	{
@@ -62,6 +63,7 @@ public class MemberSys {
 				}
 			}
 		}
+		System.out.println("로그인 실패.");
 	}
 	static void 아이디찾기 ()
 	{ 
