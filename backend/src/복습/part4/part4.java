@@ -8,7 +8,7 @@ public class part4 {
 	public static void main(String[] args) throws IOException {
 	
 			while(true) {
-				 String filePath = "C:\\Users\\504\\git\\ezen_study\\backend\\src\\복습\\part4\\재고관리.txt";
+				 String filePath = "./src/복습/part4/재고관리.txt";
 				 FileOutputStream fileOutputStream = new FileOutputStream(filePath , true);
 				 FileInputStream fileInputStream = new FileInputStream(filePath);
 				 File file = new File(filePath);
