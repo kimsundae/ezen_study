@@ -112,6 +112,11 @@
 		
 		6.논리
 			boolean(1)
+            
+		- 제약조건
+			1. pk	: primary key( pk 필드명 )
+            2. fk	: foreign key( fk 필드명 ) referances pk테이블명( pk 필드명 ) [ 선택 옵션 ]
+            
 */
 #예1 : 데이터베이스( 여러개의 테이블(표) 들이 저장 할 수 있는 공간 ) 생성
 create database sqldb1;
@@ -209,5 +214,137 @@ drop table if exists sqldb1web2;
 create database sqldb1web2;
 use sqldb1web2;
 drop table if exists board;
-create table board( bno int , btitle varchar(100) , bcontent longtext , bview int , bdate datetime);
+create table board( bno int , btitle varchar(100) , bcontent longtext , bview int , bdate datetime );
 select * from board;
+
+/* 
+	문제3 :
+		1. 웹개발 하는데 DB저장소 'sqldb1web2' 이름으로 DB 생성
+        2. 해당 db에 board 테이블 생성
+			 회원번호	    ( 필드명 : mno		타입 : 최대 21억정도 )
+             회원아이디	( 필드명 : mid		타입 : 문자열 최대 20 )
+             회원비밀번호	( 필드명 : mpw 		타입 : 문자열 최대 20 )
+			 게시물번호	( 필드명 : bno		타입 : 최대 21억정도 )
+             게시물제목	( 필드명 : btitle		타입 : 문자열 최대 100 )
+             게시물내용	( 필드명 : bcontent	타입 : 문자열 최대 6만5천 이상 )
+             게시물조회수	( 필드명 : bview   	타입 : 최대 21억정도 )
+            게시물작성일	( 필드명 : bdate	타입 : 날짜/시간 )
+*/
+# 1. 데이터베이스 생성
+# 만약에 동일한 db명이 존재했을 때 생성불가능 하기 때문에 먼저 드롭
+drop database if exists sqldb1web2;
+create database sqldb1web2;
+use sqldb1web2;
+drop table if exists memberboard;
+create table membeboard2board2rboard( 
+	mno int , 
+    mid varchar(20) ,
+    mpw varchar(20) ,
+    bno int , 
+    btitle varchar(100) , 
+    bcontent longtext , 
+    bview int , 
+    bdate datetime 
+);
+select * from memberboard;
+
+/* 
+	문제4 :
+		1. 웹개발 하는데 DB저장소 'sqldb1web2' 이름으로 DB 선택
+        2. 해당 db에 memberboard 테이블 기준으로 2개의 테이블로 생성 [ 필드와 타입은 문제3 동일 ]
+			 회원번호	    ( 필드명 : mno		타입 : 최대 21억정도 )
+             회원아이디	( 필드명 : mid		타입 : 문자열 최대 20 )
+             회원비밀번호	( 필드명 : mpw 		타입 : 문자열 최대 20 )
+			 게시물번호	( 필드명 : bno		타입 : 최대 21억정도 )
+             게시물제목	( 필드명 : btitle		타입 : 문자열 최대 100 )
+             게시물내용	( 필드명 : bcontent	타입 : 문자열 최대 6만5천 이상 )
+             게시물조회수	( 필드명 : bview   	타입 : 최대 21억정도 )
+			게시물작성일	( 필드명 : bdate	타입 : 날짜/시간 )
+*/
+
+# I 기본키 : [pk]primary key : 식별키 : 테이블의 유일한 값을 가지는 필드 : 중복이 없고 null과 공백이 없는 필드
+
+# M 외래키 : [fk]foreign key : 참조키 : PK필드와 연결된 다른 테이블의 필드 : 중복이 있다.
+	# PK : 데이터의 중복이 없는 식별가능한 필드 [ 후보 : mno , mid ]
+		# mno : 회원번호 [ 절대적인 식별 ] 권장o 
+        # mid : 회원아이디 [ 강호동 qwe 라는 아이디로 가입 후 탈퇴하고 5년 후 asd라는 아이디로 유재석 가입 ] 권장 x
+		# -번호 형태의 pk필드 권장하는 이유 : 문자열 데이터 필드보다는 메모리 효율적으로 사용 가능.
+        # -테이블 1개당 PK필드 1개이상 권장 O 
+	# FK : 다른 테이블에 있는 PK필드와 연결
+		# 1. FK필드명은 PK필드명과 동일하게 사용 [ 권장 ]
+        # 2. [필수] FK필드의 타입은 PK필드의 타입과 동일
+        # 3. [ 참조하는테이블 ] 에서 FK 필드 선언 [ 1:M 관계에서 M쪽이 참조하는 테이블 1:참조당하는 테이블 ]
+        
+-- 예1 : 1:M 관계 / PK:FK 관계
+drop database if exists sqldb1web2;
+create database sqldb1web2;
+use sqldb1web2;
+drop table if exists memberList;
+create table member2(
+	mno int , 
+    mid varchar(20) ,
+    mpw varchar(20) ,
+    primary key( mno )	-- 현재 테이블에서 mno라는 필드를 식별키로 사용
+); 
+drop table if exists boardList;
+create table board2(
+	bno int , 
+    btitle varchar(100) , 
+    bcontent longtext , 
+    bview int , 
+    bdate datetime ,
+    mno int ,	-- 1. FK 필드 선언
+    foreign key( mno ) references member2( mno )-- 2. 현재 테이블에서 mno라는 필드를 외래키로 사용
+		# foreign key( mno_fk ) 		: 'mno_fk' 라는 필드를 FK 필드로 설정
+        # references member2( mno_pk )	: FK필드를 member2 테이블의 
+);
+
+# 문제 5
+drop database if exists sqldb2sys;
+create database sqldb2sys;
+use sqldb2sys;
+# 조건2) 1. 테이블선언하고 필드명과 필드타입 선언 2. PK선정 [ 테이블당 1개 권장 ] 3. 1:M 관계 할 경우에는 M테이블 FK 필드 선언/결정
+drop table if exists category;
+create table category(
+	cno tinyint ,
+    cname varchar(15) ,
+    primary key( cno ) -- 현재 테이블에서 cno라는 필드를 식별키로 사용
+);
+drop table if exists product;
+create table product(
+	pno int ,
+    pname varchar(15) ,
+    pprice mediumint ,
+    cno tinyint , # FK필드로 사용할 필드 선언 [ 연결할 PK필드명/타입과 동일하게 선언 ]
+    primary key( pno ) ,
+    foreign key ( cno ) references category( cno ) 
+    ); 
+drop table if exists ordertable;
+create table ordertable(
+	ix tinyint ,
+    ordernum tinyint ,
+    orderproduct varchar(15) ,
+    orderdate datetime
+    
+	);
+    
+# --------------------------------
+
+drop database if exists sqldb2team1;
+create database sqldb2team1;
+use sqldb2team1;
+
+drop table if exists category;
+create table category( cno int , cname varchar(7) , primary key (cno));
+
+drop table if exists movie;
+create table movie( mno int , mname varchar(10) , cno int , primary key(mno) , foreign key(cno) references category(cno) );
+
+drop table if exists localtheater;
+create table localtheater( lno int , lname varchar(5) , primary key(lno) );
+
+drop table if exists movieroom;
+create table movieroom( mrno int , mrname varchar(5) , lno int , primary key(mrno) , foreign key(lno) references localtheater(lno));
+
+drop table if exists screening;
+create table screening( sno int ,  mrno int , mno int , foreign key(mrno) references movieroom(mrno) ,foreign key(mno) references movie(mno) , primary key(sno));
