@@ -13,7 +13,7 @@ create table member(
     mphone varchar(15)  not null unique , 
     primary key(mno) 
 );
-select mid from member;
+select * from member;
 
 # 1. 회원가입 [ 테이블에 레코드 삽입 ]
 insert into member( mid , mpw , mname , mphone ) values ( 'ezen01' , '1234' , '이젠' , '031-444-2222' );
