@@ -39,7 +39,7 @@ public class MainPage {
 			System.out.print("비밀번호 입력"); String pw = sc.next();
 			System.out.print("이름 입력"); String name = sc.next();
 			System.out.print("전화번호 입력"); String phone = sc.next();
-		int result = MemberController.getInsatance().signup( id , pw , name , phone);
+		int result = MemberController.getInstance().signup( id , pw , name , phone);
 		if(result == 1)
 			System.out.println("회원가입 성공");
 		else if( result == 2)
@@ -62,8 +62,11 @@ public class MainPage {
 			System.out.print("아이디 입력"); String id = sc.next();
 			System.out.print("비밀번호 입력"); String pw = sc.next();		
 			boolean result = 
-						MemberController.getInsatance().login( id , pw );
-			if( result ) {System.out.println("로그인 성공");}
+						MemberController.getInstance().login( id , pw );
+			if( result ) {
+				System.out.println("로그인 성공");
+				LoginPage.getInstance().loginMenu();
+			}
 			else { System.out.println("로그인 실패");}
 		
 		
@@ -81,7 +84,7 @@ public class MainPage {
 		System.out.println("--------아이디 찾기 페이지------");
 		System.out.print("이름 입력"); String name = sc.next();
 		System.out.print("전화번호 입력"); String phone = sc.next();	
-		String result = MemberController.getInsatance().findById(name ,  phone);
+		String result = MemberController.getInstance().findById(name ,  phone);
 		
 		if( result != null)System.out.println("회원님의 아이디 : " + result );
 		else System.out.println("경고] 정보가 일치한 아이디가 없습니다.");
@@ -91,7 +94,7 @@ public class MainPage {
 		System.out.println("--------비밀번호 찾기 페이지------");
 		System.out.print("아이디 입력"); String id = sc.next();
 		System.out.print("전화번호 입력"); String phone = sc.next();	
-		String result = MemberController.getInsatance().findByPw(id ,  phone);
+		String result = MemberController.getInstance().findByPw(id ,  phone);
 		
 		if( result != null)System.out.println("회원님의 비밀번호 : " + result );
 		else System.out.println("경고] 정보가 일치한 비밀번호가 없습니다.");

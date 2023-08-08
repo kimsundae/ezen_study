@@ -52,11 +52,11 @@ public class MemberDao extends Dao{
 		return false;
 	}
 	// 3. 로그인SQL
-	public boolean login( String id , String pw ) {
+	public int login( String id , String pw ) {
 		
 		try {
 			// 1단계 : SQL 작성한다. [ 추천 : MYSQL 워크벤치에서 임의의값으로 테스트하고 ]
-			String sql = "select mid , mpw from member where mid = ? and mpw = ?";
+			String sql = "select * from member where mid = ? and mpw = ?";
 			// 2단계 : SQL 조작할 수 있는 객체 필요하므로 PreparedStatement 반환받기
 			ps = conn.prepareStatement(sql);
 			// 3단계 : SQL 조작 [SQL 안에 있는 매개변수[?]에 값 대입]
@@ -68,13 +68,13 @@ public class MemberDao extends Dao{
 			// 5단계 : sql 실행 결과 조작 [ rs.next() : 결과 중에서 다음 레코드객체 호출 ]
 			// 만약에 결과의 레코드 3개 가정 [ rs = null -> 레코드1 -> 레코드2 -> 레코드3 ]
 			if (rs.next()) { // 로그인SQL 결과 레코드는 1개 또는 0개이므로 if 사용해서 .next()1번 호출
-				return true; // 로그인 성공
+				return rs.getInt(1); // 로그인 성공
 			}
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
-		return false;
+		return 0;
 	}
 	//4. 
 		public String findById( String name , String phone ) {
@@ -122,4 +122,54 @@ public class MemberDao extends Dao{
 			}
 			return null;
 		}
+		// 6.
+		public MemberDto info( int mno ) {
+			try {
+				String sql = "select * from member where mno = ?";
+				ps = conn.prepareStatement(sql); // 2. SQL조작할 객체
+				ps.setInt( 1 , mno ); // 3. SQL 조작
+				rs = ps.executeQuery(); // 4. sql 실행 // 5. sql 결과 조작 객체
+				if(rs.next()) { // 6. sql결과 조작 // 만약에 다음 레코드가 존재하면
+					// * 현재 레코드[ 1:회원번호 , 2:아이디 3:비밀번호 4:이름 5:전화번호]를 DTO로 만들기
+					MemberDto dto = new MemberDto(rs.getInt(1) , rs.getString(2),
+								null , rs.getString(4) , rs.getString(5));
+					return dto;
+				}
+			}
+			catch(Exception e) { System.out.println(e);}
+			return null; // 실패
+		}
+		// 7. 비밀번호 수정
+		public boolean fixPw( int mno , String newPw ) {
+			try {
+				String sql = "update member set mpw = ? where mno = ?"; // 1. SQL작성한다.
+				ps = conn.prepareStatement(sql); // 2. 작성한 SQL 조작할 객체 반환
+				ps.setString(1 , newPw);
+				ps.setInt(2, mno);
+				int row = ps.executeUpdate(); // 4.SQL실행 [ 업데이트한 레코드 개수 반환 ]
+				if(row == 1) return true;
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+			return false;
+		}
+		//8. 회원 탈퇴
+		public boolean infoDelete(int mno) {
+			try {
+				String sql = "delete from member where mno = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, mno);
+				int row = ps.executeUpdate(); // [ 삭제한 레코드 개수 반환 ]
+				if( row == 1) return true;
+			}catch(Exception e) { System.out.println(e);}
+			
+			return false; // 실패
+		}
+		
+		//. 글쓰기
+		public boolean boardWrite( String title , String content) {
+			return false;
+		}
+	
 }

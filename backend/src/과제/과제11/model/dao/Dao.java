@@ -17,7 +17,7 @@ public class Dao {	// 각종 Dao 클래스를 대표하는 부모클래스
 	public Dao() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sqldb4web" , "root" ,"1234" );
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sqldb4web" , "root" ,"0000" );
 		}
 		catch( Exception e) { 
 			System.out.println("경고] DB연동 실패 : " + e);
