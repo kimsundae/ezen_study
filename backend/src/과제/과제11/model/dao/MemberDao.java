@@ -10,6 +10,22 @@ public class MemberDao extends Dao{
 	public static MemberDao getInstance() {
 		return memberDao;
 	}
+	// 1. 회원정보 check SQL
+	public boolean infoCheck( String type , String values) {
+		
+		try {
+			String sql="select * from member where " + type + " = "+"'"+ values +"'"  ;
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {System.out.println("실행");return true;}
+		}
+					
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
 	
 	// 2. 회원가입SQL
 	public boolean signup( MemberDto member ) { 
@@ -59,7 +75,51 @@ public class MemberDao extends Dao{
 			System.out.println(e);
 		}
 		return false;
-		
-		
 	}
+	//4. 
+		public String findById( String name , String phone ) {
+			// 1단계 : sql 작성.
+			String sql = "select mid from member where mname = ? and mphone = ?";
+			// 2단계 : 작성된 sql을 조작할 Preparedstatement객체를 연동객체로부터 반환
+			
+			try {
+				ps = conn.prepareStatement(sql);
+				// 3단계 : sql조작[ 매개변수 대입 ]
+				ps.setString(1, name); // 1. sql문에 있는 첫번째 ? 에 name 변수 대입
+				ps.setString(2, phone);	// 2. sql문에 있는 두번째 ? 에 phone 변수 대입
+				// 4단계 : sql조작 [ sql 실행 (select = executeQuery() , insert , update , delete)]
+				// 5단계 : sql 결과를 조작할 ResultSet 객체를 executeQuery 메소드로부터 반환
+				rs = ps.executeQuery();
+				// 6단계 : sql 결과 조작 
+						// rs.next() : 검색된 레코드 중 다음 레코드 이동 
+						// rs.get타입( 검색필드순서번호 )
+						// rs.getString(검색필드순서번호) : 현재 위치한 레코드의 필드값 호출
+						// rs.getInt(검색필드순서번호) : 현재 위치한 레코드의 필드값 정수 호출
+				if(rs.next()) {
+					return rs.getString(1);	// 검색된 레코드 중 1번째 필드인 id값 반환
+				}
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+			
+			return null;// 실패
+		}
+		//5.
+		public String findByPw( String id , String phone) {
+			String sql = "select mpw from member where mid = ? and mphone = ?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, phone);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					return rs.getString(1);	// 검색된 레코드 중 1번째 필드인 pw값을 반환
+				}
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+			return null;
+		}
 }

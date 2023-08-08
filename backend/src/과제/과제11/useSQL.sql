@@ -41,3 +41,34 @@ select mid , mpw from member where mid = 'ezen01' and mpw = '1234';	#만약에 m
     
 
 */
+
+use sqldb4web;
+/*1. 테이블의 모든 레코드 검색 */
+select * from member;
+/* 2. 회원가입 : mno 자동부여 이므로 생략 */
+insert into member( mid , mpw , mname , mphone ) values ( 'ezen02' , '1234' , '이젠' , '010-443-1234' );
+# insert into member( mid , mpw , mname , mphone ) values ( ? , '? , ? , ? );
+/* 3. 로그인 : 입력한 값이 존재하는지 검색 */ 
+select * from member where mid = 'ezen02' and mpw = '1234'; # 로그인성공 : 레코드 1개이상 검색되면
+select * from member where mid = 'ezen02' and mpw = '12345'; # 로그인실패 : 레코드 0개 검색
+# 4. 아이디 / 전화번호 중복 체크 (유효성검사) : 입력한 값이 존재하는지 검색 
+select * from member where mid = 'ezen02';									# 조건에 맞는 충족한 레코드의 모든 필드 검색
+# select * from member where mid = ?;
+select * from member where mphone = '010-443-1234';							# 조건에 맞는 충족한 레코드의 모든 필드 검색
+# select * from member where mid = ?;										
+# 5. 아이디 /비밀번호 찾기 : 입력한 값의 레코드 검색
+select mid from member where mname = '이젠' and mphone = '010-443-1234';		# 조건에 맞는 충족한 레코드의 아이디 필드만 검색
+# select mid from member where mname = ? and mphone = ?;
+select mpw from member where mid = 'ezen02' and mphone = '010-443-1234';	# 조건에 맞는 충족한 레코드의 비밀번호 필드만 검색
+# select mpw from memeber where mid = ? and mphone = ?;
+# 6. 회원수정 : 비밀번호 수정 : pk식별 조건 [pk필드는 수정 하지 않음 - 권장 ] ]
+update member set mpw = '12345' where mno = 4;	# 4번 회원인 레코드의 비밀번호 수정
+# update member set mpw from memeber where mpw = ? and mno = ?;
+# 6. 회원수정 : 이름 , 전화번호 수정 : pk식별 조건[pk필드는 수정 하지 않음 - 권장 ] 
+update member set mname = 'ezen' , mphone = '010-1234-1234' where mno = 4;
+# update member set mname from memeber where mpw = ? and mno = ?;
+
+# 7. 회원탈퇴 : pk식별 조건
+delete from member where mno = 4;		-- 4번 회원인 레코드 삭제
+delete from member where mno = ?;
+select * from member where mid = 'naa';
