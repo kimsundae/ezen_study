@@ -1,4 +1,5 @@
 package java1.day18.Ex2;
+
 // 인터페이스 선언
 public interface 게임패드 {
 	
