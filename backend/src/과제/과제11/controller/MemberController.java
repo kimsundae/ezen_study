@@ -9,7 +9,6 @@ public class MemberController {
 	public static MemberController getInstance() {
 		return memberController;
 	}
-	
 	// 0. 로그인된 회원의 번호를 저장하는 필드 = 웹세션
 	private int loginSession = 0; // 0 : 로그인 안한상태 , 1이상 : 로그인된 회원의 번호
 	public int getLoginSession() { return loginSession; }
@@ -68,10 +67,8 @@ public class MemberController {
 	public boolean infoDelete() {
 		return MemberDao.getInstance().infoDelete(loginSession);
 	}
-	public boolean boardWrite( String title , String content ) {
-		return false;
+
 		
 			
-	}
-	
+		
 }

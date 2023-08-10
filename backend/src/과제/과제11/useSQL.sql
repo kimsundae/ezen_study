@@ -72,3 +72,35 @@ update member set mname = 'ezen' , mphone = '010-1234-1234' where mno = 4;
 delete from member where mno = 4;		-- 4번 회원인 레코드 삭제
 delete from member where mno = ?;
 select * from member where mid = 'naa';
+
+drop table if exists board;
+create table board(			
+	bno 		int auto_increment , 			#정수 , 자동번호 부여
+    btitle 	varchar(50) not null ,			#문자50 , 공백불가 
+    bcontent	longtext ,						#긴글[4G] 
+	bdate 		datetime default now(),			#날짜/시간 , 기본값을 레코드삽입기준 자동
+    bview		int default 0 ,					#정수 , 기본값을 0
+    mno 		int , 							#작성자의 회원번호 [ 작성자의 식별번호 ]
+    primary key( bno ) ,
+    foreign key( mno ) references member( mno ) on delete cascade ,		# 회원탈퇴[PK레코드삭제] 되면 Fk의 레코드 같이 삭제
+    foreign key( mno ) references member( mno ) on delete restrict ,	# (생략시기본값)회원탈퇴[PK레코드삭제] 할 때 FK의 레코드가 존재하면 탈퇴 불가능
+    foreign key( mno ) references member( mno ) on delete set null ,	# 회원탈퇴[PK레코드삭제] 되면 FK의 값을 NULL 수정
+    foreign key( mno ) references member( mno ) on delete no action 	# 아무런 변화 없는 상태.
+);
+/* 선택옵션
+기본키에 변화가 있을 때
+- 기본키 삭제 되었을 때 참조키는 어떻게??
+	on delete cascade : 기본키의 레코드가 삭제되면 참조키의 레코드 같이 삭제
+		예) 회원탈퇴하면 회원 작성한 글도 같이 삭제 
+	on delete restrict : (기본값) 참조되고 있는 기본키는 삭제 불가능.
+    on delete no action : 아무런 변화 없는 상태 [ restrict ] 
+    on delete set null : 기본키의 레코드가 삭제되면 참조키의 값을 null로 변경
+		예) 회원탈퇴하면 회원이 작성한 글 그대로 존재 작성자는 null
+- 기본키 수정 되었을 때 참조키는 어떻게?
+	on update cascade : 기본키가 변경되면 참조키도 같이 변경
+		예) 회원번호가 수정되면 작성자의 번호도 같이 수정된다.
+	
+	
+
+
+*/
