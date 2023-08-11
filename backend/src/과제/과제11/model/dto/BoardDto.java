@@ -14,6 +14,14 @@ public class BoardDto {
     // 2. 생성자 [ 1.빈생성자 2.풀생성자 ]
     public BoardDto() {}
     
+	public BoardDto(int bno, int Mno ,String btitle, String bcontent) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.mno = Mno;
+	}
+
 	public BoardDto(String btitle, String bcontent, int mno) {
 		super();
 		this.btitle = btitle;

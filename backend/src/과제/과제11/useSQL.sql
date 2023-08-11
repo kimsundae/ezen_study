@@ -76,7 +76,7 @@ select * from member where mid = 'naa';
 drop table if exists board;
 create table board(			
 	bno 		int auto_increment , 			#정수 , 자동번호 부여
-    btitle 	varchar(50) not null ,			#문자50 , 공백불가 
+    btitle 	varchar(50) not null ,				#문자50 , 공백불가 
     bcontent	longtext ,						#긴글[4G] 
 	bdate 		datetime default now(),			#날짜/시간 , 기본값을 레코드삽입기준 자동
     bview		int default 0 ,					#정수 , 기본값을 0
@@ -87,6 +87,47 @@ create table board(
     foreign key( mno ) references member( mno ) on delete set null ,	# 회원탈퇴[PK레코드삭제] 되면 FK의 값을 NULL 수정
     foreign key( mno ) references member( mno ) on delete no action 	# 아무런 변화 없는 상태.
 );
+select * from board;
+select bview from board where bno = 3;
+update board set bview = 1 where bno = 3;
+update board set bview = 2 where bno = 2;
+
+
+/*-------*/
+use sqldb4web;
+select * from board;
+# 1. 3번째 게시물의 제목과 내용 수정
+	# update 테이블명 set 수정할필드명 = 수정할값 , 수정할필드명 = 수정할값 where 조건
+update board set btitle = '수정한제목' , bcontent = '수정한내용' where bno = 3;
+
+# 게시물 삭제
+delete from board where bno = 2;
+update board set bview = bview + 1 where bno = 5; 
+
+# 쪽지table
+drop table if exists tableMsg;
+create table tableMsg(
+	msgnum smallint not null auto_increment ,
+    smno int ,
+    rmno int ,
+    mcontent varchar(500),
+    mdate datetime default now() ,
+    foreign key(smno) references member(mno) ,
+    foreign key(rmno) references member(mno) ,
+    primary key(msgnum)
+);
+select mno from board where bno = 5;
+select * from tableMsg where rmno = 4;
+select * from tableMsg t natural join member m;
+select m.mid from tableMsg t natural join member m where rmno = 1;
+select mid from member m , tableMsg t where m.mno = t.rmno and m.mno = 1;
+select mid from member m , tableMsg t where m.mno = t.smno and m.mno = 1;
+select mid from member m , tableMsg t where m.mno = 1;
+select * from member;
+select * from tableMsg;
+insert into tableMsg(smno , rmno , mcontent ) values( 1 , 2 , '안녕' );
+insert into tableMsg(smno , rmno , mcontent ) values( 2 , 1 , '안녕2' );
+
 /* 선택옵션
 기본키에 변화가 있을 때
 - 기본키 삭제 되었을 때 참조키는 어떻게??

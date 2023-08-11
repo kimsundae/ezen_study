@@ -7,6 +7,7 @@ import 과제.과제11.controller.BoardController;
 import 과제.과제11.controller.MemberController;
 import 과제.과제11.model.dto.BoardDto;
 import 과제.과제11.model.dto.MemberDto;
+import 과제.과제11.model.dto.MsgDto;
 
 public class LoginPage {
 	// 0.싱글톤
@@ -46,11 +47,16 @@ public class LoginPage {
 		System.out.println(" >PHONE : " + result.getPhone());
 		
 		// 2. 서브메뉴
-		System.out.print("1.비밀번호수정 2.회원탈퇴 3.뒤로가기 선택 : ");
+		System.out.print("1.비밀번호수정 2.회원탈퇴 3.뒤로가기 4.쪽지확인 5.쪽지답장 선택 : ");
 		int ch = sc.nextInt();
 		if(ch == 1) {infoUpdate();}
 		else if(ch == 2) {infoDelete();}
 		else if(ch == 3) {return;} // 생략가능
+		else if(ch == 4) { viewMsg();}
+		else if(ch == 5) { System.out.print("답장 받을 사람의 아이디");
+		String id = sc.next();
+		sendMsg(id);
+		}
 	}
 	// 3. infoUpdate : 비밀번호수정 페이지
 	public void infoUpdate() {
@@ -117,23 +123,59 @@ public class LoginPage {
 		System.out.printf("title : %s \n" , result.getBtitle());
 		System.out.printf("content : %s \n" , result.getBcontent());
 		viewAdd(bno);
-		// 4. 추가메뉴
-		System.out.println("1.뒤로가기 2.수정 3.삭제 선택>"); int ch = sc.nextInt();
-		if( ch==1 ) {}
-		if( ch==2 ) {boardUpdate();}
-		if( ch==3 ) {boardDelete();}
-	}
-	// 8. boardUpdate : 게시물 수정
-	public void boardUpdate() {}
-	// 9. boardDelete : 게시물 삭제
-	public void boardDelete() {}
-	// 10. viewAdd : 조회수 증가
-	public void viewAdd(int bno) {
-		boolean result = BoardController.getInstance().viewAdd(bno);
-		if(result) {
-			System.out.println("조회수 증가 성공");
-		}
-		
+		// 4. 추가메뉴	
+		System.out.println("1.뒤로가기 2.수정 3.삭제 선택 4.쪽지보내기>"); int ch = sc.nextInt();
+		if( ch == 1 ) {}
+		else if( ch == 2 ) {boardUpdate(bno , result.getMno());}
+		else if( ch == 3 ) {boardDelete(bno , result.getMno());}
+		else if( ch == 4) {sendMsg( bno );}
 	}
 	
+	// 8. boardUpdate : 게시물 수정
+	public void boardUpdate(int bno ,  int Mno ) {
+		System.out.print("수정할 게시물 제목"); String title = sc.next();
+		System.out.println("수정할 게시물 내용"); String content = sc.next();
+		int result = BoardController.getInstance().boardUpdate( bno , Mno ,title , content );
+		if(result == 1) {System.out.println("글 수정 성공");}
+		else if(result == 2) {System.out.println("글 수정 실패 : 관리자 오류");}
+		else if(result == 3) {System.out.println("본인 글만 수정 가능합니다");}
+		else if(result == 4) {System.out.println("수정할 제목을 1~50글자 사이로 입력해주세요.");}
+					
+	}
+	// 9. boardDelete : 게시물 삭제
+	public void boardDelete(int bno , int mno) {
+		int result = BoardController.getInstance().boardDelete( bno , mno );
+		if( result == 1) {System.out.println("안내] 글 삭제 성공");}
+		else if(result == 2) {System.out.println("안내] 글 삭제 실패 : 관리자 오류.");}
+		else if(result ==3) {System.out.println("경고] 본인 글만 삭제 가능 합니다.");}
+		
+	}
+	// 10. viewAdd : 조회수 증가
+	public void viewAdd(int bno) {
+		BoardController.getInstance().viewAdd(bno);				
+	}
+	// 쪽지 확인
+	public void viewMsg() {
+		ArrayList<MsgDto> result = BoardController.getInstance().viewMsg();
+		System.out.println("보낸사람     쪽지내용    수신일");
+		for(int i = 0; i < result.size(); i++) {
+			System.out.println(result.get(i).getSname() +"   "+
+					result.get(i).getMcontent() + "   " +
+					result.get(i).getMdate());
+		}
+	}
+	// 쪽지 보내기
+	public void sendMsg( int bno ) {
+		System.out.print("쪽지 내용을 입력해주세요"); String content = sc.next();
+		boolean result = BoardController.getInstance().sendMsg(bno , content);
+		if(result)System.out.println("쪽지 보내기 성공");
+		else System.out.println("쪽지 보내기 실패");
+	}
+	// 쪽지 답장 보내기
+	public void sendMsg(String name) {
+		System.out.print("쪽지 내용을 입력해주세요"); String content = sc.next();
+		boolean result = BoardController.getInstance().sendMsg(name , content);
+		if(result)System.out.println("쪽지 보내기 성공");
+		else System.out.println("쪽지 보내기 실패");
+	}
 }
