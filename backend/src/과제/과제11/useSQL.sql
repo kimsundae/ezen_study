@@ -116,6 +116,7 @@ create table tableMsg(
     foreign key(rmno) references member(mno) ,
     primary key(msgnum)
 );
+
 select mno from board where bno = 5;
 select * from tableMsg where rmno = 4;
 select * from tableMsg t natural join member m;
@@ -124,6 +125,7 @@ select mid from member m , tableMsg t where m.mno = t.rmno and m.mno = 1;
 select mid from member m , tableMsg t where m.mno = t.smno and m.mno = 1;
 select mid from member m , tableMsg t where m.mno = 1;
 select * from member;
+select mno from member where mname = '홍길동';
 select * from tableMsg;
 insert into tableMsg(smno , rmno , mcontent ) values( 1 , 2 , '안녕' );
 insert into tableMsg(smno , rmno , mcontent ) values( 2 , 1 , '안녕2' );
