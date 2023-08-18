@@ -7,6 +7,6 @@ public class User2Thread extends Thread {
 	
 	@Override
 	public void run() {
-		calculator.setMemory1(50);
+		calculator.setMemory2(50);
 	}
 }
