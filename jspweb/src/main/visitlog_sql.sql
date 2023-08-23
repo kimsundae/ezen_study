@@ -14,3 +14,13 @@ create table visitlog(
 
 insert into visitlog( vwriter , vpw , vcontent ) values( '김근배' , '1234' , '안녕하세요');
 select * from visitlog;
+# 3. 수정 [ 삭제할 식별자 필수 ]
+update visitlog set vcontent = "수정내용" where vno = 6 and vpw = '강사테스트';
+# 4. 삭제
+delete from visitlog where vno = 7 and vpw = '1234';
+
+drop table if exists accountbook;
+create table accountbook(
+
+)
+

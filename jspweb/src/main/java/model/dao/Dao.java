@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Dao {
-	Connection conn;
-	PreparedStatement ps;
-	ResultSet rs;
+	public Connection conn;
+	public PreparedStatement ps;
+	public ResultSet rs;
 	
 	public Dao() {
 		try {

@@ -61,7 +61,10 @@ public class VisitLogController extends HttpServlet {
 		System.out.println(vno + " " + vcontent + " " + vpwd);
 		// 2. (데이터 많으면) 객체화
 		// 3. Dao 에게 전달 후 SQL 결과를 받는다.
+		boolean result = VisitDao.getInstance().vupdate(vno, vcontent, vpwd);
 		// 4. 결과를 AJAX에게 전달한다.
+		response.setContentType("application/json; charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 
@@ -72,7 +75,10 @@ public class VisitLogController extends HttpServlet {
 		System.out.println(vno  + " " + vpwd);
 		// 2. (데이터 많으면) 객체화
 		// 3. Dao 에게 전달 후 SQL 결과를 받는다.
+		boolean result = VisitDao.getInstance().vdelete(vno, vpwd);
 		// 4. 결과를 AJAX에게 전달한다.
+		response.setContentType("application/json; charset=UTF-8");
+		response.getWriter().print(result);
 	}
 	/*
 	 *  - HTTP 서블릿 클래스는 기본적으로 get,post,put,delete 함수 제공

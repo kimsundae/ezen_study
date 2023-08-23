@@ -90,8 +90,16 @@ function vupdate( vno ){
 		url : "/jspweb/VisitLogController", // 통신할 백엔드(컨트롤러주소)	
 		method : "put",
 		data : {vno : vno , vcontent : vcontent , vpwd : vpwd},
-		success : function f(r){ console.log('vupdate통신성공') },
+		success : function f(r){
+					console.log('vupdate통신성공')
+					if(r == true){
+						alert('수정성공')
+						vread();
+					}
+					else{alert('수정실패')}				
+				 } ,
 		error : function f(r){}
+		
 	});
 	
 	
@@ -108,7 +116,14 @@ function vdelete(vno){
 		url : "/jspweb/VisitLogController" ,
 		method : "delete" ,
 		data : {vno : vno , vpwd : vpwd} ,
-		success : function f(r){ console.log('vdelete통신성공') } ,
+		success : function f(r){ 
+					console.log('vdelete통신성공') 
+					if(r == true){
+						alert('삭제성공')
+						vread();
+					}
+					else{alert('삭제실패')}	
+				} ,
 		error : function f(r){ console.log(r) }
 	});
 }

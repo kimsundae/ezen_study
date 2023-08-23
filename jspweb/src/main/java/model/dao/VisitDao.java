@@ -48,9 +48,11 @@ public class VisitDao extends Dao{
 	// 3. 수정 [ 인수 : 수정할번호(int)/수정할방문록내용(String) , 리턴 : 성공/실패 = true/false ]
 	public boolean vupdate( int vno , String vcontent , String vpwd) {
 		try {
-			String sql = "";
+			String sql = "update visitlog set vcontent = ? where vno = ? and vpw = ?";
 			ps = conn.prepareStatement(sql);
-			
+			ps.setString(1, vcontent);ps.setInt(2, vno);ps.setString(3, vpwd);
+			int row = ps.executeUpdate();
+			if(row == 1)return true;
 		}catch(Exception e) {System.out.println(e);}
 		
 		return false;	
