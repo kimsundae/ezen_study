@@ -46,11 +46,26 @@ public class VisitDao extends Dao{
 		return null;
 	}
 	// 3. 수정 [ 인수 : 수정할번호(int)/수정할방문록내용(String) , 리턴 : 성공/실패 = true/false ]
-	public boolean vupdate( int vno , String vcontent ) {
+	public boolean vupdate( int vno , String vcontent , String vpwd) {
+		try {
+			String sql = "";
+			ps = conn.prepareStatement(sql);
+			
+		}catch(Exception e) {System.out.println(e);}
+		
 		return false;	
 	}
 	// 4. 삭제 [ 인수 : 삭제할방문록번호(int) , 리턴 : 성공/실패(boolean) = true/false ] 
-	public boolean vdelete( int vno ) {
+	public boolean vdelete( int vno , String vpwd ) {
+		try {
+			String sql = "delete from visitlog where vno = ? and vpw = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1 , vno);
+			ps.setString(2, vpwd);
+			int row = ps.executeUpdate();
+			if(row == 1) return true;	
+					
+		}catch(Exception e) {System.out.println(e);}
 		return false;
 	}
 }
