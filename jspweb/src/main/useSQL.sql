@@ -18,7 +18,8 @@ select * from visitlog;
 update visitlog set vcontent = "수정내용" where vno = 6 and vpw = '강사테스트';
 # 4. 삭제
 delete from visitlog where vno = 7 and vpw = '1234';
-
+#---------------------------------------------------------------
+# 가계부 테이블
 drop table if exists accountbook;
 create table accountbook(
 	ano int auto_increment,
@@ -32,3 +33,15 @@ insert into accountbook(acontent , aprice , adate) values( '가전제품' , '100
 select * from accountbook;
 
 delete from accountbook where ano = 1;
+
+#----------------------------------------------------------------
+# Member 테이블
+drop table if exists member;
+create table member(
+	mno int auto_increment,
+    mid varchar(20) ,
+    mpwd varchar(20) ,
+    memail varchar(20) ,
+    mimg longtext ,
+    primary key(mno)
+);
