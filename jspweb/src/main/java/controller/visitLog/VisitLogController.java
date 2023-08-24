@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import controller.member.VisitDto;
 import model.dao.VisitDao;
+import model.dto.VisitDto;
 
 /**
  * Servlet implementation class VisitLogController

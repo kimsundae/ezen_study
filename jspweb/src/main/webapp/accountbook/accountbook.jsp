@@ -9,7 +9,7 @@
 	<link href="accountbook.css" rel="stylesheet">
 </head>
 <body>
-
+	<%@include file="../header.jsp" %>
 	<div class="wrap">
 		<div class="input_box">
 			<input class="input_content" type="text" placeholder="내용">

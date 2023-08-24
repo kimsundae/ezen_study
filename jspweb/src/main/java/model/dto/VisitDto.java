@@ -1,4 +1,4 @@
-package controller.member;
+package model.dto;
 
 public class VisitDto {
 	// 1. 필드

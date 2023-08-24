@@ -2,7 +2,7 @@ package model.dao;
 
 import java.util.ArrayList;
 
-import controller.member.VisitDto;
+import model.dto.VisitDto;
 
 public class VisitDao extends Dao{
 	// 싱글톤
