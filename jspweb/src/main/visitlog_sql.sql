@@ -21,6 +21,14 @@ delete from visitlog where vno = 7 and vpw = '1234';
 
 drop table if exists accountbook;
 create table accountbook(
+	ano int auto_increment,
+    acontent varchar(20) ,
+    aprice varchar(20) ,
+    adate varchar(20),
+    primary key(ano)
+);
 
-)
+insert into accountbook(acontent , aprice , adate) values( '가전제품' , '10000' , '2018-10-30');
+select * from accountbook;
 
+delete from accountbook where ano = 1;
