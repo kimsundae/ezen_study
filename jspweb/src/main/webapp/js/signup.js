@@ -28,10 +28,10 @@
  */
  
 // 1. 아이디 유효성검사.
-function idcheck(){
-	console.log('idcheck() open')
+function idcheck(){	
 	// 1. 값 호출
 	let mid = document.querySelector('.mid').value;
+	let idcheck = document.querySelector('.idcheckbox');
 	// 2. 유효성 검사
 		// 제어문 이용한 검사 if(mid.length < 5 && mid.length >= 30){}
 		// 1. 아이디는 5~30글자 사이이면서 영문+숫자 조합
@@ -39,7 +39,36 @@ function idcheck(){
 			let midj = /^[a-z0-9]{5,30}$/
 			// 2. 정규표현식 검사.
 		console.log( midj.test( mid ) );
+		if( midj.test(mid) ){//입력한 값이 패턴과 일치하면
+			idcheck.innerHTML = '패턴 합격'			
+			// -- 입력한 아이디가 패턴과 일치하면 아이디 중복검사.
+			$.ajax({
+				url : "/jspweb/MemberFindController" ,
+				method : "get",
+				data : {mid : mid},
+				success : r => {console.log('통신성공')
+				if( r )
+					idcheck.innerHTML = '사용 중인 아이디입니다.'
+				else	
+					idcheck.innerHTML = '사용 가능한 아이디입니다.'
+				},
+				error : r => {}
+			});
+			
+			
+			
+			
+		}else{
+			document.querySelector('.idcheckbox').innerHTML = '영문(소문자)+숫자 조합의 5~30글자 가능합니다.';
+		}
+		
+		
+		
+		
 	// 3. 결과 출력
+	
+	
+	
 }
 
 

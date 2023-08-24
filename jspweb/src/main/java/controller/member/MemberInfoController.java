@@ -18,24 +18,16 @@ import model.dto.MemberDto;
 public class MemberInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public MemberInfoController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. AJAX 통신받은 data요청한다. [request]
 		String mid = request.getParameter("mid"); System.out.println(mid);
@@ -43,9 +35,7 @@ public class MemberInfoController extends HttpServlet {
 		String memail = request.getParameter("memail");System.out.println(memail);
 		String mimg = request.getParameter("mimg");System.out.println(mimg);
 		// 2. (선택) 객체화
-		System.out.println("실행");
 		MemberDto dto = new MemberDto( mid , mpwd , memail , mimg);
-		System.out.println("실행2");
 		// 3. Dao에게 전달하고 결과 받는다.
 		boolean result = MemberDao.getInstance().signup(dto);
 		// 4. AJAX 통신으로 결과 데이터를 응답을 보낸다. [respnse]

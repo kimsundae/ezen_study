@@ -33,7 +33,16 @@ public class MemberDao extends Dao{
 	// 5. 내정보 호출
 	
 	// 6. 아이디/이메일 중복검사
-	
+	public boolean findId( String mid ) {
+		try {
+			String sql = "select * from member where mid = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs = ps.executeQuery();
+			if( rs.next() ) return true;
+		}catch(Exception e) {System.out.println(e);}
+		return false;
+	}
 	// 7. 회원수정
 	
 	// 8. 회원탈퇴
