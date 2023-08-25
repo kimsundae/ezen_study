@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/* 전체구역 */
+.wrap{
+	width:820px;
+	height: 1200px;
+	margin : 300px auto;
+}
+/* 좌석버튼 구역 이름 전화번호 포함 */
+.seat_table{
+	display: flex;
+}
+/* 버튼 구역 */
+.button_box{
+	display: inline-block;
+	margin-bottom: 20px;
+}
+/* 버튼 구역의 버튼들 */
+.button_box button{
+	width:80px;
+	height: 40px;
+	border: 1px solid #e8e8e8;
+	background-color: white;
+	margin: 7px 2px;
+	border-radius: 3px;
+}
+/* 이름 전화번호 구역 */
+.input_box{
+	display: flex;
+	flex-direction: column;
+	margin: 25px 20px;
+}
+/* input */
+.input_box input{
+	width: 200px;
+}
+/* 이름 전화번호 */
+.input_box .name , .input_box .phonenumber{
+	margin-top : 5px;
+}
+/* 입실 퇴실 버튼 구역 */
+.room_button{
+	margin-left: 240px;
+}
+/* 버튼 디자인  */
+.room_button button{
+	width:80px;
+	height: 40px;
+	border: 1px solid #e8e8e8;
+	background-color: white;
+	margin: 7px 2px;
+	border-radius: 3px;
+}
+/* 아래 구역 */
+.botton_table{
+	display : flex;
+}
