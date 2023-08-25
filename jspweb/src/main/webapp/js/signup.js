@@ -26,7 +26,7 @@
  		패턴 검사
  			"패턴".test( 검사할데이터 ) : 해당 데이터가 패턴에 일치하면 true / false
  */
- 
+  
 // 1. 아이디 유효성검사.
 function idcheck(){	
 	// 1. 값 호출
@@ -54,6 +54,7 @@ function idcheck(){
 				},
 				error : r => {}
 			});
+			
 			
 			
 			
