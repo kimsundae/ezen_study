@@ -122,7 +122,7 @@ function pwcheck(){
 // 3. 이메일 유효성검사 [ 1. 정규표현식 2. 중복검사 ]
 function emailcheck(){
 	let emailcheckbox = document.querySelector('.emailcheckbox');
-	
+	let authReqBtn = document.querySelector('.authReqBtn');
 	// 1. 입력된 값 호출
 	let memail = document.querySelector('.memail').value
 	
@@ -144,19 +144,71 @@ function emailcheck(){
 			method : "get",
 			success : r => {
 				console.log('통신성공');
-				if( r )
+				if( r ){
 					emailcheckbox.innerHTML = `사용 중인 이메일입니다.`;
-				else
+					authReqBtn.disabled = true;
+				}
+					
+				else{
 					emailcheckbox.innerHTML = `사용 가능한 이메일입니다.`;
+					authReqBtn.disabled = false; // 해당 버튼의 disabled 속성 해제
+				}
+					
 				
 				} ,
 			error : r => {console.log(r)}
 		})
 	}else{
-		console.log('이메일 실패');
+		emailcheckbox.innerHTML = `이메일 형식에 맞게 입력해주세요`;
+		authReqBtn.disabled = true;
 	}
 }
+// 4. 인증요청 버튼을 눌렀을 때
+function authReq(){
+	console.log('인증 요청');
+	
+	// 1. div 호출
+	let authbox = document.querySelector('.authbox');
+	
+	// 2. auth html 구성
+	let html = `<span class="timebox"> 02:00 </span>
+					<input class="ecode" type="text"/>
+					<button class="authReqBtn" type="button">인증</button>`
+	authbox.innerHTML = html;
+	// 4. 타이머 실행
+	timer = 5;
+	settimer();
+}
 
+let timer = 0; // 인증 시간 변수
+let timerInter; // setInterval() 함수를 가지고 있는 변수 [ setInterval 종료 시 필요 ]
+// 5.타이머 함수 만들기
+function settimer(){
+	// setInterval( 함수명 , 실행간격[밀리초]) : 특정시간마다 함수를 실행 함수
+	timerInter = setInterval( () => {
+		// 시간 형식 만들기
+			// 1. 분 만들기 [ 초 / 60 ] => 분 / [ 초 % 60 ] => 나머지 초
+		let m = parseInt( timer / 60 ); // 분 계산 [ 몫 ]
+		let s = parseInt (timer % 60 ); // 초 계산 [ 나머지 ]
+			// 2. 두자리수 맞춤 3 -> 03
+		m = m < 10 ? "0"+m : m; // 만약에 분이 한자리수 이면 0붙이고 아니면 안붙임
+		s = s < 10 ? "0"+s : s; 
+		
+		document.querySelector('.timebox').innerHTML = `${m}:${s}`; // 현재 인증 시간(초) HTML 대입
+		timer--; // 1씩 차감 
+		
+		// 만약에 타이머가 0이면 [ 시간 끝 ]
+		if( timer < 0 ){
+			// 1. setInterval 종료 [ 누구를 종료할건지 식별자.. 변수 선언 = timerInter ]
+			clearInterval( timerInter )
+			// 2. 인증실패 알림
+			document.querySelector('.emailcheckbox').innerHTML = '인증실패';
+			// 3. authbox 다시 숨김
+			document.querySelector('.authbox').innerHTML = ``;
+		  }
+		
+	} , 1000); // 1초에 한번씩 실행되는 함수
+}
 // 1. 회원가입 메소드
 function signup(){
 	
@@ -191,3 +243,26 @@ function signup(){
 	});
 		// 5. Servlet의 응답에 따른 제어 
 }
+
+
+/*
+	setInterval() : 특정시간마다 함수 실행 함수
+		1. 정의
+			let 변수명 = setInterval( function 함수명(){} , 밀리초 )
+			setInterval( function (){} , 밀리초 )	
+			setInterval( () => {} , 밀리초 )
+			setInterval( () => {} , 밀리초 )
+		2. 종료
+			clearInterval( setInterval변수명 )
+
+
+
+
+
+*/
+
+
+
+
+
+
