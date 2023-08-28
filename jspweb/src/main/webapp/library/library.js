@@ -11,9 +11,6 @@ function read(){
 		method : "get" ,
 		data : "",
 		success : r => {
-			console.log('통신 성공');
-			let html = ``;
-			let readButton =  document.querySelector('.button_box');
 			for(let i = 0; i < r.length; i++){
 				if(r[i].lisuse == true)
 					document.querySelector(`.button${i+1}`).style.backgroundColor = 'orange';
@@ -22,8 +19,7 @@ function read(){
 			}
 		},
 		error : r => {
-			console.log('통신 실패')
-			
+			console.log('통신 실패')		
 		}	
 	});	
 }
@@ -38,10 +34,13 @@ function getIn(){
 }
 // 퇴실 함수
 function getOut(){
-	checkPhone()
+	
+	checkPhone() == true ? console.log('전화번호 있음') : alert('일치하는 전화번호가 없습니다.')
+	
 }
+// 핸드폰번호 체크
 function checkPhone(){
-	// 저장 되어있는 전화번호가 있다면 true 없다면 false
+	
 	let isPhoneExists = false;
 	if(nowNum == 0) return alert('좌석을 선택해주세요.');
 	let phoneNumber = prompt('전화번호를 입력해주세요 : ');
@@ -52,10 +51,11 @@ function checkPhone(){
 		data : {phoneNumber : phoneNumber},
 		success : r => {
 			console.log('getOut통신')
+			// 저장 되어있는 전화번호가 있다면 true 없다면 false
 			if(r == true)
-				isPhoneExists = true;
+				return true;
 			else
-				isPhoneExists = false;		
+				return false;		
 		} ,
 		error : r => {
 			console.log('getOut통신 실패');
@@ -63,10 +63,6 @@ function checkPhone(){
 		}		
 	});
 	
-	if( !isPhoneExists ) 
- 			
- 	else
- 		return alert('퇴실에 실패했습니다.');
 }
 
 

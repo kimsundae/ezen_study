@@ -45,3 +45,37 @@ create table member(
     mimg longtext ,
     primary key(mno)
 );
+#--------------------------------------------------------------
+# library 테이블
+# library
+drop table if exists library;
+create table library (
+   lno int auto_increment,               # 식별번호 자동번호 프라이머리키
+    lname varchar(15) not null,            # 사용자이름
+    lphone varchar(13) not null unique,      # 사용자전화번호 중복금지
+    lseatno int not null,               # 좌석번호
+    lindate datetime default now(),         # 입실시간 기본값 now()
+    loutdate datetime default null,         # 퇴실시간 기본값 null
+    primary key(lno) ,   
+    foreign key( lseatno ) references seat( lseatno )
+);
+drop table if exists seat;
+create table seat (
+   lseatno int not null,               # 식별번호 프라이머리키
+    lisuse boolean default false,         # 사용여부 기본값 false
+    primary key(lseatno)
+    );
+
+select * from library , seat ;
+select * from seat ;
+
+# seat 테이블 좌석 정보 입력
+insert into seat (lseatno) value (1);
+insert into seat (lseatno) value (2);
+insert into seat (lseatno) value (3);
+insert into seat (lseatno) value (4);
+insert into seat (lseatno) value (5);
+insert into seat (lseatno) value (6);
+insert into seat (lseatno) value (7);
+insert into seat (lseatno) value (8);
+update seat set lisuse = false where lseatno = 1;
