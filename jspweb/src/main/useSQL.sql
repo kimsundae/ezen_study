@@ -72,7 +72,7 @@ create table library (
 select * from library;
 select * from library , seat ;
 select * from seat ;
-select * from library l , seat s where l.lseatno = s.lseatno and l.lphone = '01012345678' and l.lseatno = 1;
+select * from library l , seat s where l.lseatno = s.lseatno;
 select lphone from library where lseatno = 1 and loutdate is null;
 insert into library( lname , lphone , lseatno ) values( '김근배' , '01012345678' , 1);
 update seat set lisuse = true where lseatno = 1;
@@ -80,7 +80,7 @@ update seat set lisuse = true where lseatno = 2;
 update seat set lisuse = true where lseatno = 3;
 insert into library( lname , lphone , lseatno ) values( '김근배' , '01012345679' , 2);
 insert into library( lname , lphone , lseatno ) values( '김근배' , '01012345670' , 3);
-update library l , seat s set l.loutdate = now() , s.lisuse = false where l.lseatno = s.lseatno and l.lphone = '01012345679' and l.lseatno = 2;
+update library l , seat s set l.loutdate = now() , s.lisuse = false where l.lseatno = s.lseatno and l.lphone = '01012345679' and l.loutdate is null and l.lseatno = 2;
 select * from library l , seat s where l.lseatno = s.lseatno and l.lphone = '01012345679' and l.loutdate is null and l.lseatno = 2;
 # seat 테이블 좌석 정보 입력
 insert into seat (lseatno) value (1);
