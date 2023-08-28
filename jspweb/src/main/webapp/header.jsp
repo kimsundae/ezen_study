@@ -15,6 +15,7 @@
 			<li><a href="/jspweb/visitlog/visitlog.jsp">방문록(절대경로)</a></li>
 			<li><a href="/jspweb/accountbook/accountbook.jsp">과제1:가계부</a></li>
 			<li><a href="/jspweb/member/signup.jsp">회원가입</a></li>
+			<li><a href="/jspweb/library/library.jsp">독서실</a></li>
 		</ul>
 	</div>
 	<!-- 최신 JQUERY import ( ajax() 사용할 js파일)  -->
