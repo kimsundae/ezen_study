@@ -13,7 +13,17 @@ public class LibraryDto {
 
    
    
-   // 생성자
+   public LibraryDto(String lname, String lphone, int lseatno, boolean lisuse) {
+	super();
+	this.lname = lname;
+	this.lphone = lphone;
+	this.lseatno = lseatno;
+	this.lisuse = lisuse;
+}
+
+
+
+// 생성자
    public LibraryDto() {    }
 
    

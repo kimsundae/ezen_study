@@ -31,7 +31,7 @@
 		<div class="botton_table">	
 			<div>현재 선택된 좌석 번호 : <span class="ch_num"></span></div>
 			<div class="room_button">
-				<button onclick="getIn()" class="getIn" type="button">입실</button>
+				<button onclick="checkIn()" class="getIn" type="button">입실</button>
 				<button onclick="getOut()" class="getOut" type="button">퇴실</button>
 			</div>
 		</div>

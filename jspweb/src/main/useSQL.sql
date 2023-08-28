@@ -45,6 +45,7 @@ create table member(
     mimg longtext ,
     primary key(mno)
 );
+select * from member;
 #--------------------------------------------------------------
 # library 테이블
 # library
@@ -65,9 +66,11 @@ create table seat (
     lisuse boolean default false,         # 사용여부 기본값 false
     primary key(lseatno)
     );
-
+select * from library;
 select * from library , seat ;
 select * from seat ;
+insert into library(lname , lphone , lseatno ) values('김근배' , '01012345678' , 1 );
+select lphone from library where lseatno = 1;
 
 # seat 테이블 좌석 정보 입력
 insert into seat (lseatno) value (1);

@@ -28,27 +28,75 @@ function chNum( num ){
 	nowNum = num;
 	document.querySelector('.ch_num').innerHTML = num;
 }
-// 입실 함수
-function getIn(){
-	
+
+//입실정보등록
+function checkIn(){
+   let seatnoInput = document.querySelector('.ch_num');
+   let nameInput = document.querySelector('.name');
+   let phonenumberInput = document.querySelector('.phonenumber');
+
+   console.log("seatno  :  " + seatnoInput.innerText);
+   console.log("name  :  " + nameInput.value);
+   console.log("phonenumberInput  :  " + phonenumberInput.value);
+   //객체화
+   let info = {
+      name: nameInput.value,
+      phonenumber:phonenumberInput.value,
+      seatno:seatnoInput.innerText
+   }
+   console.log("info >> "+info);
+   $.ajax({
+      url :"/jspweb/Library",
+      method : "post",
+      data : info,
+      success: r => {
+         console.log('통신성공' + r)
+         alert("입실정보가 정상등록되었습니다.")
+         nameInput.value='';
+         phonenumberInput ='';
+         read();
+      },
+      error : r => {
+
+         console.log('통신실패 : '+ r );
+      }
+   });
 }
 // 퇴실 함수
 function getOut(){
 	
-	checkPhone() == true ? console.log('전화번호 있음') : alert('일치하는 전화번호가 없습니다.')
+	if( checkPhone() == false)
+		return alert('전화번호가 일치하지 않습니다.')
 	
+	
+	$.ajax({
+		url: "/jspweb/Library" ,
+		method : "put",
+		data : {type: "out" , nowNum : nowNum},
+		success: r => {
+			if( r == true ){
+				alert('퇴실되었습니다.'); read();
+			}			
+			else
+				alert('퇴실 실패하였습니다. 다시 시도해주세요.')
+		} ,
+		error: r => {} 
+	});
 }
 // 핸드폰번호 체크
 function checkPhone(){
 	
-	let isPhoneExists = false;
-	if(nowNum == 0) return alert('좌석을 선택해주세요.');
+
+	if(nowNum == 0) {
+		alert('좌석을 선택해주세요.');
+		return;
+	}
 	let phoneNumber = prompt('전화번호를 입력해주세요 : ');
 	//유효성 검사 위한 ajax
 	$.ajax({
 		url : "/jspweb/Library" ,
 		method : "get" ,
-		data : {phoneNumber : phoneNumber},
+		data : {type : "checkPhone" , phoneNumber : phoneNumber , nowNum : nowNum},
 		success : r => {
 			console.log('getOut통신')
 			// 저장 되어있는 전화번호가 있다면 true 없다면 false
