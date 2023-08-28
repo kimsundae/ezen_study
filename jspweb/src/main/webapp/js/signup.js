@@ -173,15 +173,19 @@ function authReq(){
 	// 2. auth html 구성
 	let html = `<span class="timebox"> 02:00 </span>
 					<input class="ecode" type="text"/>
-					<button class="authReqBtn" type="button">인증</button>`
+					<button class="authReqBtn" onclick="auth()" type="button">인증</button>`
 	authbox.innerHTML = html;
 	// 4. 타이머 실행
-	timer = 5;
-	settimer();
+	authcode = '1234';	// '1234' 테스트용
+	timer = 10;			// 인증 제한시간 10초 테스트용
+	settimer();			// 타이머 실행
 }
 
+// 4번 5번 함수에서 공통적으로 사용할 변수[전역변수]
+let authcode = ''; // 인증코드
 let timer = 0; // 인증 시간 변수
 let timerInter; // setInterval() 함수를 가지고 있는 변수 [ setInterval 종료 시 필요 ]
+
 // 5.타이머 함수 만들기
 function settimer(){
 	// setInterval( 함수명 , 실행간격[밀리초]) : 특정시간마다 함수를 실행 함수
@@ -209,6 +213,28 @@ function settimer(){
 		
 	} , 1000); // 1초에 한번씩 실행되는 함수
 }
+
+// 6. 인증요청 후 인증코드를 입력하고 인증하는 함수
+function auth(){
+	
+	// 1. 입력받은 인증코드
+	let ecode = document.querySelector('.ecode').value;
+	
+	// 2. 비교[ 인증코드와 입력받은 인증코드 ]
+	if( authcode == ecode ){
+		// 1. setInterval 종료
+		clearInterval( timerInter ); // 1. setInterval
+		// 2. 인증성공 알림
+		document.querySelector('.emailcheckbox').innerHTML = '인증성공';
+		// 3. authbox 구역 HTML 초기화
+		document.querySelector('.authbox').innerHTML = '';
+	}else{
+		// 1. 인증코드 불일치 알림
+		document.querySelector('.emailcheckbox').innerHTML = '인증코드 불일치';
+	}
+	
+}
+
 // 1. 회원가입 메소드
 function signup(){
 	
@@ -254,11 +280,6 @@ function signup(){
 			setInterval( () => {} , 밀리초 )
 		2. 종료
 			clearInterval( setInterval변수명 )
-
-
-
-
-
 */
 
 
