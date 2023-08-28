@@ -1,6 +1,5 @@
 package library;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.dao.Dao;
@@ -54,17 +53,11 @@ public class LibraryDao extends Dao{
    //퇴실정보등록 (입실정보수정)
    public boolean checkOut( int nowNum ) {
       try {
-    	  String sql = "update seat set lisuse = false where lseatno = ? and lisuse = true";
+    	  String sql = "update library l , seat s set l.loutdate = now() , s.lisuse = false where l.lseatno = s.lseatno and l.lphone = ? and l.loutdate is null and l.lseatno = ?";
       ps = conn.prepareStatement(sql);
       ps.setInt(1, nowNum);
       int row = ps.executeUpdate();
       if(row == 1) {
-    	  
-		  String sql2 = "update library set loutdate = now() where lseatno = "+nowNum;
-		  ps = conn.prepareStatement(sql2);
-		  int row2 = ps.executeUpdate();
-		  if(row2 != 1)
-			  return false;
 		  
     	  return true;
       }
@@ -75,7 +68,7 @@ public class LibraryDao extends Dao{
    // 핸드폰번호 체크
    public boolean checkPhone( int nowNum , String phoneNumber) {
 	   try {
-		   String sql = "select lphone from library where lseatno = "+nowNum+" and loutdate is null;";
+		   String sql = "select lphone from library where lseatno = "+nowNum+" and loutdate is null";
 		   ps = conn.prepareStatement(sql);
 		   rs = ps.executeQuery();
 		   if(rs.next()) {

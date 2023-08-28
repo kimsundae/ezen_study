@@ -30,12 +30,14 @@ public class Library extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 타입 : 휴대폰번호 체크
 		if( "checkPhone".equals(request.getParameter("type")) ) {
 			int nowNum = Integer.parseInt(request.getParameter("nowNum"));
 			String phoneNumber = request.getParameter("phoneNumber");
 			boolean result = LibraryDao.getInstance().checkPhone( nowNum , phoneNumber  );
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().print(result);
+			return;
 		}
 			
 		// Json으로 배열 전송

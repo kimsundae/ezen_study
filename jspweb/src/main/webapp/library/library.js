@@ -65,6 +65,8 @@ function checkIn(){
 // 퇴실 함수
 function getOut(){
 	
+	if( checkPhone() == -1 )
+		return;
 	if( checkPhone() == false)
 		return alert('전화번호가 일치하지 않습니다.')
 	
@@ -89,7 +91,7 @@ function checkPhone(){
 
 	if(nowNum == 0) {
 		alert('좌석을 선택해주세요.');
-		return;
+		return -1;
 	}
 	let phoneNumber = prompt('전화번호를 입력해주세요 : ');
 	//유효성 검사 위한 ajax
