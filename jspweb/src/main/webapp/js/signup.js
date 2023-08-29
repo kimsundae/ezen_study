@@ -167,18 +167,29 @@ function emailcheck(){
 function authReq(){
 	console.log('인증 요청');
 	
-	// 1. div 호출
-	let authbox = document.querySelector('.authbox');
+	// -- 인증요청 시 서블릿 통신 [ 인증코드 생성 , 이메일 전송 ]
+	$.ajax({
+		url : "/jspweb/AuthSendEmail",
+		method : "get" ,
+		data : {memail : document.querySelector('.memail').value},
+		success : r => {
+				// 1. div 호출
+			let authbox = document.querySelector('.authbox');
+			
+			// 2. auth html 구성
+			let html = `<span class="timebox"> 02:00 </span>
+							<input class="ecode" type="text"/>
+							<button class="authReqBtn" onclick="auth()" type="button">인증</button>`
+			authbox.innerHTML = html;
+			// 4. 타이머 실행
+			authcode = r;	// '1234' 테스트용
+			timer = 120;			// 인증 제한시간 10초 테스트용
+			settimer();			// 타이머 실행	
+			
+		} ,
+		error : r =>{console.log(e)}
+	})
 	
-	// 2. auth html 구성
-	let html = `<span class="timebox"> 02:00 </span>
-					<input class="ecode" type="text"/>
-					<button class="authReqBtn" onclick="auth()" type="button">인증</button>`
-	authbox.innerHTML = html;
-	// 4. 타이머 실행
-	authcode = '1234';	// '1234' 테스트용
-	timer = 10;			// 인증 제한시간 10초 테스트용
-	settimer();			// 타이머 실행
 }
 
 // 4번 5번 함수에서 공통적으로 사용할 변수[전역변수]
