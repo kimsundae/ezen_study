@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.EmailService;
+
 /**
  * Servlet implementation class AuthSendEmail
  */
 @WebServlet("/AuthSendEmail")
-public class AuthSendEmail extends HttpServlet {
+public class AuthSendEmail extends HttpServlet { // 이메일 전송에 관련된 서블릿으로 사용
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -39,7 +41,9 @@ public class AuthSendEmail extends HttpServlet {
 		}; System.out.println("생성된 6자리 난수 : " + auth);
 		
 		// 3. 인증번호를 해당 이메일에게 전송 [ SMTP : 간이 우편 전송 프로토콜 ]
-		
+		EmailService emailService = new EmailService();
+			// 객체를 통한 메일전송 함수 호출 ( 받는사람 이메일 , )
+		emailService.authsend( memail ,  auth );
 		
 		// 4. 인증번호 반환
 		response.getWriter().print(auth);

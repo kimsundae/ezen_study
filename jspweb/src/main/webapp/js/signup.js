@@ -246,6 +246,32 @@ function auth(){
 	
 }
 
+// 7. 첨부파일에 등록된 사진을 HTML표시하기 < 등록 사진을 미리보기 기능 >
+function preimg( object ){ console.log('사진 선택 변경')
+	console.log(object); // 이벤트 발생시킨 태그의 DOM 객체를 인수로 받음
+	console.log( document.querySelector('.mimg'));
+	// 1. input태그의 속성 [ type,class,onchange,name 등등]
+	// 1. input태그 이면서 type="file" 이면 추가적인 속성
+		// .files : input type="file" 에 선택한 파일 정보를 리스트로 받음
+	console.log( object.files );
+	console.log( object.files[0] );
+	
+	// --- 해당 파일을 바이트코드 변환
+	// 2. JS 파일 클래스 선언
+	let file = new FileReader(); // 파일 읽기 클래스 이용한 파일 읽기 객체 선언
+	// 3. 파일 읽어오기 함수 제공
+	file.readAsDataURL( object.files[0] ); // input에 등록된 파일리스트 중 1개를 파일 객체로 읽어오기
+		console.log( file )
+	// 4.읽어온 파일을 해당 html img태그에 load
+	
+	file.onload = e=>{ // onload() : 읽어온 파일의 바이트코드를 불러오기
+		console.log(e); // 이벤트 정보
+		console.log( e.target); // onload() 실행한 FileReader 객체
+		console.log( e.target.result ); // 읽어온 파일의 바이트 코드
+		document.querySelector('.preimg').src = e.target.result; // img src 속성에 대입
+	}
+}
+
 // 1. 회원가입 메소드
 function signup(){
 	
