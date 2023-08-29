@@ -10,12 +10,26 @@ public class LibraryDao extends Dao{
    private  static LibraryDao libraryDao = new LibraryDao();
    public static LibraryDao getInstance() {return libraryDao;}
    private LibraryDao() {}
+   //이미 입실한 좌석인지 확인
+   public boolean isSeatUsing( int seatNum ) {
+	   try {
+		   String sql = "select * from library where loutdate is null and lseatno = ?";
+		   ps = conn.prepareStatement(sql);
+		   ps.setInt( 1, seatNum);
+		   rs = ps.executeQuery();
+		   if(rs.next())
+			   // 이미 입실해 있는 경우
+			   return true;
+	   }catch(Exception e) {e.printStackTrace();}
+	   return false;
+   }
 
-   
-
- //입실정보등록
+   //입실정보등록
    public boolean checkIn(LibraryDto dto){
-
+	   
+	  if(isSeatUsing(dto.getLseatno()) == true)
+		  return false;
+	  
       String sql = "insert into library ( lname, lphone, lseatno ) values(?,?,?)";
       try {
          ps= conn.prepareStatement(sql);
@@ -27,14 +41,13 @@ public class LibraryDao extends Dao{
          // library 정보가 정상등록되면 seat테이블을 업데이트
          if(rs == 1 ) {
 
-            sql = "update seat set  lisuse = ? where lseatno =? ";
+            sql = "update seat set lisuse = ? where lseatno =? ";
             ps= conn.prepareStatement(sql);
             ps.setBoolean(1, dto.isLisuse());
             ps.setInt(2, dto.getLseatno());
 
             rs = ps.executeUpdate();
             if(rs == 1) {
-               System.out.println(" 입실등록이 정상처리되었습니다.");
                return true;
             } else {
                sql = "delete from library where lseatno = ? and lphone=?";
@@ -50,6 +63,7 @@ public class LibraryDao extends Dao{
          }
       } catch (Exception e) {e.printStackTrace(); } return false;
    }
+   
    //퇴실정보등록 (입실정보수정)
    public boolean checkOut( int nowNum , String phoneNumber ) {
       try {

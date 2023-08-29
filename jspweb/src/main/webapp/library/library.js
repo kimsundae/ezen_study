@@ -5,7 +5,6 @@ let nowNum = 0;
 read();
 function read(){
 	
-	
 	$.ajax({
 		url : "/jspweb/Library" ,
 		method : "get" ,
@@ -34,12 +33,13 @@ function checkIn(){
    let seatnoInput = document.querySelector('.ch_num');
    let nameInput = document.querySelector('.name');
    let phonenumberInput = document.querySelector('.phonenumber');
-   if( seatnoInput.value = '' )
-   		return alert('최소 한글자 이상 입력해야합니다.');
+   if(nowNum == 0)
+   		return alert('좌석을 선택해주세요.')
    	if( nameInput.value = '' )
    		return alert('최소 한글자 이상 입력해야합니다.');
+   	if(phonenumberInput == '')
+   		return alert('공백 입력 불가')
    	
-   	if( nameInput)	
    console.log("seatno  :  " + seatnoInput.innerText);
    console.log("name  :  " + nameInput.value);
    console.log("phonenumberInput  :  " + phonenumberInput.value);
@@ -55,11 +55,15 @@ function checkIn(){
       method : "post",
       data : info,
       success: r => {
-         console.log('통신성공' + r)
-         alert("입실정보가 정상등록되었습니다.")
-         nameInput.value='';
-         phonenumberInput ='';
-         read();
+         if( r == true ){
+			alert("입실정보가 정상등록되었습니다.");
+        	 nameInput.value= '';
+        	 phonenumberInput.value = ''; 
+        	 read();
+		 }
+         else{
+			 alert("입실 실패되었습니다.")
+		 }               
       },
       error : r => {
 

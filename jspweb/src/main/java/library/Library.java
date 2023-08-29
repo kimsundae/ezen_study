@@ -65,8 +65,6 @@ public class Library extends HttpServlet {
 
 		      LibraryDto libraryDto = new LibraryDto(name, phonenumber, seatno, true);
 		      boolean result = LibraryDao.getInstance().checkIn(libraryDto);
-
-
 		      response.setContentType("application/json;charset=UTF-8");
 		      response.getWriter().print(result);
 		   
