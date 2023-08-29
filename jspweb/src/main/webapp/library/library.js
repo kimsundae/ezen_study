@@ -34,7 +34,12 @@ function checkIn(){
    let seatnoInput = document.querySelector('.ch_num');
    let nameInput = document.querySelector('.name');
    let phonenumberInput = document.querySelector('.phonenumber');
-
+   if( seatnoInput.value = '' )
+   		return alert('최소 한글자 이상 입력해야합니다.');
+   	if( nameInput.value = '' )
+   		return alert('최소 한글자 이상 입력해야합니다.');
+   	
+   	if( nameInput)	
    console.log("seatno  :  " + seatnoInput.innerText);
    console.log("name  :  " + nameInput.value);
    console.log("phonenumberInput  :  " + phonenumberInput.value);
@@ -65,16 +70,18 @@ function checkIn(){
 // 퇴실 함수
 function getOut(){
 	
-	if( checkPhone() == -1 )
+	let phoneNumber = prompt('전화번호를 입력해주세요 : ');
+	let result = checkPhone( phoneNumber );
+	if( result == -1 )
 		return;
-	if( checkPhone() == false)
-		return alert('전화번호가 일치하지 않습니다.')
+	if( result == false)
+		return alert('일치하는 정보가 없습니다.');
 	
 	
 	$.ajax({
 		url: "/jspweb/Library" ,
 		method : "put",
-		data : {type: "out" , nowNum : nowNum},
+		data : {type: "out" , nowNum : nowNum , phoneNumber : phoneNumber},
 		success: r => {
 			if( r == true ){
 				alert('퇴실되었습니다.'); read();
@@ -86,14 +93,14 @@ function getOut(){
 	});
 }
 // 핸드폰번호 체크
-function checkPhone(){
+function checkPhone( phoneNumber ){
 	
 
 	if(nowNum == 0) {
 		alert('좌석을 선택해주세요.');
 		return -1;
 	}
-	let phoneNumber = prompt('전화번호를 입력해주세요 : ');
+	
 	//유효성 검사 위한 ajax
 	$.ajax({
 		url : "/jspweb/Library" ,

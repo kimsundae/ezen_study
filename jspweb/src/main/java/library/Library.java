@@ -39,7 +39,7 @@ public class Library extends HttpServlet {
 			response.getWriter().print(result);
 			return;
 		}
-			
+		// read함수	
 		// Json으로 배열 전송
 		ArrayList<LibraryDto> seatArr = LibraryDao.getInstance().showSeat();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -54,16 +54,7 @@ public class Library extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/**
 		    * 입실
-		    */
-		// 퇴실 함수일 경우
-		if( "out".equals(request.getParameter("type"))) {
-			int nowNum = Integer.parseInt(request.getParameter("nowNum"));
-			boolean result = LibraryDao.getInstance().checkOut(nowNum);
-			response.setContentType("application/json;charset=UTF-8");
-		    response.getWriter().print(result);
-		    return;
-		}
-		//입실일 경우
+		    */				
 		      int seatno = Integer.parseInt(request.getParameter("seatno"));
 		      String name = request.getParameter("name");
 		      String phonenumber = request.getParameter("phonenumber");
@@ -85,8 +76,10 @@ public class Library extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//퇴실
 		int nowNum = Integer.parseInt(request.getParameter("nowNum"));
-		boolean result = LibraryDao.getInstance().checkOut(nowNum);
+		String phoneNumber = request.getParameter("phoneNumber");
+		boolean result = LibraryDao.getInstance().checkOut(nowNum , phoneNumber);
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
 	}

@@ -51,16 +51,16 @@ public class LibraryDao extends Dao{
       } catch (Exception e) {e.printStackTrace(); } return false;
    }
    //퇴실정보등록 (입실정보수정)
-   public boolean checkOut( int nowNum ) {
+   public boolean checkOut( int nowNum , String phoneNumber ) {
       try {
-    	  String sql = "update library l , seat s set l.loutdate = now() , s.lisuse = false where l.lseatno = s.lseatno and l.lphone = ? and l.loutdate is null and l.lseatno = ?";
+    	  String sql = "update library l , seat s set l.loutdate = now() , s.lisuse = false where l.lseatno = s.lseatno and s.lisuse = true and l.lphone = ? and l.loutdate is null and l.lseatno = ?";
       ps = conn.prepareStatement(sql);
-      ps.setInt(1, nowNum);
+      ps.setString(1, phoneNumber);
+      ps.setInt(2, nowNum);
       int row = ps.executeUpdate();
-      if(row == 1) {
-		  
+      if(row == 2)	  
     	  return true;
-      }
+      
       }catch(Exception e) { e.printStackTrace();}
 	   
       return false;
@@ -68,14 +68,14 @@ public class LibraryDao extends Dao{
    // 핸드폰번호 체크
    public boolean checkPhone( int nowNum , String phoneNumber) {
 	   try {
-		   String sql = "select lphone from library where lseatno = "+nowNum+" and loutdate is null";
+		   String sql = "select * from library l , seat s where l.lseatno = s.lseatno and l.lphone = ? and l.loutdate is null and l.lseatno = ?";
 		   ps = conn.prepareStatement(sql);
+		   ps.setString( 1, phoneNumber);
+		   ps.setInt( 2, nowNum);
 		   rs = ps.executeQuery();
-		   if(rs.next()) {
-			  
-			  return phoneNumber.equals(rs.getString(1)) == true ? true : false;
-			   
-		   }
+		   if( rs.next() ) 		
+			   return true;			     
+		   
 	   }catch(Exception e) {e.printStackTrace();}
 	   return false;
    }
