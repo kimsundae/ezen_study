@@ -66,10 +66,16 @@ function idcheck(){
 				method : "get",
 				data : {type : "mid" , data : mid},
 				success : r => {console.log('통신성공')
-				if( r )
+				if( r ){
 					idcheck.innerHTML = '사용 중인 아이디입니다.'
-				else	
+					checkList[0] = false;
+				}
+					
+				else	{
 					idcheck.innerHTML = '사용 가능한 아이디입니다.'
+					checkList[0] = true;
+				}
+					
 				},
 				error : r => {}
 			});
@@ -105,8 +111,10 @@ function pwcheck(){
 				// 3. 비밀번호와 비밀번호 확인 일치여부
 				if( mpwd == mpwdconfirm){
 					pwcheckbox.innerHTML = `사용가능한 비밀번호`;
+					checkList[1] = true;
+					return;
 				}else{
-					pwcheckbox.innerHTML = `비밀번호가 일치하지 않습니다.`
+					pwcheckbox.innerHTML = `비밀번호가 일치하지 않습니다.`					
 				}
 				
 			}else{
@@ -239,9 +247,11 @@ function auth(){
 		document.querySelector('.emailcheckbox').innerHTML = '인증성공';
 		// 3. authbox 구역 HTML 초기화
 		document.querySelector('.authbox').innerHTML = '';
+		checkList[2] = true;
 	}else{
 		// 1. 인증코드 불일치 알림
 		document.querySelector('.emailcheckbox').innerHTML = '인증코드 불일치';
+		checkList[2] = false;
 	}
 	
 }
@@ -271,9 +281,48 @@ function preimg( object ){ console.log('사진 선택 변경')
 		document.querySelector('.preimg').src = e.target.result; // img src 속성에 대입
 	}
 }
+let checkList = [false, false , false];
 
-// 1. 회원가입 메소드
+// 8. 회원가입 메소드
 function signup(){
+	// 1. 아이디/비밀번호/이메일 유효성검사 통과 여부 체크
+	if( checkList[0] && checkList[1] && checkList[2] ){
+		console.log('회원가입 가능')
+		
+		// 2. 입력받은 데이터를 한번에 가져오기 form 태그 이용
+			// <form> 각종 input/button </form>
+			// 1. form 객체 호출 document.querySelector()
+			let signupForm = document.querySelectorAll('.signupForm')[0];
+			console.log(signupForm);
+			let signupData = new FormData( signupForm ); // 첨부파일 [대용량]시 필수
+			// 3. AJAX 에게 첨부파일[대용량] 전송하기
+			// 1. 첨부파일 없을 때
+			/*
+			$.ajax({
+				url : "",
+				method : "" ,
+				data : "",
+				success : r =>{},
+				error : r=>{}
+			});
+			*/
+			// 2. 첨부파일 있을 때 [기존 json형식의 전송x form 객체 전송 타입으로 변환]
+			$.ajax({
+				url : "/jspweb/MemberInfoController",
+				method : "post" ,
+				data : signupData,
+				contentType : false ,
+				processData : false,
+				success : r =>{},
+				error : r=>{}
+			});
+
+	}else{
+		console.log('회원가입 불가능')
+	}
+}
+// 1. 회원가입 메소드
+/*function signup(){
 	
 	// 1. HTML에 가져올 데이터의 tag객체 호출 [ DOM객체 : html 태그를 객체화 ]
 	let midInput = document.querySelector('.mid'); // <input class="mid" type="text">
@@ -305,7 +354,7 @@ function signup(){
 		error : r => {console.log('통신실패');}		
 	});
 		// 5. Servlet의 응답에 따른 제어 
-}
+}*/
 
 
 /*
