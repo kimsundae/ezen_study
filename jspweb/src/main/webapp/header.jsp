@@ -13,7 +13,7 @@
 	<div id="header">
 		<div class="mainlogo"><!-- 로고 -->
 			<a href="/jspweb/index.jsp">
-				<img alt="" src="/jspweb/img/플랫폼logo.png" />
+				<img alt="" src="/jspweb/img/ezenlogo.png" />
 			</a>
 		</div>
 		<ul class="mainmenu"><!-- 본메뉴  -->

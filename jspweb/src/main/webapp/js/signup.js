@@ -314,14 +314,16 @@ function signup(){
 				contentType : false ,
 				processData : false,
 				success : r =>{ 
-					if(r== true)
-						alert('회원가입 성공')
-					else
-						alert('회원가입 실패')
-						
-					location.reload();
+					if(r== true){ // 회원가입성공 [ 1. 알린다. 2. 페이지 전환]
+						alert('회원가입 성공');
+						location.href = '/jspweb/member/login.jsp';
+					}					
+					else{
+						alert('회원가입 실패');
+						location.reload();
+					}																					
 				},
-				error : r=>{}
+				error : r=>{ console.log(r) }
 			});
 
 	}else{

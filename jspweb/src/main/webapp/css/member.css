@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .signupForm{
-	width: 50%; margin : 0 auto;
+	width: 50%; margin : 60px auto;
 	font-size : 15px;
 }
 .signupForm h2 , .signupForm p {
@@ -60,6 +60,14 @@
 	margin : 10px 0px 100px 0px;
 	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
+/* ------------ 로그인 css --------- */
+.logincheckbox{
+	color: #ea3636; font-size: 18px;
+	 text-align: center;margin : 20px 0px;
+}
+.findbtnbox a{margin-right:10px;}
+
+
 /* 
 	식별자
 		1. 하위식별자

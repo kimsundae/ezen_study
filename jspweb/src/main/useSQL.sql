@@ -20,6 +20,7 @@ select * from visitlog;
 update visitlog set vcontent = "수정내용" where vno = 6 and vpw = '강사테스트';
 # 4. 삭제
 delete from visitlog where vno = 7 and vpw = '1234';
+
 #---------------------------------------------------------------
 # 가계부 테이블
 drop table if exists accountbook;
@@ -55,8 +56,18 @@ create table seat (
     lisuse boolean default false,         # 사용여부 기본값 false
     primary key(lseatno)
     );
-# library 테이블
-# library
+    
+# seat 테이블 좌석 정보 입력---------------------------------------------------------
+insert into seat (lseatno) value (1);
+insert into seat (lseatno) value (2);
+insert into seat (lseatno) value (3);
+insert into seat (lseatno) value (4);
+insert into seat (lseatno) value (5);
+insert into seat (lseatno) value (6);
+insert into seat (lseatno) value (7);
+insert into seat (lseatno) value (8);
+
+# library 테이블-----------------------------------------------------------
 drop table if exists library;
 create table library (
    lno int auto_increment,               # 식별번호 자동번호 프라이머리키
@@ -69,20 +80,5 @@ create table library (
     foreign key( lseatno ) references seat( lseatno )
 );
 
-select * from library;
-select * from library , seat ;
-select * from seat ;
-select * from library l , seat s where l.lseatno = s.lseatno;
-insert into library( lname , lphone , lseatno ) values( '김근배' , '01011112222' , 2 );
-select * from library where loutdate is null and lseatno = 2;
-
-# seat 테이블 좌석 정보 입력
-insert into seat (lseatno) value (1);
-insert into seat (lseatno) value (2);
-insert into seat (lseatno) value (3);
-insert into seat (lseatno) value (4);
-insert into seat (lseatno) value (5);
-insert into seat (lseatno) value (6);
-insert into seat (lseatno) value (7);
-insert into seat (lseatno) value (8);
-update seat set lisuse = false where lseatno = 1;
+# 로그인 [아이디와 비밀번호가 일치한 레코드 존재여부 ]
+select * from member where mid= 'qweqwe' and mpwd = 'qweqwe'; # 레코드가 검색되면 로그인 성공 / 없으면 로그인 실패
