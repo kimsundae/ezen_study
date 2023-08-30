@@ -22,28 +22,8 @@
 			<div class="idcheckbox"> </div>
 			<div class="intitle">비밀번호</div>
 			<input maxlength="20" onkeyup="pwcheck()" name="mpwd" class="mpwd" type="password"/>
-			<div class="intitle">비밀번호 확인</div>
-			<input maxlength="20" onkeyup="pwcheck()"  class="mpwdconfirm" type="password"/>
-	
 			
-			<div class="pwcheckbox"></div>
-	
-			<div class="intitle">이메일</div>
-			<div class="emailbox">
-				<input onkeyup="emailcheck()" name="memail" class="memail" type="text"/>
-				<button class="authReqBtn" onclick="authReq()" disabled type="button">인증요청</button>		
-			</div>		
-			<div class="authbox">
-				<!-- 인증 호출 구역 -->
-			</div>
-		
-			<div class="emailcheckbox">프로필</div>
-			<!-- <태그명 이벤트명="함수명( this )"  -->
-			<input onchange="preimg( this )" name="mimg" class="mimg" type="file" accept="image/*"/><br/> 
-			
-			<img class="preimg" alt="" src="img/default.webp" width="100px"><!-- 등록 사진을 미리보기 할 사진 태그 -->
-			<button class="signupbtn" onclick="signup()" type="button">회원가입</button>
-			
+			<button class="signupbtn" onclick="signup()" type="button">로그인</button>
 		</form>
 	</div>
 	

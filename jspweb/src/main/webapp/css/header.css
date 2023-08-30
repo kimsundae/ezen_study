@@ -2,6 +2,7 @@
 
 /* 공통 css */
 /* 1. 기본값 바깥/안쪽 여백 제거 2. 구역사이즈기준 3. */
+
 *{
 	list-style-type: none;
 	margin: 0px; padding : 0px;
@@ -47,7 +48,9 @@ a{
 	display: flex; /* 하위요소 가로배치 */
 	align-items: center; /* 세로배치 */
 	justify-content: space-around; /* 가로 정렬 */
-	margin : 20px 0px 50px 0px; /* 바깥여백 */
+	padding : 20px 0px 40px 0px; /* 여백 */
+	background-color: #735C3F;
+	color:white;
 }
 
 .mainlogo{ width: 5%;}	/* 로고구역 */

@@ -187,7 +187,7 @@ function authReq(){
 			// 2. auth html 구성
 			let html = `<span class="timebox"> 02:00 </span>
 							<input class="ecode" type="text"/>
-							<button class="authReqBtn" onclick="auth()" type="button">인증</button>`
+							<button onclick="auth()" type="button">인증</button>`
 			authbox.innerHTML = html;
 			// 4. 타이머 실행
 			authcode = r;	// '1234' 테스트용
