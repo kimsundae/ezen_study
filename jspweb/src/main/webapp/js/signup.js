@@ -309,11 +309,18 @@ function signup(){
 			// 2. 첨부파일 있을 때 [기존 json형식의 전송x form 객체 전송 타입으로 변환]
 			$.ajax({
 				url : "/jspweb/MemberInfoController",
-				method : "post" ,
+				method : "post" ,		// form 객체 [대용량] 전송은 무조건 post
 				data : signupData,
 				contentType : false ,
 				processData : false,
-				success : r =>{},
+				success : r =>{ 
+					if(r== true)
+						alert('회원가입 성공')
+					else
+						alert('회원가입 실패')
+						
+					location.reload();
+				},
 				error : r=>{}
 			});
 

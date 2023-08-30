@@ -11,7 +11,7 @@
 <body>
 	<%@include file="../header.jsp" %>
 	
-	<div><!--회원가입 전체 구역  -->
+	<div class="wrap"><!--회원가입 전체 구역  -->
 	<form class="signupForm"><!-- 폼 전송시 각 input에 name -->
 		아이디 : <input onkeyup="idcheck()" name="mid" class="mid" type="text"/>
 		<span class="idcheckbox"> </span>
@@ -30,9 +30,9 @@
 		<br/>
 		<span class="emailcheckbox"></span>
 		<br/>
-		프로필 : <input onchange="preimg( this )" name="mimg" class="mimg" type="file"/><br/> 
+		프로필 : <input onchange="preimg( this )" name="mimg" class="mimg" type="file" accept="image/*"/><br/> 
 			<!-- <태그명 이벤트명="함수명( this )"  -->
-		<img class="preimg" alt="" src=""><!-- 등록 사진을 미리보기 할 사진 태그 -->
+		<img class="preimg" alt="" src="img/default.webp" width="100px"><!-- 등록 사진을 미리보기 할 사진 태그 -->
 		<button onclick="signup()" type="button">회원가입</button>
 	</form>
 	</div>
