@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.hform{
+	width: 50%; margin : 60px auto;
+	font-size : 15px;
+}
+.hform h2{
+	text-align: center;
+	margin-bottom : 40px;
+}
+.hform input , .hform select{
+	margin: 5px 0px 10px 0px;
+}
+.hname ,.hphone  {
+	width: 30%;
+	height: 30px;
+	padding: 10px;
+	border: 1px solid #e8e8e8;
+	border-radius: 10px;
+}
+.hform button {
+	width: 100%; height: 50px;
+	border: none;
+	background-color: #A6774E; color: white;
+	font-size: 21px;
+	margin : 10px 0px 70px 0px;
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+.houtBox h2{
+	text-align: center;
+}
+.hrank{
+	height: 35px;
+    width: 60px;
+    border: 1px solid #e8e8e8;
+}
+.houtBox{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.houtBox .imgBox{
+	width:100%;
+	height: 180px;	
+}
+.hout{
+	width: 30%;
+}
+.bottomContent{
+	text-align : center;
+	background-color: #402D16;
+	font-size: 24px;
+    height: 50px;
+  	padding-top: 12px; 
+  	margin-bottom: 25px;
+}
