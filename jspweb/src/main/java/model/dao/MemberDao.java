@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.time.LocalDateTime;
+
 import model.dto.MemberDto;
 
 public class MemberDao extends Dao{
@@ -43,7 +45,23 @@ public class MemberDao extends Dao{
 	// 4. 비밀번호 찾기
 	
 	// 5. 내정보 호출
-	
+	public MemberDto info( String mid ) {
+		try {
+			String sql = "select mno , mid , memail , mimg from member where mid = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				MemberDto memberDto = new MemberDto( LocalDateTime.now().toString() , 
+						rs.getInt(1) , 
+						rs.getString(2) ,
+						rs.getString(3)  , 
+						rs.getString(4) );
+				return memberDto;
+			}
+		}catch(Exception e) {e.printStackTrace();}
+		return null;
+	}
 	// 6. 아이디/이메일 중복검사
 	public boolean findIdOrEmail( String type , String data ) {
 		try {

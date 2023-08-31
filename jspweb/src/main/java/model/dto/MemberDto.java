@@ -7,6 +7,8 @@ public class MemberDto {
 	private String mpwd; 
 	private String memail; 
 	private String mimg;
+	//DB없는 필드
+	private String loginDatetime; // 로그인 시간
 	
 	public MemberDto() {}	
 	public MemberDto(String mid, String mpwd, String memail, String mimg) {
@@ -24,7 +26,16 @@ public class MemberDto {
 		this.memail = memail;
 		this.mimg = mimg;
 	}
+	
 
+	public MemberDto(String loginDatetime , int mno, String mid, String memail, String mimg ) {
+		super();
+		this.mno = mno;
+		this.mid = mid;
+		this.memail = memail;
+		this.mimg = mimg;
+		this.loginDatetime = loginDatetime;
+	}
 	public int getMno() {
 		return mno;
 	}
@@ -65,9 +76,16 @@ public class MemberDto {
 		this.mimg = mimg;
 	}
 
+	public String getLoginDatetime() {
+		return loginDatetime;
+	}
+	public void setLoginDatetime(String loginDatetime) {
+		this.loginDatetime = loginDatetime;
+	}
 	@Override
 	public String toString() {
-		return "memberDto [mno=" + mno + ", mid=" + mid + ", mpwd=" + mpwd + ", memail=" + memail + ", mimg=" + mimg
-				+ "]";
+		return "MemberDto [mno=" + mno + ", mid=" + mid + ", mpwd=" + mpwd + ", memail=" + memail + ", mimg=" + mimg
+				+ ", loginDatetime=" + loginDatetime + "]";
 	}
+
 }
