@@ -49,6 +49,7 @@ create table member(
     primary key(mno)
 );
 select * from member;
+delete from member where mid = 'naa123' and mpwd = 'qwe123456';
 #--------------------------------------------------------------
 drop table if exists seat;
 create table seat (

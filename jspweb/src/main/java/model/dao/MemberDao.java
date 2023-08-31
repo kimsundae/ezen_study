@@ -76,6 +76,18 @@ public class MemberDao extends Dao{
 	// 7. 회원수정
 	
 	// 8. 회원탈퇴
-	
+	public boolean deleteId( int mno , String mpwd) {
+		try {
+			System.out.println("실행");
+			String sql = "delete from member where mno = ? and mpwd = ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.setString(2, mpwd);
+			int row = ps.executeUpdate();
+			if(row == 1)
+				return true;
+		}catch(Exception e) {e.printStackTrace();}
+		return false;
+	}
 	
 }

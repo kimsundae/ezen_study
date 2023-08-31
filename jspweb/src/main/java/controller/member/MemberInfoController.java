@@ -92,7 +92,6 @@ public class MemberInfoController extends HttpServlet {
 				// - DTO는 JS가 이해할 수 없는 언어이므로 JS가 이해할 수 있게 JS 언어로 변환
 			ObjectMapper objectMapper = new ObjectMapper();
 			String json = objectMapper.writeValueAsString(loginDto);
-			
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().print(json);		
 		}else if( type.equals("logout")) {
@@ -111,9 +110,17 @@ public class MemberInfoController extends HttpServlet {
 	}
 	// 4. 회원 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
+		String mpwd = request.getParameter("mpwd");
+		Object object = request.getSession().getAttribute("loginDto");
+		MemberDto memberDto = (MemberDto)object;
+		int loginMno = memberDto.getMno();
+		
+		boolean result = MemberDao.getInstance().deleteId(loginMno, mpwd);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+	}
 }
 /*
  *  용량 단위
