@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -27,9 +28,7 @@ public class MemberInfoController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 첨부파일 저장할 폴더의 절대 경로
@@ -75,17 +74,42 @@ public class MemberInfoController extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
 	}
-
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
+	// 2. 회원정보 호출
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 요청하기 [ 기능 구분을 위한 요청 ]
+		String type = request.getParameter("type");
+		if( type.equals("info")) {
+			// 1. 요청한다. [X]
+			// 2. 유효성/객체화 [X]
+			// 3. Dao 처리 [X]
+			// 4. 응답한다.
+				// * 세션에 저장된 로그인 객체를 꺼내기
+					// 1. 세션호출한다. [ 세션타입은 Object ]
+					// 2. 타입변환한다. [ 부 -> 자 (캐스팅/강제타입변환) ]
+			Object session = request.getSession().getAttribute("loginDto");
+			MemberDto loginDto = (MemberDto)session;
+			
+				// - DTO는 JS가 이해할 수 없는 언어이므로 JS가 이해할 수 있게 JS 언어로 변환
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(loginDto);
+			
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(json);		
+		}else if( type.equals("logout")) {
+			// * 세션에 저장된 로그인객체를 없애기/초기화/지우기/삭제
+			// 방법1 : (세션의 모든 속성) 초기화하는 함수
+				//request.getSession().invalidate(); // 로그인 정보 뿐만 아니라 모두 삭제
+			// 방법2 :(세션의 특정 속성) JVM GC(쓰레기수집기 = 해당 객체를 아무도 참조하고 있지 않으면 삭제)
+				// 삭제할 세션속성명과 동일하게 null 대입
+			request.getSession().setAttribute("loginDto", null);
+		}
+		
+	}
+	// 3. 회원 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+	// 4. 회원 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}

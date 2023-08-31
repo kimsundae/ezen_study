@@ -91,6 +91,12 @@ public class MemberFindController extends HttpServlet {
  * 			- 세션 타입 : Object
  * 			세션저장 : request.getSession().setAttribute( "속성명" , 데이터 );
  * 			세션호출 : request.getSession().getAttribute( "속성명" );
+ * 			세션내 속성초기화
+ * 				1. 세션의 모든 속성 초기화하는 함수
+					request.getSession().invalidate(); 				
+				2 :세션의 특정 속성 JVM GC(쓰레기수집기 = 해당 객체를 아무도 참조하고 있지 않으면 삭제)
+				 	삭제할 세션속성명과 동일하게 null 대입
+				  	request.getSession().setAttribute("loginDto", null);
  * 
  * 	서블릿 클래스
  * 		내장객체

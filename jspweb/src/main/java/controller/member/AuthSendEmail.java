@@ -30,7 +30,7 @@ public class AuthSendEmail extends HttpServlet { // 이메일 전송에 관련�
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 요청하기
+		
 		String memail = request.getParameter("memail"); System.out.println(memail);
 		// 2. 인증번호 생성 [ 난수 6자리 ]
 		String auth = ""; // 인증번호를 저장할 문자열
