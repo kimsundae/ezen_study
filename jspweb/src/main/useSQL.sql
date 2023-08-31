@@ -80,5 +80,17 @@ create table library (
     foreign key( lseatno ) references seat( lseatno )
 );
 
-# 로그인 [아이디와 비밀번호가 일치한 레코드 존재여부 ]
-select * from member where mid= 'qweqwe' and mpwd = 'qweqwe'; # 레코드가 검색되면 로그인 성공 / 없으면 로그인 실패
+# hrm 테이블 ---------------------------------------
+drop table if exists hrm;
+create table hrm(
+	hno int auto_increment,
+    hname varchar(10) ,
+    hphone varchar(15) ,
+    hrank varchar(5) ,
+	himg longtext , 
+    hindate datetime default now() ,
+    primary key(hno)
+);
+select * from hrm;
+select hphone from hrm where hphone = '01012';
+insert hrm( hname , hphone , hrank , himg ) values ( '김근배' , '0101234' , '대리' , '123.png' );
