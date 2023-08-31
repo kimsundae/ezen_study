@@ -49,6 +49,7 @@ create table member(
     primary key(mno)
 );
 select * from member;
+delete from member where mid is null;
 delete from member where mid = 'naa123' and mpwd = 'qwe123456';
 #--------------------------------------------------------------
 drop table if exists seat;
@@ -93,5 +94,5 @@ create table hrm(
     primary key(hno)
 );
 select * from hrm;
-select hphone from hrm where hphone = '01012';
-insert hrm( hname , hphone , hrank , himg ) values ( '김근배' , '0101234' , '대리' , '123.png' );
+select * from member;
+update member set mpwd = '1234' where mno = 11 and mpwd = 'naa1234'; 

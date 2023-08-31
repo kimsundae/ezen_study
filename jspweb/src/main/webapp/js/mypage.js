@@ -23,6 +23,40 @@ function getInfo(){
 } 
 // 1. 수정
 function mupdate(){
+	let mpwd = document.querySelector('.mpwd');
+	let newmpwd = document.querySelector('.newmpwd');
+	let mimg = document.querySelector('.mimg');
+	if(mpwd.value == '' && newmpwd.value == '' && mimg.value == '' )
+		return alert('변경할 정보를 입력해주세요')
+	if(mpwd.value == newmpwd.value)
+		return alert('같은 비밀번호입니다.')
+	if(mpwd.value != '' && newmpwd.value == '')
+		return alert('변경할 비밀번호를 입력해주세요')
+	 
+		// 1. form 가져오기
+	let form = document.querySelectorAll('.signupForm')[0];
+		// 2. form 데이터 객체화 하기
+	let formdata = new FormData( form );
+	
+	// form 전송 ajax
+	$.ajax({
+			url: "/jspweb/MemberInfoController",
+			method: "put",
+			data: formdata ,
+			contentType : false ,	// form
+			processData : false ,
+			success: r => {
+				if (r) {
+					alert('수정 완료');
+					location.reload();
+				} else {
+					alert('수정 실패');
+				}
+
+			},
+			error: e => { }
+		});	
+
 	
 }
 
@@ -30,7 +64,6 @@ function mupdate(){
 function mdelete(){
 	// 1. 탈퇴여부 확인 confirm() 확인true/취소false 버튼 알림창
 	let dconfirm = confirm('정말 탈퇴하시겠습니까?')
-	let mid = ``;
 	// 2. 확인 버튼을 눌렀을 때
 	if (dconfirm == true) {
 		let mpwd = prompt('비밀번호 확인');	

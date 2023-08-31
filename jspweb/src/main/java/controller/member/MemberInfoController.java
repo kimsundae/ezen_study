@@ -106,7 +106,39 @@ public class MemberInfoController extends HttpServlet {
 	}
 	// 3. 회원 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
+		
+		// multipart/form-data 전송 요청 // cos.jar[ MultipartRequest클래스 ]
+		
+		MultipartRequest multi = new MultipartRequest(
+				request,
+				request.getServletContext().getRealPath("/member/img"),
+				1024*1024*10 ,
+				"UTF-8" ,
+				new DefaultFileRenamePolicy()
+				);
+		// ---------------------- DB 업데이트 ---------------------- //
+		// * form 전송일 때는 input의 데이터 호출 시
+			// 일반 input : multi.getParameter("input name");
+			// 첨부 input : multi.getFilesystem("input name");
+		String mimg = multi.getFilesystemName("mimg");
+		
+		// Dao[ 로그인 된 회원번호 , 수정할 값 ]
+		Object object = request.getSession().getAttribute("loginDto");
+		MemberDto memberDto = (MemberDto)object;
+		int loginMno = memberDto.getMno();
+		if(mimg == null) {
+			System.out.println("2111" + multi.getParameter("mpwd") + " " + multi.getParameter("newmpwd"));
+			boolean result = MemberDao.getInstance().mpwdUpdate( loginMno, multi.getParameter("mpwd"), multi.getParameter("newmpwd"));
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(result);
+			return;
+		}
+		boolean result = MemberDao.getInstance().mupdate(loginMno, mimg);
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+		
 	}
 	// 4. 회원 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

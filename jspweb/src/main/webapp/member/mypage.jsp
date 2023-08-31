@@ -38,7 +38,7 @@
 			
 		</form>
 	</div>
-	
+	<script src="/jspweb/js/signup.js" type="text/javascript"></script>
 	<script src="/jspweb/js/mypage.js" type="text/javascript"></script>
 </body>
 </html>

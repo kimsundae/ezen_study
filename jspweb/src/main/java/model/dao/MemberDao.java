@@ -74,7 +74,31 @@ public class MemberDao extends Dao{
 		return false;
 	}
 	// 7. 회원수정
-	
+	public boolean mupdate( int mno , String mimg ) {
+		try {
+			String sql = "update member set mimg = ? where mno = ?";
+			ps = conn.prepareStatement(sql);			
+			ps.setString(1,mimg);ps.setInt(2, mno);
+			int row = ps.executeUpdate();
+			if(row == 1)
+				return true;		
+		}catch(Exception e) {e.printStackTrace();}
+		return false;
+	}
+	public boolean mpwdUpdate( int mno , String mpwd , String newmpwd ) {
+		try {
+			String sql = "update member set mpwd = ? where mno = ? and mpwd = ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, newmpwd);
+			ps.setInt( 2, mno);
+			ps.setString(3, mpwd);
+			int row = ps.executeUpdate();
+			System.out.println("실행");
+			if(row == 1)
+				return true;
+		}catch(Exception e) {e.printStackTrace();}
+		return false;
+	}
 	// 8. 회원탈퇴
 	public boolean deleteId( int mno , String mpwd) {
 		try {
