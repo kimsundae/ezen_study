@@ -34,8 +34,7 @@ function listRead(){
 						`	
 				});
 							
-			document.querySelector('.board').innerHTML += html;
-							
+			document.querySelector('.board').innerHTML += html;				
 		},
 		error : e => {}
 	});		

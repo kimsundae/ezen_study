@@ -17,6 +17,7 @@
 			<button type="button"> 자유게시판 </button>
 			<button type="button"> 노하우 </button>
 		</div>
+		
 		<div>
 			<button onclick="onWrite()" type="button"> 글쓰기 </button>
 		</div>	
