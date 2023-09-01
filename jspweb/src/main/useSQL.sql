@@ -93,6 +93,34 @@ create table hrm(
     hindate datetime default now() ,
     primary key(hno)
 );
+
+# 카테고리 테이블 ------------------------------------
+create table category(
+	cno int auto_increment ,
+    cname varchar(30) not null,
+    primary key(cno)
+);
+select * from category;
+insert into category( cname ) values( '공지사항' );
+insert into category( cname ) values( '자유게시판' );
+insert into category( cname ) values( '노하우' );
+# 게시판 테이블----------------------------
+drop table if exists board;
+create table board(
+	bno int auto_increment ,
+    btitle varchar(30) not null ,
+    bcontent longtext ,
+    bimg longtext , 
+    bwriteTime datetime default now(),
+    bview int default 0 ,
+    mno int ,
+	cno int , 
+	primary key( bno ) ,
+    foreign key(cno) references category(cno) on delete cascade on update cascade,
+    foreign key (mno) references member(mno) on delete cascade
+);
+select * from board;
+
 select * from hrm;
 select * from member;
 update member set mpwd = '1234' where mno = 11 and mpwd = 'naa1234'; 

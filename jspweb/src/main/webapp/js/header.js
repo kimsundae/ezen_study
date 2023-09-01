@@ -1,3 +1,5 @@
+let 헤더변수 = "헤더변수데이터";
+let loginState = false; /* 로그인 상태 저장하는 변수 true 로그인 중 false 비로그인 */
 
 // 1. 현재 로그인된 회원정보 요청
 
@@ -21,6 +23,7 @@ function getMemberInfo(){
 						`
 			}else{ // 로그인
 				if( r.mid == "admin"){} // 로그인 했는데 관리자 메뉴
+				loginState = true;
 				html += `
 							<li>${r.mid}님</li>
 							<li><img class="hmimg" src="/jspweb/member/img/${r.mimg}"></li>						
@@ -44,6 +47,7 @@ function logout(){
 		data : {type : "logout"},
 		success : r=> {
 			alert('로그아웃 되었습니다.');
+			loginState = false;
 			location.href="/jspweb/index.jsp";
 		} ,
 		error : e => {} 
