@@ -130,3 +130,7 @@ select b.* , m.mid , m.mimg , bc.cname
 				from board b 
 					natural join category bc 
                     natural join member m order by b.bwriteTime desc;
+select b.bno , b.btitle , b.bcontent , b.bimg , date_format( b.bwriteTime , '%y/%m/%d'), b.bview , b.mno , b.cno , m.mid , m.mimg , bc.cname 
+				from board b 
+					natural join category bc 
+                    natural join member m order by b.bwriteTime desc;
