@@ -9,3 +9,34 @@ function onWrite(){
 		location.href="/jspweb/member/login.jsp"
 	}
 }
+listRead();
+function listRead(){
+	
+	$.ajax({
+		url : "/jspweb/BoardInfoController",
+		data : {},
+		method : "get",
+		success : r => {
+			console.log(r)
+			let html = ``;
+			// 배열명.forEach
+			r.forEach( b => {
+				html += `
+							<tr class="list">
+								<td>${b.bno}</td>
+								<td>${b.bcname}</td>
+								<td>${b.btitle}</td>
+								<td>${b.mid} / <img width="25px" src="/jspweb/member/img/${b.mimg}"/></td>
+								<td>${b.bwriteTime}</td>
+								<td>${b.bview}</td>
+								
+							</tr>
+						`	
+				});
+							
+			document.querySelector('.board').innerHTML += html;
+							
+		},
+		error : e => {}
+	});		
+}	

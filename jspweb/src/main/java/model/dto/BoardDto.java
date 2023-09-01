@@ -12,8 +12,9 @@ public class BoardDto { // 게시물 , 카테고리
 	private int mno;
 	private int cno; 
 	// - 게시물에 추가적으로 표시할 필드들
-	private String mid; // 작성자 회원아이디
+	private String mid; // 작성자 회원아이디	
 	private String bcname; // 카테고리명
+	private String mimg; // 작성자 프로필
 	
 	// 생성자
 	public BoardDto() {}
@@ -35,6 +36,27 @@ public class BoardDto { // 게시물 , 카테고리
 	
 	
 
+	public BoardDto(int bno, String btitle, String bcontent, String bimg, String bwriteTime, int bview, int mno,
+			int cno, String mid, String bcname, String mimg) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bimg = bimg;
+		this.bwriteTime = bwriteTime;
+		this.bview = bview;
+		this.mno = mno;
+		this.cno = cno;
+		this.mid = mid;
+		this.bcname = bcname;
+		this.mimg = mimg;
+	}
+	public String getMimg() {
+		return mimg;
+	}
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
 	public BoardDto(String btitle, String bcontent, String bimg, int mno, int cno) {
 		super();
 		this.btitle = btitle;
@@ -122,11 +144,12 @@ public class BoardDto { // 게시물 , 카테고리
 	public void setBcname(String bcname) {
 		this.bcname = bcname;
 	}
-
 	@Override
 	public String toString() {
 		return "BoardDto [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bimg=" + bimg
 				+ ", bwriteTime=" + bwriteTime + ", bview=" + bview + ", mno=" + mno + ", cno=" + cno + ", mid=" + mid
-				+ ", bcname=" + bcname + "]";
-	}	
+				+ ", bcname=" + bcname + ", mimg=" + mimg + "]";
+	}
+
+	
 }

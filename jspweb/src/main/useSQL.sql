@@ -123,4 +123,10 @@ select * from board;
 
 select * from hrm;
 select * from member;
-update member set mpwd = '1234' where mno = 11 and mpwd = 'naa1234'; 
+update member set mpwd = '1234' where mno = 11 and mpwd = 'naa1234';
+
+select* from board b natural join member m; 
+select b.* , m.mid , m.mimg , bc.cname 
+				from board b 
+					natural join category bc 
+                    natural join member m order by b.bwriteTime desc;

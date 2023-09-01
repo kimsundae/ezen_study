@@ -10,11 +10,10 @@ public class Dao {
 	public PreparedStatement ps;
 	public ResultSet rs;
 	
-	public Dao() {
+	public Dao() { 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspweb","root","0000");
-			
+			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jspweb","root","1234");
 		}catch(Exception e) {System.out.println(e);}
 	}			
 }

@@ -20,40 +20,7 @@ function bwrite(){
 		error : e => {}	
 	});
 }
-function listRead(){
-	
-	$.ajax({
-		url : "/jspweb/BoardInfoController",
-		data : {},
-		method : "get",
-		success : r => {
-			let html = `<tr>
-							<th>게시글 번호</th>
-							<th width="60%">제목</th>
-							<th>글쓴이</th>
-							<th>작성일</th>
-							<th>조회수</th>
-						</tr>`;
-			for(let i = 0; i < r.length; i++){
-				html += `
-							<tr class="list">
-								<td>${r[i].bno}</td>
-								<td>${r[i].btitle}</td>
-								<td>${r[i].mid}</td>
-								<td>${r[i].bwriteTime}</td>
-								<td>${r[i].bview}</td>
-							</tr>
-						`	
-			}
-			
-			
-			
-		},
-		error : e => {}
-	});
-	
-	
-}
+
 
 
 

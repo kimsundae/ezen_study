@@ -1,12 +1,15 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -33,8 +36,13 @@ public class BoardInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<BoardDto> dtoList = BoardDao.getInstance().listRead();
+		System.out.println(dtoList);
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonList = objectMapper.writeValueAsString(dtoList);
 		
-		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(jsonList);
 		
 	}
 

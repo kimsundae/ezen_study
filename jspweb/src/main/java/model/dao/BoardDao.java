@@ -12,7 +12,7 @@ public class BoardDao extends Dao{
 	// 1. 글쓰기
 	public boolean write( BoardDto boardDto) {
 		try {
-			String sql = "insert into board( btitle , bcontent , bfile , bmno , bcno) values( ? , ? , ? , ? , ? )";
+			String sql = "insert into board( btitle , bcontent , bimg , mno , cno) values( ? , ? , ? , ? , ? )";
 			ps = conn.prepareStatement(sql);
 			ps.setString( 1 , boardDto.getBtitle() );
 			ps.setString( 2 , boardDto.getBcontent());
@@ -28,12 +28,26 @@ public class BoardDao extends Dao{
 	// 2. 모든 글 출력
 	public ArrayList<BoardDto> listRead(){
 		ArrayList<BoardDto> dtoList = new ArrayList<>();
-		try {
-			String sql = "";
+		try {	
+			String sql = " select b.* , m.mid , m.mimg , bc.cname from "
+					+ "board b natural join category bc "
+					+ "natural join member m order by b.bwriteTime desc";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardDto dto = new BoardDto( rs.getInt("bno") ,
+						rs.getString("btitle") , rs.getString("bcontent")
+						,rs.getString("bimg") , rs.getString("bwriteTime")
+						,rs.getInt("bview") , rs.getInt("mno")
+						,rs.getInt("cno") , rs.getString("mid")
+						,rs.getString("cname"),rs.getString("mimg") );
+				dtoList.add(dto);
+			}
+			return dtoList;
 			
 		}catch(Exception e) {e.printStackTrace();}
 		
-		
+		return null;
 	}
 	// 3. 개별 글 출력
 	

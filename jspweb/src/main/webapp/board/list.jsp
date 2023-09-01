@@ -23,17 +23,11 @@
 		<table class="board">
 				<tr>
 					<th>게시글 번호</th>
-					<th width="60%">제목</th>
+					<th>카테고리</th>
+					<th width="45%">제목</th>
 					<th>글쓴이</th>
 					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-				<tr class="list">
-					<td>1</td>
-					<td>안녕하세요</td>
-					<td>홍길동</td>
-					<td>2014/2/3</td>
-					<td>10</td>
+					<th>조회수</th>				
 				</tr>
 		</table>											
 	</div>
