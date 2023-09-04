@@ -117,7 +117,11 @@ public class BoardInfoController extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int bno = Integer.parseInt( request.getParameter("bno") );
+		boolean result = BoardDao.getInstance().onDelete(bno);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 }

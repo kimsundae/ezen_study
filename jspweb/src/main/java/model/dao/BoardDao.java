@@ -76,6 +76,19 @@ public class BoardDao extends Dao{
 		return null;
 	}
 	// 4. 게시물 수정
+	
+	// 5. 게시물 삭제
+	public boolean onDelete( int bno ) {
+		try {
+			String sql = "delete from board where bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt( 1 , bno);
+			int row = ps.executeUpdate();
+			if( row == 1)return true;
+		}catch(Exception e) {e.printStackTrace();}
+		return false;
+	}
+	// 6. 조회수 증가
 	public boolean updateView( int bno ) {
 		try {
 			String sql = "update board set bview = bview+1 where bno = ?";
@@ -85,8 +98,4 @@ public class BoardDao extends Dao{
 			if( row == 1 )	return true;
 		}catch(Exception e) {e.printStackTrace();} return false;
 	}
-	// 5. 게시물 삭제
-	
-	// 6. 조회수 증가
-	
 }

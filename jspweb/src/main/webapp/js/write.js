@@ -12,8 +12,10 @@ function bwrite(){
 		contentType : false ,
 		processData : false,
 		success: r => {
-			if( r )
+			if( r ){
 				alert('글 등록 성공')
+				location.href="/jspweb/board/list.jsp"
+			}
 			else
 				alert('글 등록 실패')
 		},

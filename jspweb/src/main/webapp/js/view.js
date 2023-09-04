@@ -30,8 +30,8 @@ function getBoard(){
 			html += `<a href="list.jsp"><button type="button"> 목록보기 </button></a>`
 			if(r.ishost){
 				html += `
-							<button onclick="ondelete()" type="button"> 삭제 </button>
-							<button onclick="onupdate()"type="button"> 수정 </button>
+							<button onclick="ondelete(${r.bno})" type="button"> 삭제 </button>
+							<button onclick="onUpdate(${r.bno})"type="button"> 수정 </button>
 						`	
 			}
 			
@@ -44,6 +44,28 @@ function getBoard(){
 	
 }
 
+// 2. 게시물 삭제 -> 레코드 삭제 -> 레코드 식별 -> pk
+function ondelete( bno ){
+	
+	$.ajax({
+		url : "/jspweb/BoardInfoController" ,
+		method : "delete",
+		data : {bno : bno},
+		success : r => { console.log(r)
+			if(r){
+				alert('삭제 성공')
+				location.href="/jspweb/board/list.jsp"
+			}else alert('삭제 실패')
+			
+		} ,
+		error : r => {}
+	});
+}
+// 3. 게시물 수정 페이지로 이동
+function onUpdate( bno ){
+	// 1. 수정페이지로 이동
+	location.href = `/jspweb/board/update.jsp?bno=${bno}`
+}// f end
 
 
 
