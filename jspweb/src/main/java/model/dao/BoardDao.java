@@ -50,9 +50,41 @@ public class BoardDao extends Dao{
 		return null;
 	}
 	// 3. 개별 글 출력
-	
+	public BoardDto getBoard( int bno ) {
+		updateView(bno);
+		try {
+			String sql = "select b.bno , b.btitle , b.bcontent , b.bimg , date_format( b.bwriteTime , '%y/%m/%d'), "
+					+ "b.bview , b.mno , b.cno , m.mid , m.mimg , bc.cname"
+					+ "	from board b natural join member m"
+					+ " natural join category bc"
+					+ " where b.bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+			if( rs.next() ) {
+				BoardDto dto = new BoardDto(
+						rs.getInt("bno") ,
+						rs.getString("btitle") , rs.getString("bcontent")
+						,rs.getString("bimg") , rs.getString("date_format( b.bwriteTime , '%y/%m/%d')")
+						,rs.getInt("bview") , rs.getInt("mno")
+						,rs.getInt("cno") , rs.getString("mid")
+						,rs.getString("cname"),rs.getString("mimg")
+						);
+				return dto;
+			}
+			}catch(Exception e) {e.printStackTrace();}
+		return null;
+	}
 	// 4. 게시물 수정
-	
+	public boolean updateView( int bno ) {
+		try {
+			String sql = "update board set bview = bview+1 where bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bno);
+			int row = ps.executeUpdate();
+			if( row == 1 )	return true;
+		}catch(Exception e) {e.printStackTrace();} return false;
+	}
 	// 5. 게시물 삭제
 	
 	// 6. 조회수 증가

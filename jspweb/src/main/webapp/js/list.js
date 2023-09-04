@@ -14,7 +14,7 @@ function listRead(){
 	
 	$.ajax({
 		url : "/jspweb/BoardInfoController",
-		data : {},
+		data : {type : 1 },
 		method : "get",
 		success : r => {
 			console.log(r)

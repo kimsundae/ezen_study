@@ -36,13 +36,35 @@ public class BoardInfoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<BoardDto> dtoList = BoardDao.getInstance().listRead();
-		System.out.println(dtoList);
+		// 1. 요청
+		String type = request.getParameter("type");		
 		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonList = objectMapper.writeValueAsString(dtoList);
+		String json = "";
 		
-		response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().print(jsonList);
+		if( type.equals("1") ) {
+			ArrayList<BoardDto> dtoList = BoardDao.getInstance().listRead();
+			json = objectMapper.writeValueAsString(dtoList);
+						
+		}else if( type.equals("2")) {
+			int bno = Integer.parseInt(request.getParameter("bno"));
+			BoardDto result = BoardDao.getInstance().getBoard(bno);
+				// 3. 만약에 (로그인 혹은 비로그인 ) 요청한 사람과 게시물 작성한 사람과 동일하면
+					// 로그인 정보[세션]
+			Object object = request.getSession().getAttribute("loginDto");
+			if( object == null )
+				result.setIshost(false);
+			else {
+				MemberDto login = (MemberDto)object;
+				// 내가 쓴 글
+				if( login.getMno() == result.getMno())result.setIshost(true);
+				else result.setIshost(false);		
+			}
+				
+			json = objectMapper.writeValueAsString(result);
+		}
+			// 공통 로직
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(json);
 		
 	}
 

@@ -10,12 +10,11 @@
 	
 	<%@include file="../header.jsp"%>
 	<div class="webcontainer">
-		<h3>글 상세 페이지 </h3>			
+		<h3>글 상세 페이지 </h3>		
+		<div class="boardBox">
+		
+		</div>
 	</div>
-	
-	
-	
 	<script src="/jspweb/js/view.js" type="text/javascript"></script>
-
 </body>
 </html>

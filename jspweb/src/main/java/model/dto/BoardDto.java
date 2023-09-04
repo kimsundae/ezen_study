@@ -15,7 +15,8 @@ public class BoardDto { // 게시물 , 카테고리
 	private String mid; // 작성자 회원아이디	
 	private String bcname; // 카테고리명
 	private String mimg; // 작성자 프로필
-	
+	// - 조회대상자와 게시물 작성자 대상자 일치여부 [본인글 체크여부]
+	private boolean ishost;
 	// 생성자
 	public BoardDto() {}
 	// 생성자 [ 1.빈생성자 2.풀생성자 3.(추후에)작업하면 필요한 생성자들 ]
@@ -50,6 +51,16 @@ public class BoardDto { // 게시물 , 카테고리
 		this.mid = mid;
 		this.bcname = bcname;
 		this.mimg = mimg;
+	}
+	
+	
+	
+	
+	public boolean isIshost() {
+		return ishost;
+	}
+	public void setIshost(boolean ishost) {
+		this.ishost = ishost;
 	}
 	public String getMimg() {
 		return mimg;
