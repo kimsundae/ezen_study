@@ -20,7 +20,7 @@
 							<option value="3"> 노하우 </option>
 					</select> <br/>
 				제목 : <input type="text" name="btitle" class="btitle"> <br/>
-				<div><img class="oldfile" src=""></div>
+				<div class="oldfile"></div>
 				내용 : <textarea name ="bcontent" class="bcontent"></textarea><br/>
 				첨부파일 : <input type="file" name="bfile" class="bfile"> <br/>
 				<button onclick="onUpdate()" type="button"> 글수정 </button>

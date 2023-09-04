@@ -110,7 +110,33 @@ public class BoardInfoController extends HttpServlet {
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		// 1. 수정할 첨부파일 업로드
+		MultipartRequest multi = new MultipartRequest(
+				request,
+				request.getSession().getServletContext().getRealPath("/board/img") ,
+				1024 * 1024 * 10,
+				"UTF-8", 
+				new DefaultFileRenamePolicy()
+				);
+		// 2. 수정할 데이터 요청
+		int bcno = Integer.parseInt( multi.getParameter("bcno"));
+		String btitle = multi.getParameter("btitle");
+		String bcontent = multi.getParameter("bcontent");
+		String bfile = multi.getFilesystemName("bfile");
+		
+		// 2. 수정할 게시물 식별키
+		int bno = Integer.parseInt( multi.getParameter("bno"));
+		BoardDto updateDto = new BoardDto(bno, btitle, bcontent, bfile, bcno);
+		// * 만약에 새로운 첨부파일이 없으면 기존 첨부파일 그대로 사용
+		if( updateDto.getBimg() == null )
+			// 기존 첨부파일
+			updateDto.setBimg(BoardDao.getInstance().getBoard(bno).getBimg()); 
+		
+		// 3. Dao
+		boolean result = BoardDao.getInstance().onUpdate(updateDto);
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 	/**

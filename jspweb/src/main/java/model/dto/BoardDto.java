@@ -37,6 +37,14 @@ public class BoardDto { // 게시물 , 카테고리
 	
 	
 
+	public BoardDto(int bno, String btitle, String bcontent, String bimg, int cno) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bimg = bimg;
+		this.cno = cno;
+	}
 	public BoardDto(int bno, String btitle, String bcontent, String bimg, String bwriteTime, int bview, int mno,
 			int cno, String mid, String bcname, String mimg) {
 		super();

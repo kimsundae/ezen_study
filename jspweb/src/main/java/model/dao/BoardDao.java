@@ -76,7 +76,22 @@ public class BoardDao extends Dao{
 		return null;
 	}
 	// 4. 게시물 수정
-	
+	public boolean onUpdate( BoardDto dto ) {
+		try {
+			String sql = "update board set btitle = ? , bcontent = ? , cno = ? , bimg = ? where bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getBtitle()); 
+			ps.setString(2, dto.getBcontent());
+			ps.setInt(3 , dto.getCno()); 
+			ps.setString( 4 , dto.getBimg());
+			ps.setInt(5 , dto.getBno());
+			int row = ps.executeUpdate();
+			if(row == 1)
+				return true;
+		}catch(Exception e) {e.printStackTrace();}	
+		
+		return false;
+	}
 	// 5. 게시물 삭제
 	public boolean onDelete( int bno ) {
 		try {
