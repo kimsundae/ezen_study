@@ -25,7 +25,7 @@ function listRead(){
 							<tr class="list">
 								<td>${b.bno}</td>
 								<td>${b.bcname}</td>
-								<td>${b.btitle}</td>
+								<td><a href="/jspweb/board/view.jsp?bno=${b.bno	}">${b.btitle}</a></td>
 								<td>${b.mid} / <img width="25px" src="/jspweb/member/img/${b.mimg}"/></td>
 								<td>${b.bwriteTime}</td>
 								<td>${b.bview}</td>
@@ -38,4 +38,17 @@ function listRead(){
 		},
 		error : e => {}
 	});		
-}	
+}
+
+/*
+	HTTP URL에 매개변수(파라미터) 전달 ( 쿼리[질의]스트링 방식)
+		- 
+		- 형태
+			URL?변수명=데이터
+			URL?변수명=데이터&변수명=데이터
+			http://localhost:80/jspweb/board/view.jsp?bno=3
+			href="/jspweb/board/view.jsp?bno=${b.bno}"
+		- 정의 : 페이지 전환 시 매개변수(PK,식별) 전달
+		
+	
+*/
