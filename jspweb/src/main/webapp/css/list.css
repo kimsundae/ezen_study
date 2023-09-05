@@ -10,15 +10,7 @@
 	justify-content: center;
 	margin-top: 40px;
 }
-.category button{
-	width: 70px;
-    height: 35px;
-	background-color: black;
-	border:none;
-	color:white;
-	margin : 0px 5px 0px 5px;
-	border-radius: 5px;box-shadow: 0 15px 35px rgba(0, 0, 0, 0.14);
-}
+
 .wrap .boardList{
 	border : 1px solid #e8e8e8;
 }
@@ -65,9 +57,39 @@
 .boardTable tr:nth-child(odd){background-color:#A6774E;}
 .boardTable tr:nth-child(even){background-color:#D9B384;}
 
-.boardTable tr:hover{background-color: #75C1CF;}
+.boardTable tr:hover{background-color: #735C3F;}	
 .boardTable img{width:10px; vertical-align: middle;}
 
+/* 2. 상단 구역 */
+.boardtop{text-align: center;}
+.boardtopetc{
+	display:flex; justify-content: space-between;
+	margin: 20px 0px;
+}
+.bbtn{
+	border: none;
+	background-color:#402D16; color:white;
+	width: 100px; padding: 5px 20px;
+	border-radius: 8px;
+	font-size:15px;
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.14);
+}
+.boardcount{margin-left:20px;}
+/* 상단 구역 */
+.boardbottom{
+	border-top : 1px solid #e8e8e8;
+	padding-top: 30px; margin: 50px 0px;
+	text-align: center;
+}
+.pagebox button{
+	border: none;
+	background-color: transparent; /* 투명색 */
+	font-size:20px; margin: 15px 10px;
+}
+.keyword{
+	border: 1px solid #e8e8e8; padding : 10px;
+	border-radius: 10px; width: 200px;
+}
 /* 
 	하위 요소를 인덱스로 식별 하기
 		- 인덱스 : 1번부터 시작
