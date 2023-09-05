@@ -26,7 +26,7 @@ function listRead(){
 								<td>${b.bno}</td>
 								<td>${b.bcname}</td>
 								<td><a href="/jspweb/board/view.jsp?bno=${b.bno	}">${b.btitle}</a></td>
-								<td>${b.mid} / <img width="25px" src="/jspweb/member/img/${b.mimg}"/></td>
+								<td>${b.mid} / <img src="/jspweb/member/img/${b.mimg}"/></td>
 								<td>${b.bwriteTime}</td>
 								<td>${b.bview}</td>
 								
@@ -34,7 +34,7 @@ function listRead(){
 						`	
 				});
 							
-			document.querySelector('.board').innerHTML += html;				
+			document.querySelector('.boardTable').innerHTML += html;				
 		},
 		error : e => {}
 	});		

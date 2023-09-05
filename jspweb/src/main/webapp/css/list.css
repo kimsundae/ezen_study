@@ -22,7 +22,58 @@
 .wrap .boardList{
 	border : 1px solid #e8e8e8;
 }
-.board{    
+.boardTable{    
 	width: 100%;
+	margin-top: 30px;
     text-align: left;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+.boardTable th, td {
+	text-align: center;
+	padding: 13px 0px;
+	/* 내용물이 구역보다 커졌을 때, (생략 기호)...표시하기 */
+	white-space:nowrap; /* 자동 줄바꿈 해제 */
+	overflow: hidden; /* 내용물이 구역보다 커졌을 때 내용물 숨기기 */
+	text-overflow : ellipsis; /* 넘쳐서 숨겨진 내용물은 ... 표기하기 */
+	max-width: 150px;
+}
+.boardTable th{ /* 첫번째 열 */
+	background-color: #735C3F; color:white;
+	padding: 10px 0px;
+}
+.boardTable th:nth-child(1){ /* 첫번째 열 */
+	width:8%;
+}
+.boardTable th:nth-child(2){ /* 두번째 열 */
+	width:10%;
+}
+.boardTable th:nth-child(3){ /* 세번째 열 */
+	width:60%;
+}
+.boardTable th:nth-child(4){ /* 네번째 열 */
+	width:13%;
+}
+.boardTable th:nth-child(5){ /* 다섯번째 열 */
+	width:5%;
+}
+.boardTable th:nth-child(6){ /* 여섯번째 열 */
+	width:10%;
+}
+/* 1-5 홀수/짝수 행마다 구역 */
+.boardTable tr:nth-child(odd){background-color:#A6774E;}
+.boardTable tr:nth-child(even){background-color:#D9B384;}
+
+.boardTable tr:hover{background-color: #75C1CF;}
+.boardTable img{width:10px; vertical-align: middle;}
+
+/* 
+	하위 요소를 인덱스로 식별 하기
+		- 인덱스 : 1번부터 시작
+		- 목적 : 동일한 식별자가 여러개일 때 사용
+		- 상위요소 하위요소:nth-chile( 인덱스 )
+			- form input :nth-child( 1 )	: form 태그 하위요소의 첫번째 input 요소 식별
+			- form input :nth-child( 3 )	: form 태그 하위요소의 세번째 input 요소 식별
+			
+ */

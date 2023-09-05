@@ -13,7 +13,7 @@
 	<div class="webcontainer">
 		<div class="category">
 			<button type="button"> 전체 </button>
-			<button type="button"> 공지사항 </button>
+			<button type="button"> 공지사항 </button>	
 			<button type="button"> 자유게시판 </button>
 			<button type="button"> 노하우 </button>
 		</div>
@@ -21,7 +21,7 @@
 		<div>
 			<button onclick="onWrite()" type="button"> 글쓰기 </button>
 		</div>	
-		<table class="board">
+		<table class="boardTable">
 				<tr>
 					<th>게시글 번호</th>
 					<th>카테고리</th>
