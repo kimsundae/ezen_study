@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model.dao.BoardDao;
 import model.dto.BoardDto;
 import model.dto.MemberDto;
+import model.dto.PageDto;
 
 /**
  * Servlet implementation class BoardInfoController
@@ -53,9 +54,22 @@ public class BoardInfoController extends HttpServlet {
 			int startrow = (page-1)*listsize; // 페이지번호*최대게시물수
 				// 1*10 => 10
 				// 2*10 => 20
-			ArrayList<BoardDto> dtoList = BoardDao.getInstance().listRead( bcno , listsize , startrow);
-			json = objectMapper.writeValueAsString(dtoList);
-			System.out.println(json);
+			// ---------------- 4. 마지막 페이지번호 --------------- //
+				// 1. 마지막페이지번호/총 페이지 수 = 전체 게시물 수 / 페이지별 게시물 수 
+				// 2. 전체게시물 수
+			int totalsize = BoardDao.getInstance().getTotalSize(bcno);
+				// 3. 마지막 페이지 번호/총 페이지 수 
+			int totalpage = totalsize%listsize == 0 ? 		// 만약에 나머지가 없으면
+								totalsize/listsize : 		// 몫
+									totalsize/listsize + 1;	// 몫 + 1
+			ArrayList<BoardDto> result = BoardDao.getInstance().listRead( bcno , listsize , startrow);
+			PageDto pageDto = new PageDto(
+					page , listsize , startrow , totalsize , totalpage , result
+					);
+					
+					
+			json = objectMapper.writeValueAsString(pageDto);
+	
 						
 		}else if( type.equals("2")) {
 			int bno = Integer.parseInt(request.getParameter("bno"));

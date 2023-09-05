@@ -35,7 +35,7 @@ function listRead( page ){ // page : 조회할 페이지
 								<th>작성일</th>				
 							</tr>`;					
 			// 배열명.forEach
-			r.forEach( b => {
+			r.boardList.forEach( b => {
 				html += `
 							<tr class="list">
 								<td>${b.bno}</td>
@@ -57,14 +57,21 @@ function listRead( page ){ // page : 조회할 페이지
 			// 이전버튼
 			html += `<button onclick="listRead(${ page == 1 ? page : page-1})" type="button"> < </button>`
 			// 페이지 번호 버튼 [ 페이지 개수만큼 반복]
-			for( let i = 1; i <= 5; i++){
-				html += `<button onclick="listRead(${i})" type="button"> ${i} </button>`
+			for( let i = 1; i <= r.totalpage; i++){
+				
+				html += `<button class="${page == i ? 'selectpage' : ''}" onclick="listRead(${i})" type="button"> ${i} </button>`
 			}	
 			// 다음버튼
 			html += `<button onclick="listRead(${page+1})"type="button"> > </button>`
 					
 		//pagebox 구역에 구성된 html 대입
 		document.querySelector('.pagebox').innerHTML = html;
+		
+		// ------------- 3. 게시물 수 출력 -------------//
+		let boardcount = document.querySelector('.boardcount');
+		
+		boardcount.innerHTML = `총 게시물 수 : ${ r.totalsize }`
+		
 		},
 		error : e => {}
 	});		

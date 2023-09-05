@@ -25,6 +25,18 @@ public class BoardDao extends Dao{
 		}catch(Exception e) {e.printStackTrace();}
 		return false;
 	}
+	// 2-2 게시글 수 출력
+	public int getTotalSize( int cno ) {
+		try {
+			String sql = "select count(*) from board b ";
+			// 만약에 전체보기가 아니면[카테고리별	 개수 ]
+			if( cno != 0 ) { sql += "where b.cno = " + cno;}
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if( rs.next() )return rs.getInt(1);
+		}catch(Exception e) {e.printStackTrace();}
+		return 0;
+	}
 	// 2. 모든 글 출력
 	public ArrayList<BoardDto> listRead(int bcno , int listsize , int startrow){
 		ArrayList<BoardDto> dtoList = new ArrayList<>();
