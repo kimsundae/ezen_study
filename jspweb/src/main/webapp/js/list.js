@@ -9,16 +9,29 @@ function onWrite(){
 		location.href="/jspweb/member/login.jsp"
 	}
 }
+
+/* 게시물 조회 조건 객체 */
+let pageObject = { type: 1 , bcno : 0 , listsize: 10}
+	// * type 		: (1:전체조회 , 2:개별조회)
+	// * bcno	 	: 조회할 카테고리번호 [ 기본값은 전체보기 ]
+	// * listsize	: 하나의 페이지에 최대 표시할 게시물 수
 listRead();
-function listRead(){
+function listRead( ){
 	
 	$.ajax({
 		url : "/jspweb/BoardInfoController",
-		data : {type : 1 },
+		data : pageObject,
 		method : "get",
 		success : r => {
 			console.log(r)
-			let html = ``;
+				let html = `<tr>
+								<th>게시글 번호</th>
+								<th>카테고리</th>
+								<th>제목</th>
+								<th>글쓴이</th>
+								<th>조회수</th>
+								<th>작성일</th>				
+							</tr>`;					
 			// 배열명.forEach
 			r.forEach( b => {
 				html += `
@@ -33,11 +46,23 @@ function listRead(){
 						`	
 				});
 							
-			document.querySelector('.boardTable').innerHTML += html;				
+			document.querySelector('.boardTable').innerHTML = html;				
 		},
 		error : e => {}
 	});		
 }
+	
+// 3. 카테고리 버튼을 클릭했을 때.
+function onCategory( bcno ){ 
+	pageObject.bcno = bcno; // 조회 조건객체 내 카테고리 번호를 선택한 카테고리로 변경
+	listRead()
+}
+// 4. 한페이지 최대 표시할 게시글 개수를 변경했을 때
+function onListSize(){
+	pageObject.listsize = document.querySelector('.listsize').value;
+	listRead();
+}
+
 
 /*
 	HTTP URL에 매개변수(파라미터) 전달 ( 쿼리[질의]스트링 방식)

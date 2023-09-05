@@ -90,6 +90,10 @@
 	border: 1px solid #e8e8e8; padding : 10px;
 	border-radius: 10px; width: 200px;
 }
+.selectpage{
+	width: 30px; height: 30px; border-radius: 50%;
+	background-color : #402D16 !important; /* 다른 css 겹쳤을 때 최우선 */
+}
 /* 
 	하위 요소를 인덱스로 식별 하기
 		- 인덱스 : 1번부터 시작

@@ -26,13 +26,20 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	// 2. 모든 글 출력
-	public ArrayList<BoardDto> listRead(){
+	public ArrayList<BoardDto> listRead(int bcno , int listsize){
 		ArrayList<BoardDto> dtoList = new ArrayList<>();
 		try {	
 			String sql = " select b.* , m.mid , m.mimg , bc.cname from "
 					+ "board b natural join category bc "
-					+ "natural join member m order by b.bwriteTime desc";
+					+ "natural join member m ";
+			if( bcno != 0)  // 만약에 카테고리를 선택했으면 [ 전체보기가 아니면 ] 
+				sql += "where b.cno = " + bcno;
+			
+			// 뒤부분 공통 SQL 
+			sql += " order by b.bwriteTime desc limit ? ";
+			
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, listsize);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				BoardDto dto = new BoardDto( rs.getInt("bno") ,
