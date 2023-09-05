@@ -52,14 +52,7 @@
 		<!-- 5. 페이징처리 구역 -->
 		<div class="boardbottom">
 			<div class="pagebox">
-				<button type="button"> < </button>	<!-- 이전버튼 -->
-					<button type="button"> 1 </button>	<!-- 페이징 버튼 -->
-					<button type="button" class="selectpage"> 2 </button>
-					<button type="button"> 3 </button>
-					<button type="button"> 4 </button>
-					<button type="button"> 5 </button>
-					<button type="button"> 6 </button>			
-				<button type="button"> > </button>	<!-- 다음버튼  -->
+				
 			</div>				
 			<!-- 6. 검색 구역 -->				
 			<select class="bbtn">	<!-- 검색할 필드명 -->

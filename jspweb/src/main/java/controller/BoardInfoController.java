@@ -47,8 +47,13 @@ public class BoardInfoController extends HttpServlet {
 			int bcno = Integer.parseInt(request.getParameter("bcno"));
 			//----------- 2. 출력할 게시물수/하나의 페이지의 최대 게시물 수 -----------//
 			int listsize = Integer.parseInt(request.getParameter("listsize"));
-			
-			ArrayList<BoardDto> dtoList = BoardDao.getInstance().listRead( bcno , listsize);
+			//------------ 3. 페이징 처리 하기 ------------//
+			int page = Integer.parseInt(request.getParameter("page"));
+				// 1. 페이지별 레코드의 시작번호
+			int startrow = (page-1)*listsize; // 페이지번호*최대게시물수
+				// 1*10 => 10
+				// 2*10 => 20
+			ArrayList<BoardDto> dtoList = BoardDao.getInstance().listRead( bcno , listsize , startrow);
 			json = objectMapper.writeValueAsString(dtoList);
 			System.out.println(json);
 						

@@ -11,12 +11,14 @@ function onWrite(){
 }
 
 /* 게시물 조회 조건 객체 */
-let pageObject = { type: 1 , bcno : 0 , listsize: 10}
+let pageObject = { type: 1 , bcno : 0 , listsize: 10 , page : 1 }
 	// * type 		: (1:전체조회 , 2:개별조회)
 	// * bcno	 	: 조회할 카테고리번호 [ 기본값은 전체보기 ]
 	// * listsize	: 하나의 페이지에 최대 표시할 게시물 수
-listRead();
-function listRead( ){
+listRead(1);
+function listRead( page ){ // page : 조회할 페이지
+	
+	pageObject.page = page;
 	
 	$.ajax({
 		url : "/jspweb/BoardInfoController",
@@ -46,7 +48,23 @@ function listRead( ){
 						`	
 				});
 							
-			document.querySelector('.boardTable').innerHTML = html;				
+			document.querySelector('.boardTable').innerHTML = html;
+			
+			//------------ 2. 페이지번호 출력 -------------//		
+			html = ``;
+			
+		// 페이지 개수만큼 페이징번호 구성
+			// 이전버튼
+			html += `<button onclick="listRead(${ page == 1 ? page : page-1})" type="button"> < </button>`
+			// 페이지 번호 버튼 [ 페이지 개수만큼 반복]
+			for( let i = 1; i <= 5; i++){
+				html += `<button onclick="listRead(${i})" type="button"> ${i} </button>`
+			}	
+			// 다음버튼
+			html += `<button onclick="listRead(${page+1})"type="button"> > </button>`
+					
+		//pagebox 구역에 구성된 html 대입
+		document.querySelector('.pagebox').innerHTML = html;
 		},
 		error : e => {}
 	});		
@@ -55,14 +73,30 @@ function listRead( ){
 // 3. 카테고리 버튼을 클릭했을 때.
 function onCategory( bcno ){ 
 	pageObject.bcno = bcno; // 조회 조건객체 내 카테고리 번호를 선택한 카테고리로 변경
-	listRead()
+	listRead(1)
 }
 // 4. 한페이지 최대 표시할 게시글 개수를 변경했을 때
 function onListSize(){
 	pageObject.listsize = document.querySelector('.listsize').value;
-	listRead();
+	listRead(1);
 }
 
+function te(){
+	
+	html = ``;
+		// 페이지 개수만큼 페이징번호 구성
+			// 이전버튼
+			html += `<button onclick="listRead(${ page == 1 ? page : page-1})" type="button"> < </button>`
+			// 페이지 번호 버튼 [ 페이지 개수만큼 반복]
+			for( let i = 1; i <= 5; i++){
+				html += `<button onclick="listRead(${i})" type="button"> ${i} </button>`
+			}	
+			// 다음버튼
+			html += `<button onclick="listRead(${page+1})"type="button"> > </button>`
+					
+		//pagebox 구역에 
+	
+}
 
 /*
 	HTTP URL에 매개변수(파라미터) 전달 ( 쿼리[질의]스트링 방식)

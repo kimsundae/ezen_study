@@ -26,7 +26,7 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	// 2. 모든 글 출력
-	public ArrayList<BoardDto> listRead(int bcno , int listsize){
+	public ArrayList<BoardDto> listRead(int bcno , int listsize , int startrow){
 		ArrayList<BoardDto> dtoList = new ArrayList<>();
 		try {	
 			String sql = " select b.* , m.mid , m.mimg , bc.cname from "
@@ -36,10 +36,10 @@ public class BoardDao extends Dao{
 				sql += "where b.cno = " + bcno;
 			
 			// 뒤부분 공통 SQL 
-			sql += " order by b.bwriteTime desc limit ? ";
+			sql += " order by b.bwriteTime desc limit ? , ?";
 			
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, listsize);
+			ps = conn.prepareStatement(sql);			
+			ps.setInt(1, startrow); ps.setInt(2, listsize);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				BoardDto dto = new BoardDto( rs.getInt("bno") ,
