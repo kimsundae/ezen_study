@@ -17,6 +17,7 @@ import model.dao.BoardDao;
 import model.dto.BoardDto;
 import model.dto.MemberDto;
 import model.dto.PageDto;
+import service.FileService;
 
 /**
  * Servlet implementation class BoardInfoController
@@ -177,7 +178,11 @@ public class BoardInfoController extends HttpServlet {
 		if( updateDto.getBimg() == null )
 			// 기존 첨부파일
 			updateDto.setBimg(BoardDao.getInstance().getBoard(bno).getBimg()); 
-		
+		else { // 만약에 수정할 첨부파일 있으면 기존 첨부파일은 서버 업로드 폴더에서 삭제
+			String filename = BoardDao.getInstance().getBoard(bno).getBimg();
+			filename = request.getServletContext().getRealPath("/board/img")+ "/" + filename;
+			FileService.fileDelete(filename);		
+		}
 		// 3. Dao
 		boolean result = BoardDao.getInstance().onUpdate(updateDto);
 		response.setContentType("application/json;charset=UTF-8");
@@ -189,8 +194,15 @@ public class BoardInfoController extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bno = Integer.parseInt( request.getParameter("bno") );
-		boolean result = BoardDao.getInstance().onDelete(bno);
-		
+		String filename = BoardDao.getInstance().getBoard(bno).getBimg();
+		boolean result = BoardDao.getInstance().onDelete(bno);		
+			// 게시물 삭제시 삭제된 게시물의 업로드 파일도 같이 삭제
+			if( result ) { //만약에 게시물 삭제 성공이면
+				filename = request.getServletContext().getRealPath("/board/img")+ "/" + filename;
+				
+				FileService.fileDelete(filename);
+			}
+			
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
 	}
