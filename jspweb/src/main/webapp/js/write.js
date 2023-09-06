@@ -1,3 +1,15 @@
+$(document).ready(function() {
+	
+	let option ={
+		lang : 'ko-KR',
+		height : 500 ,
+		placeholder : '여기에 내용 작성'
+		
+	}
+	
+  $('#summernote').summernote();
+});	
+
 function bwrite(){
 
 	// 1. form 가져오기

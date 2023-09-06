@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="/jspweb/css/header.css" rel="stylesheet">
+	<link href="/jspweb/css/header.css" rel="stylesheet">	
 </head>
 <body>
 
@@ -30,7 +30,7 @@
 	</div>
 	<!-- 최신 JQUERY import ( ajax() 사용할 js파일)  -->
 	<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-	<script src="/jspweb/js/header.js" type="text/javascript"></script>
+	<script src="/jspweb/js/header.js" type="text/javascript"></script>	
 </body>
 </html>
 <!-- 

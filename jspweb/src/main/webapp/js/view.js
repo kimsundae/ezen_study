@@ -24,7 +24,7 @@ function getBoard(){
 							부가정보2 : <div> ${r.mid} , <img src="/jspweb/member/img/${r.mimg}" width="25px"></div>
 							제목 : <div> ${r.btitle} </div>	
 							내용 : <div> ${r.bcontent} </div>
-							첨부파일 : <div> <img src="/jspweb/member/img/${r.bimg}" width="25px"> </div>
+							첨부파일 : <div> <a href="/jspweb/FileDownLoad?filename=${r.bimg}"> ${ r.bimg }</div>
 							
 						`
 			html += `<a href="list.jsp"><button type="button"> 목록보기 </button></a>`

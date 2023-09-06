@@ -39,7 +39,6 @@ public class BoardDao extends Dao{
 				
 				sql += " " + key + " like '%"+keyword+"%' ";
 			}
-			System.out.println(sql);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			if( rs.next() )return rs.getInt(1);
@@ -67,7 +66,6 @@ public class BoardDao extends Dao{
 				
 			// 뒤부분 공통 SQL 
 			sql += " order by b.bwriteTime desc limit ? , ?";
-			System.out.println(sql);
 			ps = conn.prepareStatement(sql);			
 			ps.setInt(1, startrow); ps.setInt(2, listsize);
 			rs = ps.executeQuery();
