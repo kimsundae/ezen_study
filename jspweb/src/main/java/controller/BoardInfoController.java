@@ -62,9 +62,25 @@ public class BoardInfoController extends HttpServlet {
 			int totalpage = totalsize%listsize == 0 ? 		// 만약에 나머지가 없으면
 								totalsize/listsize : 		// 몫
 									totalsize/listsize + 1;	// 몫 + 1
+			
+			// --------------- 5. 페이지 번호 버튼 시작번호 , 마지막 번호 --------------//
+			
+			// 1. 페이지 버튼 번호의 쵀대개수
+			int btnsize = 5;
+			// 2. 페이지버튼 번호의 시작번호
+			int startbtn = ( (page-1) / btnsize ) * btnsize + 1;
+			// 3. 페이지버튼 번호의 마지막번호
+			int endbtn = startbtn+(btnsize-1);
+				// 단 마지막 번호는 총페이지수보다 커질 수 없음
+				// 만약에 마지막 번호가 총 페이지수보다 크거나 같으면 총페이지 수로 제한두기
+			if( endbtn >= totalpage) endbtn = totalpage;
+			
+			// ------------ pageDto 구성 -------------- //
+			
+			
 			ArrayList<BoardDto> result = BoardDao.getInstance().listRead( bcno , listsize , startrow);
 			PageDto pageDto = new PageDto(
-					page , listsize , startrow , totalsize , totalpage , result
+					page , listsize , startrow , totalsize , totalpage , startbtn, endbtn, result
 					);
 					
 					

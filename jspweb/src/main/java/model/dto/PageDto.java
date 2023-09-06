@@ -11,6 +11,8 @@ public class PageDto {
 	private int startrow; 	// 현재 페이지에서 시작되는 게시물 번호
 	private int totalsize;	// 현재 총 게시물 수	
 	private int totalpage;	// 총 페이지 수
+	private int startbtn;
+	private int endbtn;
 	
 	// * 게시물 리스트 [ 조회된 결과 ]
 	ArrayList<BoardDto> boardList;
@@ -26,6 +28,21 @@ public class PageDto {
 		this.startrow = startrow;
 		this.totalsize = totalsize;
 		this.totalpage = totalpage;
+		this.boardList = boardList;
+	}
+
+	
+	
+	public PageDto(int page, int listsize, int startrow, int totalsize, int totalpage, int startbtn, int endbtn,
+			ArrayList<BoardDto> boardList) {
+		super();
+		this.page = page;
+		this.listsize = listsize;
+		this.startrow = startrow;
+		this.totalsize = totalsize;
+		this.totalpage = totalpage;
+		this.startbtn = startbtn;
+		this.endbtn = endbtn;
 		this.boardList = boardList;
 	}
 
