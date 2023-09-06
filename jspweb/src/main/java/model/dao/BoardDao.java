@@ -26,11 +26,20 @@ public class BoardDao extends Dao{
 		return false;
 	}
 	// 2-2 게시글 수 출력
-	public int getTotalSize( int cno ) {
+	public int getTotalSize( int cno , String key , String keyword ) {
 		try {
-			String sql = "select count(*) from board b ";
+			String sql = "select count(*) from board b natural join member m ";
 			// 만약에 전체보기가 아니면[카테고리별	 개수 ]
 			if( cno != 0 ) { sql += "where b.cno = " + cno;}
+			
+			// 만약에 검색이 있으면
+			if( !key.isEmpty() && !keyword.isEmpty()) {
+				if( cno != 0 ) sql += " and";
+				else sql += " where";
+				
+				sql += " " + key + " like '%"+keyword+"%' ";
+			}
+			System.out.println(sql);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			if( rs.next() )return rs.getInt(1);
@@ -38,7 +47,7 @@ public class BoardDao extends Dao{
 		return 0;
 	}
 	// 2. 모든 글 출력
-	public ArrayList<BoardDto> listRead(int bcno , int listsize , int startrow){
+	public ArrayList<BoardDto> listRead(int bcno , int listsize , int startrow , String key , String keyword){
 		ArrayList<BoardDto> dtoList = new ArrayList<>();
 		try {	
 			String sql = " select b.* , m.mid , m.mimg , bc.cname from "
@@ -47,9 +56,18 @@ public class BoardDao extends Dao{
 			if( bcno != 0)  // 만약에 카테고리를 선택했으면 [ 전체보기가 아니면 ] 
 				sql += "where b.cno = " + bcno;
 			
+			// 만약에 검색이 있으면 [ key와 keyword 모두 빈 문자열이 아니면]
+				// 문자열.isEmpty() : 문자열이 비어 있으면 [ '' ] null vs '' 다름
+			if( !key.isEmpty() && !keyword.isEmpty() ) {			
+				if( bcno != 0) sql+=" and";
+				else sql += " where";
+				sql+= " "+ key + " like '%"+keyword+"%'";
+			}
+			
+				
 			// 뒤부분 공통 SQL 
 			sql += " order by b.bwriteTime desc limit ? , ?";
-			
+			System.out.println(sql);
 			ps = conn.prepareStatement(sql);			
 			ps.setInt(1, startrow); ps.setInt(2, listsize);
 			rs = ps.executeQuery();

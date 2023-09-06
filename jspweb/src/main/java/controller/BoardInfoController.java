@@ -41,8 +41,11 @@ public class BoardInfoController extends HttpServlet {
 		String type = request.getParameter("type");		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = "";
-		
+		String key = request.getParameter("key");
+		String keyword = request.getParameter("keyword"); 
 		if( type.equals("1") ) {
+			
+			
 			
 			//----------- 1. 카테고리 ---------------//
 			int bcno = Integer.parseInt(request.getParameter("bcno"));
@@ -57,7 +60,7 @@ public class BoardInfoController extends HttpServlet {
 			// ---------------- 4. 마지막 페이지번호 --------------- //
 				// 1. 마지막페이지번호/총 페이지 수 = 전체 게시물 수 / 페이지별 게시물 수 
 				// 2. 전체게시물 수
-			int totalsize = BoardDao.getInstance().getTotalSize(bcno);
+			int totalsize = BoardDao.getInstance().getTotalSize(bcno , key , keyword);
 				// 3. 마지막 페이지 번호/총 페이지 수 
 			int totalpage = totalsize%listsize == 0 ? 		// 만약에 나머지가 없으면
 								totalsize/listsize : 		// 몫
@@ -78,7 +81,7 @@ public class BoardInfoController extends HttpServlet {
 			// ------------ pageDto 구성 -------------- //
 			
 			
-			ArrayList<BoardDto> result = BoardDao.getInstance().listRead( bcno , listsize , startrow);
+			ArrayList<BoardDto> result = BoardDao.getInstance().listRead( bcno , listsize , startrow , key , keyword );
 			PageDto pageDto = new PageDto(
 					page , listsize , startrow , totalsize , totalpage , startbtn, endbtn, result
 					);
