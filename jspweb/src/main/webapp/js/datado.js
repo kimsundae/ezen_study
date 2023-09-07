@@ -52,6 +52,66 @@ function api1(){
 		error : e => {}		
 	})
 }
+
+ var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
+        center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표 
+        level : 14 // 지도의 확대 레벨 
+    });
+    // 마커 이미지의 주소
+var markerImageUrl = '/jspweb/img/번개.png', 
+    markerImageSize = new kakao.maps.Size(40, 42), // 마커 이미지의 크기
+		  markerImageOptions = { 
+		      offset : new kakao.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+		  };
+// 마커 이미지를 생성한다
+var markerImage = new kakao.maps.MarkerImage(markerImageUrl, markerImageSize, markerImageOptions);
+    
+    // 마커 클러스터러를 생성합니다 
+    var clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+    });
+ 	
+    // 데이터를 가져오기 위해 jQuery를 사용합니다
+    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+    $.get("https://api.odcloud.kr/api/15090398/v1/uddi:6fe0e3f2-0285-4999-9edf-995afe19a6ea?page=1&perPage=10&serviceKey=Ur9HfN6c2theRbwarAqypv9rrZMM7A6s1EEGh5NcEJq7ed1qmiSLPJ%2BlZf%2Ffrna%2BqM2C7Z7K49VnJ%2FQ5uXl2HA%3D%3D", 
+    	function(response) {	
+			console.log(response)
+	        // response : 공공데이터 응답 객체
+	        // response : 
+	        var markers = $(response.data).map(function(i, position) {
+				
+				// 개별 마커 생성 후
+				let marker = new kakao.maps.Marker({ 
+					position : new kakao.maps.LatLng(position['위도(WGS84)'], position['경도(WGS84)']),
+					image : markerImage ,//마커의 이미지
+					
+				 })
+				
+	            
+	            
+	             // 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
+				kakao.maps.event.addListener(marker, 'click', function() {
+				    let html = ``
+				    	
+				    		html	+=	`<div> 충전소명 : ${position.충전소명}</div>`
+				    		html	+=	`<div> 충전소명 : ${position.충전기타입명}</div>`
+				    		html	+=	`<div> 충전소명 : ${position.운영기관명}</div>`
+				    		html	+=	`<div> 충전소명 : ${position.소재지도로명주소}</div>`
+				    			
+				    		document.querySelector('.detailbox').innerHTML = html;
+				});
+				
+				return marker;
+        	});
+
+        // 클러스터러에 마커들을 추가합니다
+        clusterer.addMarkers(markers);
+    });
+    
+   
+/*
 // 1. 접속한 브라우저의 GPS 좌표 얻기 [ geolocation ]
 navigator.geolocation.getCurrentPosition( pos => {
 	console.log( pos );
@@ -79,7 +139,7 @@ navigator.geolocation.getCurrentPosition( pos => {
 });
 // 카카오지도 출력
 
-
+*/
 
 
 

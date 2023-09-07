@@ -12,9 +12,15 @@
 		<h3> 공공데이터 </h3>
 		<div>
 			<h6> 안산시 착한가격업소 현황 </h6>
-			<div>			
+			<div>	
+				<h2>카카오 지도</h2>		
+				<div class="detailbox"> 
+				
+				</div>
 				<div id="map" style="width:500px;height:400px;"></div>
 			</div>
+			
+			
 			<table class="apitable1">
 				<tr>
 					<th> 번호 </th>
@@ -28,7 +34,7 @@
 			</table>
 		</div>	
 	</div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6627d92a562d0e01aed3c8ae1c67211e"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6627d92a562d0e01aed3c8ae1c67211e&libraries=clusterer"></script>
 	<script src="/jspweb/js/datado.js" type="text/javascript"></script>
 	
 </body>
