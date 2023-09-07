@@ -145,3 +145,29 @@ navigator.geolocation.getCurrentPosition( pos => {
 
 // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 // marker.setMap(null);    
+
+
+
+/*
+	1. 인덱스 0부터 배열의 길이만큼 반복
+	for문
+	2. 배열의 첫번째 인덱스부터 마지막인덱스 까지 반복
+		for( let 인덱스변수 in arrayList ){}
+		
+	3. 배열의 첫번째 데이터부터 마지막 데이터까지 반복
+		for( let 반복변수 of ArrayList){}
+	4. 배열의 반복변수of 인덱스를 첫번째부터 마지막 반복 [반환 return 값x]
+		arrayList.forEach((반복변수)=>{})
+		arrayList.forEach((반복변수,인덱스변수)=>{})
+	
+	5. 배열의 반복변수or인덱스를 첫번째부터 마지막 반복 [반환값return o ] => 새로운 배열에 저장할 수 있다.
+		arrayList.map((반복변수)=>{})	
+		arrayList.map((반복변수,인덱스변수)=>{})
+		arrayList.map((반복변수,인덱스변수,배열)=>{})
+		
+		let returnArrays = arrayList.map((반복변수,인덱스변수)=>{return})
+	6. filter
+	
+	
+	
+*/

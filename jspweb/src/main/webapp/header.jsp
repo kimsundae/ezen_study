@@ -20,7 +20,7 @@
 			<li><a href="/jspweb/visitlog/visitlog.jsp">방문록(절대경로)</a></li>		
 			<li><a href="/jspweb/board/list.jsp">게시판</a></li>
 			<li><a href="/jspweb/datago.jsp">공공데이터</a></li>
-			<li><a href="#">기능3</a></li>		
+			<li><a href="/jspweb/chatting/chatting.jsp">채팅</a></li>		
 			<li><a href="/jspweb/accountbook/accountbook.jsp">과제1:가계부</a></li>
 			<li><a href="/jspweb/library/library.jsp">과제2:열람실</a></li>
 			<li><a href="/jspweb/hrm/hrm.jsp">과제3:사원관리시스템</a></li>
