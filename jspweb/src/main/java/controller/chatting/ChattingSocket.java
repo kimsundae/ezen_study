@@ -6,7 +6,10 @@ import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+
+import model.dto.ClientDto;
 
 /*
  * 	1. 서버 웹소켓 만들기
@@ -20,25 +23,27 @@ import javax.websocket.server.ServerEndpoint;
  * 		
  * 
  */
-@ServerEndpoint("/ChattingSocket")
+@ServerEndpoint("/ChattingSocket/{mid}")
 public class ChattingSocket {
 	
-	static ArrayList<Session> 접속명단 = new ArrayList<>();
+	static ArrayList<ClientDto> clientList = new ArrayList<>();
 	
 	//1.
 	@OnOpen // 클라이언트가 서버소켓의 접속했을 때 매핑/연결
-	public void onOpen( Session session ) {
+	public void onOpen( Session session , @PathParam("mid") String mid ) {
 		System.out.println("클라이언트 소켓 접속 :" + session);
-		System.out.println(session.getId());
+		System.out.println("접속한 회원아이디:" + mid);
 		System.out.println(session.getRequestURI());
-		
-		접속명단.add(session);
-		System.out.println("접속명단 : " + 접속명단);
+		// 1-1 : 접속된 클라이언트소켓을 리스트에 저장하자.
+		ClientDto clientDto = new ClientDto(session , mid);
+		clientList.add( clientDto );
+
+		System.out.println("접속명단 : " + clientList);
 	}
 	// 2. 클라이언트가 서버소켓과 연결이 닫혔을 때 매핑/연결 (JS에서 웹소켓 객체를 초기화 = 새로고침[F5],페이지전환 등등
 	@OnClose
 	public void onClose(Session session) {
-		접속명단.remove(session);
+		clientList.remove(session);
 	}
 	//3.
 	@OnMessage
@@ -49,7 +54,7 @@ public class ChattingSocket {
 		 * for( int i = 0; i < 접속명단.size(); i++) { Session s = 접속명단.get(i); } for(
 		 * Session s : 접속명단 ) {}
 		 */
-		접속명단.forEach( s -> {
+		clientList.forEach( s -> {
 			try {
 				s.getBasicRemote().sendText(msg);
 			}catch(Exception e) {e.printStackTrace();}
