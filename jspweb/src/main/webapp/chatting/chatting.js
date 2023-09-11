@@ -3,10 +3,10 @@
 
 	// 1. JS웹 소켓 만들기 [WebSocket클래스]
 		// new WebSocket('서버소켓 URL'); 
-	let 클라이언트소켓 = new WebSocket('ws://localhost:80/jspweb/ChattingSocket'); console.log(클라이언트소켓)
+	let 클라이언트소켓 = new WebSocket('ws://localhost:8080/jspweb/ChattingSocket'); console.log(클라이언트소켓)
 	
 	// 내가 만든 함수를 클라이언트소켓 속성에 대입
-	클라이언트소켓.onmessage
+	클라이언트소켓.onmessage = ( event ) => onmsg(event);
 	
 function msgsend(){
 	
