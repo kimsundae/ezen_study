@@ -11,6 +11,8 @@
 	height: 650px;
 	background-color: #BACEE0;
 	padding: 20px;
+	/* 만약에 내용물이 구역보다 커졌을 때 */
+	overflow-y: scroll;
 }
 
 /* 채팅입력창 , 전송버튼 구역 */
@@ -45,6 +47,7 @@
 .content{/*메세지 내용  */
 	background-color: #FFFFFF;
 	padding: 10px; border-radius: 5px;
+	max-width: 80%;
 }
 .date{
 	font-size:10px; margin: 0px 5px;
