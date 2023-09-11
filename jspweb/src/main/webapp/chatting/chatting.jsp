@@ -39,7 +39,7 @@
 			</div>
 			<!-- 채팅입력창 , 전송버튼 -->
 			<div class="chatbottom">
-				<textarea></textarea>
+				<textarea class="msg"></textarea>
 				<button onclick="onSend()" type="button"></button>
 			</div>
 		</div>
