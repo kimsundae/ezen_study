@@ -17,6 +17,18 @@ function onSend(){
 	if( msg == ''){alert('내용을 입력해주세요.'); return;}
 	// 3-2 메시지 전송
 	clientSocket.send(msg);
+	// 3-3 메세지 전송 성공 시 
+	document.querySelector('.msg').value = ``;
+}
+function onEnterKey(){
+	
+	
+	// 2. 만약에 ctrl + 엔터이면 줄바꿈 
+	if( window.event.keyCode == 13 && window.event.ctrlKey){
+		document.querySelector('.msg').value += `\n`;return;
+	}
+	// 1. 만약에 입력한 키가 [엔터]이면 메시지 전송
+	if( window.event.keyCode == 13){onSend();return;}
 }
 function onMsg( e ){
 	console.log(e)
@@ -24,13 +36,19 @@ function onMsg( e ){
 	// 1. 어디에 출력할건지
 	let chatcont = document.querySelector('.chatcont')
 	let html = ``;
+	console.log(msg.msg)
+	let content = msg.msg.replaceAll('\n' , '<br/>')
+	
+	// 2. 특정 문자열 찾아서 찾은 문자열 모두 치환/바꾸기/교체 => java : .replaceAll(); js: 정규표현식
+ 	content = msg.msg.replace('/\n/gi' , '<br>')
+ 	
 	// 2. 무엇을
 	if(msg.frommid == loginMid){
 		html =  `			
 							<div class="rcont">
 								<div class="subcont">
 									<div class="date">${msg.date}</div>
-									<div class="content">${msg.msg}</div>
+									<div class="content">${content}</div>
 								</div>
 							</div>
 					`;
@@ -41,7 +59,7 @@ function onMsg( e ){
 					<div class="tocont">
 						<div class="name">${msg.frommid}</div><!-- 보낸사람 -->
 						<div class="subcont">
-							<div class="content"> ${msg.msg} </div>
+							<div class="content"> ${content} </div>
 							<div class="date"> 오전 10:10 </div>
 						</div>					
 					</div>
