@@ -12,7 +12,7 @@ function getMemberInfo(){
 		url : "/jspweb/MemberInfoController" ,
 		method : "get" ,
 		async : false,/*비동기화(기본값=true) , 동기화(false) 설정하는 속성*/
-		data : {type : "info" },
+		data : {type : "info"},
 		success : r=> {
 			// - 로그인 상태에 따른 서로 다른 html 구성
 			let submenu = document.querySelector('.submenu')

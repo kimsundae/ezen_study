@@ -3,7 +3,7 @@
 if(loginState == false){alert('회원전용 페이지입니다.'); location.href = "/jspweb/member/login.jsp";}
 console.log('채팅방에 입장한 아이디 : ' + loginMid); console.log('loginState : ' + loginState);
 // 1. 클라이언트 소켓 만들기
-let clientSocket = new WebSocket(`ws://localhost:8080/jspweb/ChattingSocket/${loginMid}`)
+let clientSocket = new WebSocket(`ws://localhost:80/jspweb/ChattingSocket/${loginMid}`)
 //-------------------------------------------------------//
 clientSocket.onopen = e=> {console.log('서버와 접속이 성공')};
 clientSocket.onclose = '';
@@ -25,11 +25,11 @@ function onMsg( e ){
 	let chatcont = document.querySelector('.chatcont')
 	let html = ``;
 	// 2. 무엇을
-	if(msg.mid == loginMid){
+	if(msg.frommid == loginMid){
 		html =  `			
 							<div class="rcont">
 								<div class="subcont">
-									<div class="date">오전 10:02</div>
+									<div class="date">${msg.date}</div>
 									<div class="content">${msg.msg}</div>
 								</div>
 							</div>
@@ -37,9 +37,9 @@ function onMsg( e ){
 	}else{
 		html = `
 				<div class="lcont">					
-					<img class="pimg" src="/jspweb/member/img/default.webp">
+					<img class="pimg" src="/jspweb/member/img/${msg.frommimg}">
 					<div class="tocont">
-						<div class="name">${msg.mid}</div><!-- 보낸사람 -->
+						<div class="name">${msg.frommid}</div><!-- 보낸사람 -->
 						<div class="subcont">
 							<div class="content"> ${msg.msg} </div>
 							<div class="date"> 오전 10:10 </div>
@@ -51,7 +51,19 @@ function onMsg( e ){
 	
 	// 3. 누적 대입 [기존채팅이 존재]
 	chatcont.innerHTML += html;
+	// ------------- 스크롤 최하단으로 내리기( 스크롤 이벤트 ) ----//
+	// 1. 현재 스크롤의 상단 위치 좌표.
+	let topHeight = chatcont.scrollTop; // dom객체.scrollTop : 해당 div객체
+		console.log( topHeight )
+	let scrollHeight = chatcont.scrollHeight; // dom객체.scrollHeight
+		console.log( scrollHeight )
+	// 3. 전체 높이 값을 현재 스크롤 상단 위치에 대입
+	chatcont.scrollTop = chatcont.scrollHeight;
+	
 }
+
+
+
 /*
 	JS[ HTML파일 종속된 파일 - HTML 안에서 실행되는 구조 ]
 
