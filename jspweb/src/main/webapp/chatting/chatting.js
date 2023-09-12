@@ -5,7 +5,12 @@ console.log('채팅방에 입장한 아이디 : ' + loginMid); console.log('logi
 // 1. 클라이언트 소켓 만들기
 let clientSocket = new WebSocket(`ws://localhost:80/jspweb/ChattingSocket/${loginMid}`)
 //-------------------------------------------------------//
-clientSocket.onopen = e=> {console.log('서버와 접속이 성공')};
+clientSocket.onopen = e=> {
+	console.log('서버와 접속이 성공')
+	let msg = {type : 'alarm' , content : `${loginMid}님이 입장했습니다`}
+	
+	clientSocket.send(JSON.stringify(msg));
+};
 clientSocket.onclose = '';
 clientSocket.onerror = '';
 clientSocket.onmessage = e => onMsg(e);
@@ -13,10 +18,12 @@ clientSocket.onmessage = e => onMsg(e);
 //3. 서버에게 메시지 전송
 function onSend(){
 	// 3-1 textarea 입력값 호출
-	let msg = document.querySelector('.msg').value
-	if( msg == ''){alert('내용을 입력해주세요.'); return;}
+	let msgValue = document.querySelector('.msg').value
+	if( msgValue == '' || msgValue == '\n'){alert('내용을 입력해주세요.');document.querySelector('.msg').value = ``; return;}
+	
+	let msg = {type : 'message' , content : msgValue}
 	// 3-2 메시지 전송
-	clientSocket.send(msg);
+	clientSocket.send(JSON.stringify(msg));
 	// 3-3 메세지 전송 성공 시 
 	document.querySelector('.msg').value = ``;
 }
@@ -31,36 +38,51 @@ function onEnterKey(){
 	if( window.event.keyCode == 13){onSend();return;}
 }
 function onMsg( e ){
-	console.log(e)
-	let msg = JSON.parse(e.data)
-	// 1. 어디에 출력할건지
-	let chatcont = document.querySelector('.chatcont')
-	let html = ``;
-	console.log(msg.msg)
-	let content = msg.msg.replaceAll('\n' , '<br/>')
+	console.log( "e :" +e)
+	console.log("e.data : " + e.data)
+	let msgBox = JSON.parse(e.data);		
+	msgBox.msg = JSON.parse(msgBox.msg);
 	
+	// 2. msg속성 내 content \n -> <br>
+	msgBox.msg.content = msgBox.msg.content.replace(/\n/g , '<br>')
+	
+	
+	
+	/*// 1. 어디에 출력할건지
+	
+	
+	
+	//let content = msgBox.msg.replace('\n' , '<br/>')
+	console.log('msgBox: ' +msgBox.msg)
 	// 2. 특정 문자열 찾아서 찾은 문자열 모두 치환/바꾸기/교체 => java : .replaceAll(); js: 정규표현식
- 	content = msg.msg.replace('/\n/gi' , '<br>')
+ 	let content = msgBox.msg.replace( /\n/g , '<br>')
+ 	console.log('content : ' + content)
+ 	msgBox.msg = JSON.parse(content);*/
  	
+ 	let chatcont = document.querySelector('.chatcont');
+	let html = ``;
 	// 2. 무엇을
-	if(msg.frommid == loginMid){
+	if(msgBox.msg.type == 'alarm'){
+		html = `${typeHTML(msgBox.msg)}`
+	}
+	else if(msgBox.frommid == loginMid){
 		html =  `			
 							<div class="rcont">
 								<div class="subcont">
-									<div class="date">${msg.date}</div>
-									<div class="content">${content}</div>
+									<div class="date">${msgBox.date}</div>
+									${typeHTML(msgBox.msg)}
 								</div>
 							</div>
 					`;
 	}else{
 		html = `
 				<div class="lcont">					
-					<img class="pimg" src="/jspweb/member/img/${msg.frommimg}">
+					<img class="pimg" src="/jspweb/member/img/${msgBox.frommimg}">
 					<div class="tocont">
-						<div class="name">${msg.frommid}</div><!-- 보낸사람 -->
+						<div class="name">${msgBox.frommid}</div><!-- 보낸사람 -->
 						<div class="subcont">
-							<div class="content"> ${content} </div>
-							<div class="date"> 오전 10:10 </div>
+							${typeHTML(msgBox.msg)}
+							<div class="date"> ${msgBox.date} </div>
 						</div>					
 					</div>
 				</div>
@@ -80,7 +102,42 @@ function onMsg( e ){
 	
 }
 
-
+getEno();
+function getEno(){
+	
+	// -
+	for( let i = 1; i<=43; i++){
+		document.querySelector('.emolistbox').innerHTML 
+				+= `<img onclick="onEmoSend(${i})" src="/jspweb/img/imoji/emo${i}.gif">` 
+	}
+}
+// 7. 클릭한 이모티콘 서버로 보내기
+function onEmoSend(i){
+	
+	let msg = { type : 'emo' , content : i+""};
+		// type : msg[메시지] , emo[이모티콘] , img[사진]
+		// content : 내용물
+	
+	// 2. 보내기
+	clientSocket.send( JSON.stringify(msg) );
+}
+// 8. msg 타입에 따른 HTML 반환 함수
+function typeHTML( msg ){
+	let html = ``;
+	
+	// 1. 메시지 타입 일때는 <div> 반환  
+	if( msg.type == 'message'){
+		html += `<div class="content"> ${ msg.content } </div>`;
+	}
+	// 2. 이모티콘 타입 일때는 <img> 반환 
+	else if( msg.type == 'emo' ){
+		html += `<img src="/jspweb/img/imoji/emo${msg.content}.gif" />`;
+	}
+	else if(msg.type == 'alarm'){
+		html += `<div class="alarm">${msg.content}</div>`
+	}
+	return html;
+}
 
 /*
 	JS[ HTML파일 종속된 파일 - HTML 안에서 실행되는 구조 ]
