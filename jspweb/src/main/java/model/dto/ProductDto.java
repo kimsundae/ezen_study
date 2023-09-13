@@ -33,6 +33,20 @@ public class ProductDto {
 		this.imgList = imgList;
 		this.mid = mid;
 	}
+	
+	
+	public ProductDto(String pname, String pcontent, int pprice, String plat, String plng, int pcno, int mno,
+			Map<Integer, String> imgList) {
+		super();
+		this.pname = pname;
+		this.pcontent = pcontent;
+		this.pprice = pprice;
+		this.plat = plat;
+		this.plng = plng;
+		this.pcno = pcno;
+		this.mno = mno;
+		this.imgList = imgList;
+	}
 	public int getPno() {
 		return pno;
 	}
