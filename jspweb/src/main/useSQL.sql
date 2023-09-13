@@ -160,4 +160,13 @@ create table product(
     foreign key( pcno ) references pcategory(pcno) on delete set null on update cascade,
     foreign key( mno ) references member(mno) on delete cascade on update cascade
 );
+# 3.제품 이미지
+drop table if exists productimg;
+create table productimg(
+	pimgno int auto_increment,
+    pimg longtext,
+    pno int,
+    primary key( pimgno ),
+    foreign key( pno ) references product( pno ) on delete cascade on update cascade
+)
  
