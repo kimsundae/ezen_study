@@ -123,14 +123,41 @@ select * from board;
 
 select * from hrm;
 select * from member;
-update member set mpwd = '1234' where mno = 11 and mpwd = 'naa1234';
 
-select* from board b natural join member m; 
-select b.* , m.mid , m.mimg , bc.cname 
-				from board b 
-					natural join category bc 
-                    natural join member m order by b.bwriteTime desc;
-select b.bno , b.btitle , b.bcontent , b.bimg , date_format( b.bwriteTime , '%y/%m/%d'), b.bview , b.mno , b.cno , m.mid , m.mimg , bc.cname 
-				from board b 
-					natural join category bc 
-                    natural join member m order by b.bwriteTime desc;
+delete from board where bno = 1;
+
+select count(*) from board b where b.cno = 1; 
+select count(*) from board b ;
+ select b.* , m.mid , m.mimg , bc.cname from board b natural join category bc natural join member m  order by b.bwriteTime desc limit 1 , 5;
+ select b.* , m.mid , m.mimg , bc.cname from board b natural join category bc natural join member m  order by b.bwriteTime desc limit 1 , 5;
+ select count(*) from board b natural join member m where b.cno = 1;
+#--------------------------------------------
+# 제품 카테고리 테이블
+drop table if exists pcategory;
+create table pcategory(
+	pcno int auto_increment,
+    pcname varchar(100) not null,
+    primary key(pcno)
+);
+ # 샘플
+insert pcategory(pcname) values('노트북');
+insert pcategory(pcname) values('태블릿');
+insert pcategory(pcname) values('냉장고');
+# 제품 테이블
+drop table if exists product;
+create table product(
+	pno int auto_increment,
+    pname varchar(20) not null,
+    pcontent longtext not null ,
+    pprice int unsigned default 0 not null, -- signed(기본값:음수사용 +-21억) / unsigned(움수사용x-음수만큼의 메모리를 양수로 사용 0~40억정도) : 음수 사용여부
+    pstate tinyint default 0 not null, -- [0: 판매중(기본값) , 1:거래중 , 2: 판매대기 , 3:판매완료]
+    pdate datetime default now() not null,
+    plat varchar(30) not null,
+    plng varchar(30) not null,
+    pcno int ,
+    mno int ,
+    primary key( pno ),
+    foreign key( pcno ) references pcategory(pcno) on delete set null on update cascade,
+    foreign key( mno ) references member(mno) on delete cascade on update cascade
+);
+ 
