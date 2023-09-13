@@ -1,13 +1,18 @@
 package controller.product;
 
+import java.io.File;
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oreilly.servlet.MultipartRequest;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+
+
 
 /**
  * Servlet implementation class ProductController
@@ -29,20 +34,20 @@ public class ProductController extends HttpServlet {
 
 	// 2. 제품 조회
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//[form 없는 경우1]
-			// 1. ajax 전달한 data의 객체 속성명을 이용한 호출
-		/*
-		 * String pname1 = request.getParameter("pname1"); String pcontent1 =
-		 * request.getParameter("pcontent1"); System.out.println(pname1);
-		 * System.out.println(pcontent1);
-		 */
 		
-		// [form 태그 이용하는 경우 2- 첨부파일 없음]
-		MultipartRequest multi = new MultipartRequest(request, request.getServletContext().getRealPath("/product"));
+		// commons-io.jar , commons-fileupload.jar 빌드 필요!!	
+		// 옵션 1.요청방식 2.저장위치 3.용량 4.한글인코딩 5.파일명중복일때	
+		// 1. 저장경로
+		String uploadPath = request.getServletContext().getRealPath("/product/img");
 		
-		String pname2 = multi.getParameter("pname2");
-		String pcontent2 = multi.getParameter("pcontent2");
-		System.out.println(pname2); System.out.println(pcontent2);
+		// 2. 업로드 객체 [ import org.apache.commons.fileupload.FileItem ]
+		DiskFileItemFactory itemFactory = new DiskFileItemFactory();
+		itemFactory.setRepository( new File(uploadPath) ); // 2. 저장위치
+		itemFactory.setSizeThreshold( 1024 * 1024 * 1024 ); // 3. 용량
+		itemFactory.setDefaultCharset("UTF-8"); // 4. 한글인코딩
+		
+		
+		
 	}
 
 	// 3. 제품 수정
