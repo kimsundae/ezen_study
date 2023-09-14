@@ -83,8 +83,9 @@ public class ProductInfoController extends HttpServlet {
 				}
 			}
 			// 회원 번호
-			Object object = request.getAttribute("loginDto");
+			Object object = request.getSession().getAttribute("loginDto");
 			MemberDto memberDto = (MemberDto)object;
+			System.out.println(memberDto);
 			// FileItem 으로 가져온 데이터들을 각 필드에 맞춰서 제품Dto 에 저장하기 
 			ProductDto productDto = new ProductDto(
 					Integer.parseInt( fileList.get(0).getString() ), 
@@ -97,10 +98,12 @@ public class ProductInfoController extends HttpServlet {
 					imgList );
 			
 			System.out.println( productDto );
-			boolean result = ProductDao.getInstance().register(productDto);
+			
+			boolean result = ProductDao.getInstance().register(productDto);System.out.println(result);
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().print(result);
-		}catch (Exception e) { }
+			
+		}catch (Exception e) {e.printStackTrace(); }
 	}
 	// 2. 제품 조회 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

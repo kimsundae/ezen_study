@@ -12,6 +12,7 @@ public class ProductDao extends Dao{
 	
 	// 1. 제품 등록
 	public boolean register( ProductDto productDto ) {
+		System.out.println("실행");
 		// 1-1 
 		try {
 			String sql = "insert into product( pcno, pname, pcontent, pprice , plat, plng,mno)"
@@ -30,7 +31,7 @@ public class ProductDao extends Dao{
 			ps.setInt(7 , productDto.getMno());
 			
 			int count = ps.executeUpdate();
-			
+			System.out.println(count);
 			rs = ps.getGeneratedKeys();
 			rs.next();
 			if( count == 1) { //		
