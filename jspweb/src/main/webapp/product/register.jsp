@@ -27,7 +27,13 @@
 			<!-- 2. cos.jar 첨부파일 여러개일 때  input 속성에 multiple="multiple"-->
 			<!-- 해결방안 : 1. multiple="multiple" 사용하지 않고 input 여러개 사용 -->
 			<!-- 해결방안 : 2. multiple="multiple" 사용하고 cos.jar 대신 commons jar -->
-			<button onclick="onRegister()" type="button">등록</button>
+			<div class="fileDropBox" style="width: 300px; height:100px; border: 1px solid red;">
+				여기에 드래그 해서 파일을 올려주세요.
+			</div>
+			
+			
+			
+			<button onclick="onRegister()" type="button">등록</button>	
 		</form>
 	</div>
 
