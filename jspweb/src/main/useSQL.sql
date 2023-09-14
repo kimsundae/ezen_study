@@ -137,6 +137,7 @@ drop table if exists pcategory;
 create table pcategory( pcno int auto_increment , pcname varchar(100) not null , primary key(pcno)  );
 	# 샘플 
 	insert pcategory(pcname) values( '노트북' ); insert pcategory(pcname) values( '태블릿' ); insert pcategory(pcname) values( '냉장고' );
+select * from pcategory;
 # 2. 제품 
 drop table if exists product;
 create table product(
@@ -163,3 +164,10 @@ create table productimg(
     primary key ( pimgno ) , 
     foreign key( pno ) references product( pno ) on delete cascade on update cascade
 );
+select * from product;
+select * from productimg;
+# 1. 제품 등록 [ 제품정보 등록 후에 이미지등록 이미지 등록 시 제품번호[FK] 필요하기 때문 ] 
+	# 1-1 제품 테이블 내 제품 정보 등록
+insert
+	into product( pcno, pname, pcontent, pprice, plat, plng, mno ) 
+    values( 1, '삼성노트북', '2023최신형')
