@@ -21,6 +21,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import model.dao.ProductDao;
+import model.dto.MemberDto;
 import model.dto.ProductDto;
 
 @WebServlet("/ProductInfoController")// 사용자 크롬에서 HTTP로 주소작성 그 주소와 일치한 서블릿 찾아서(핸들러)+매핑(연결)
@@ -80,14 +82,24 @@ public class ProductInfoController extends HttpServlet {
 					imgList.put( i , filename  ); // 저장시 에는 이미지번호가 필요 없음
 				}
 			}
+			// 회원 번호
+			Object object = request.getAttribute("loginDto");
+			MemberDto memberDto = (MemberDto)object;
 			// FileItem 으로 가져온 데이터들을 각 필드에 맞춰서 제품Dto 에 저장하기 
 			ProductDto productDto = new ProductDto(
 					Integer.parseInt( fileList.get(0).getString() ), 
-					fileList.get(1).getString(),  fileList.get(2).getString(), 
+					fileList.get(1).getString(), 
+					fileList.get(2).getString(), 
 					Integer.parseInt( fileList.get(3).getString() ), 
-					null, null, 0, imgList );
+					fileList.get(4).getString(),
+					fileList.get(5).getString(), 
+					memberDto.getMno(), 
+					imgList );
 			
 			System.out.println( productDto );
+			boolean result = ProductDao.getInstance().register(productDto);
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(result);
 		}catch (Exception e) { }
 	}
 	// 2. 제품 조회 
