@@ -33,6 +33,7 @@
 			
 			
 			
+			
 			<button onclick="onRegister()" type="button">등록</button>	
 		</form>
 	</div>
