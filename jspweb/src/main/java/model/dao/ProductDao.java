@@ -2,6 +2,7 @@ package model.dao;
 
 
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.dto.ProductDto;
 
@@ -52,9 +53,32 @@ public class ProductDao extends Dao{
 		return false;	
 	}
 	// 2. 제품 전체 출력
-	
+	public ArrayList<ProductDto> allPrint(){
+		try {
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	// 10개 최신순 출력
+	public ArrayList<ProductDto> newProductPrint(){
+		try {
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	// 범위 만큼 출력
+	public ArrayList<ProductDto> rangePrint(int range){
+		
+		return null;
+	}
 	// 3. 제품 개별 조회
-	
+	public ProductDto onePrint( int pno ) {
+		return null;
+	}
 	// 4. 제품 수정
 	
 	// 5. 제품 삭제	

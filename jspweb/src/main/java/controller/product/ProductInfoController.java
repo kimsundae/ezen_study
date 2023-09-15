@@ -2,6 +2,7 @@ package controller.product;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -107,6 +109,23 @@ public class ProductInfoController extends HttpServlet {
 	}
 	// 2. 제품 조회 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		
+		if("newProduct".equals(type)) 
+			json = mapper.writeValueAsString(ProductDao.getInstance().newProductPrint());
+		else if("rangePrint".equals(type)) 
+			json = mapper.writeValueAsString(ProductDao.getInstance().rangePrint(1));
+		else if("allPrint".equals(type)) 
+			json = mapper.writeValueAsString(ProductDao.getInstance().allPrint());
+		else if("onePrint".equals(type)) {
+			int pno = Integer.parseInt(request.getParameter("pno"));
+			json = mapper.writeValueAsString(ProductDao.getInstance().onePrint(pno));
+		}
+				
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(json);		
 	}
 	// 3. 제품 수정 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
