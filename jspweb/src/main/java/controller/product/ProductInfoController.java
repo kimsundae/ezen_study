@@ -115,7 +115,7 @@ public class ProductInfoController extends HttpServlet {
 		
 		if("findByTop".equals(type)) {		
 			int count = Integer.parseInt( request.getParameter("count"));	
-			json = mapper.writeValueAsString(ProductDao.getInstance().findByTop());
+			json = mapper.writeValueAsString(ProductDao.getInstance().findByTop(10));
 		}
 			
 		else if("findByLatLng".equals(type)) {

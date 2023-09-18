@@ -42,47 +42,13 @@
 	</div>
 	
 	<div class="container">
-		<div class="row row-cols-1 row-cols-md-4 g-4">
-		  <div class="col">
-		    <div class="card">
-		      <img src="https://image.nbkorea.com/NBRB_Product/20230908/NB20230908101101685001.jpg" class="card-img-top" alt="...">
-		      <div class="card-body">
-		        <h5 class="card-title">Card title</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col">
-		    <div class="card">
-		      <img src="https://image.nbkorea.com/NBRB_Product/20230825/NB20230825085613821001.jpg" class="card-img-top" alt="...">
-		      <div class="card-body">
-		        <h5 class="card-title">Card title</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col">
-		    <div class="card">
-		      <img src="https://image.nbkorea.com/NBRB_Product/20230908/NB20230908100239261001.jpg" class="card-img-top" alt="...">
-		      <div class="card-body">
-		        <h5 class="card-title">Card title</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col">
-		    <div class="card">
-		      <img src="https://image.nbkorea.com/NBRB_Product/20230821/NB20230821175524860001.jpg" class="card-img-top" alt="...">
-		      <div class="card-body">
-		        <h5 class="card-title">Card title</h5>
-		        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		      </div>
-		    </div>
-		  </div>
+		<div class="productBox row row-cols-1 row-cols-md-4 g-4">
+			  
 		</div>
 	</div>
 	<!-- JSP파일 안에 다른 JSP 파일 import 하기  -->
 	<%@include file ="footer.jsp" %>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<script src="/jspweb/js/index.js" type="text/javascript"></script>
 </body>
 </html>

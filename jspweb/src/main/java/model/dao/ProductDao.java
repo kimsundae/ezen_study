@@ -65,7 +65,7 @@ public class ProductDao extends Dao{
 			List<ProductDto> list = new ArrayList<>();			
 			String sql = "select * from product";
 			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while( rs.next() ) {list.add( findByPno( rs.getInt("pno")));} return list; 
 			
 		}catch (Exception e) {
@@ -78,7 +78,7 @@ public class ProductDao extends Dao{
 		try {
 			Map<Integer , String > imgList = new HashMap<>(); // 제품별 여러개 이미지
 			String sql = "select * from productimg where pno = " + pno;
-			PreparedStatement ps  = conn.prepareStatement(sql);
+			ps  = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) { imgList.put(rs.getInt("pimgno") , rs.getString("pimg"));} return imgList;	
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class ProductDao extends Dao{
 							rs.getInt("pno") , rs.getString("pname"),
 							rs.getString("pcontent") , rs.getInt("pprice"),
 							rs.getInt("pstate"), rs.getString("pdate"),
-							rs.getString("plat") , rs.getString("plang"),
+							rs.getString("plat") , rs.getString("plng"),
 							rs.getInt("mno"), getProductImg(rs.getInt("pno")) , rs.getString("mid")
 							);
 						return productDto;
