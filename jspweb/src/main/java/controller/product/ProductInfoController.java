@@ -113,15 +113,24 @@ public class ProductInfoController extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = "";
 		
-		if("newProduct".equals(type)) 
-			json = mapper.writeValueAsString(ProductDao.getInstance().newProductPrint());
-		else if("rangePrint".equals(type)) 
-			json = mapper.writeValueAsString(ProductDao.getInstance().rangePrint(1));
-		else if("allPrint".equals(type)) 
-			json = mapper.writeValueAsString(ProductDao.getInstance().allPrint());
-		else if("onePrint".equals(type)) {
+		if("findByTop".equals(type)) {		
+			int count = Integer.parseInt( request.getParameter("count"));	
+			json = mapper.writeValueAsString(ProductDao.getInstance().findByTop());
+		}
+			
+		else if("findByLatLng".equals(type)) {
+			String east = request.getParameter("east"); String west = request.getParameter("west");
+			String south = request.getParameter("south"); String north = request.getParameter("north");
+			json = mapper.writeValueAsString(ProductDao.getInstance().findByLatLng( east, south, west, north));
+		}
+			
+		else if("findByAll".equals(type)) {
+			json = mapper.writeValueAsString(ProductDao.getInstance().findByAll());
+		}
+			
+		else if("findByPno".equals(type)) {
 			int pno = Integer.parseInt(request.getParameter("pno"));
-			json = mapper.writeValueAsString(ProductDao.getInstance().onePrint(pno));
+			json = mapper.writeValueAsString(ProductDao.getInstance().findByPno(pno));
 		}
 				
 		response.setContentType("application/json;charset=UTF-8");

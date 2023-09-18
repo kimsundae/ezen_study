@@ -169,47 +169,7 @@ function fileListPrint(){
 }
 // 4.현재 드랍된 파일들 중에 삭제버튼 클릭시 해당 파일 제거
 function fileDelete( i ) { fileList.splice( i, 1); fileListPrint();}
-// 10개 최신순으로 출력
-function newProduct(){
-	$.ajax({
-		url: "/jspweb/ProductInfoController",
-		method: "get",
-		data : {type:'newProduct'},
-		success: r=>{},
-		error: e=>{}
-	})
-}
-// 현재 보고 있는 범위만큼의 좌표
-function rangePrint(){
 
-	$.ajax({
-		url: "/jspweb/ProductInfoController",
-		method: "get",
-		data : {type:'rangePrint', range:1},
-		success: r=>{},
-		error: e=>{}
-	})
-}
-// 선택된 제품의 개별 출력
-function onePrint( pno ){
-	$.ajax({
-		url: "/jspweb/ProductInfoController",
-		method: "get",
-		data : {type:'onePrint',pno: pno},
-		success: r=>{},
-		error: e=>{}
-	})
-}
-// 모든 제품 출력
-function allPrint(){
-	$.ajax({
-		url: "/jspweb/ProductInfoController",
-		method: "get",
-		data : {type:'allPrint'},
-		success: r=>{},
-		error: e=>{}
-	})
-}
 /*
 
 	dom객체 이벤트 추가하는 방법 2가지.

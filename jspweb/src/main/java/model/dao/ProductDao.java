@@ -1,8 +1,15 @@
 package model.dao;
 
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 
 import model.dto.ProductDto;
 
@@ -52,33 +59,84 @@ public class ProductDao extends Dao{
 		}catch(Exception e) {e.printStackTrace();}
 		return false;	
 	}
-	// 2. 제품 전체 출력
-	public ArrayList<ProductDto> allPrint(){
+	// 4. 제품 전체 출력
+	public List<ProductDto> findByAll(){
 		try {
+			List<ProductDto> list = new ArrayList<>();			
+			String sql = "select * from product";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {list.add( findByPno( rs.getInt("pno")));} return list; 
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	// 10개 최신순 출력
-	public ArrayList<ProductDto> newProductPrint(){
+	// 0. 제품에 해당하는 이미지 출력하는 함수
+	public Map<Integer, String > getProductImg( int pno ){
 		try {
+			Map<Integer , String > imgList = new HashMap<>(); // 제품별 여러개 이미지
+			String sql = "select * from productimg where pno = " + pno;
+			PreparedStatement ps  = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) { imgList.put(rs.getInt("pimgno") , rs.getString("pimg"));} return imgList;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return null;
+	}
+	// 3. 제품 조회
+		public ProductDto findByPno( int pno ) {
+			try {
+				String sql = "select * from product p natural join pcategory pc natural join member m where p.pno = "+pno;
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery();
+				if(rs.next()) {
+					ProductDto productDto = new ProductDto(
+							rs.getInt("pcno"), rs.getString("pcname"),
+							rs.getInt("pno") , rs.getString("pname"),
+							rs.getString("pcontent") , rs.getInt("pprice"),
+							rs.getInt("pstate"), rs.getString("pdate"),
+							rs.getString("plat") , rs.getString("plang"),
+							rs.getInt("mno"), getProductImg(rs.getInt("pno")) , rs.getString("mid")
+							);
+						return productDto;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+	// 1. N개 최신순 출력
+	public List<ProductDto> findByTop( int count ){
+		try {
+			List<ProductDto> list = new ArrayList<>();
+			String sql = "select * from product order by pdate desc limit "+ count;
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
 			
+			while( rs.next() ) {list.add( findByPno( rs.getInt("pno")));} return list;
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	// 범위 만큼 출력
-	public ArrayList<ProductDto> rangePrint(int range){
-		
+	public List<ProductDto> findByLatLng(String east, String west, String south, String north){
+		try {	
+			List<ProductDto> list = new ArrayList<>();
+			// 동 경도보다 크고 서 경도보다 작고 남 위도보다 크고 북 위도 보다 작고
+			String sql = "select * from product where ? >= plng and ? <= plng ? >= plat ? <= plat order by pdate";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {list.add( findByPno( rs.getInt("pno")));} return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
-	// 3. 제품 개별 조회
-	public ProductDto onePrint( int pno ) {
-		return null;
-	}
+	
 	// 4. 제품 수정
 	
 	// 5. 제품 삭제	
