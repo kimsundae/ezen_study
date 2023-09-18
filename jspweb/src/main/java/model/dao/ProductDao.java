@@ -127,8 +127,9 @@ public class ProductDao extends Dao{
 		try {	
 			List<ProductDto> list = new ArrayList<>();
 			// 동 경도보다 크고 서 경도보다 작고 남 위도보다 크고 북 위도 보다 작고
-			String sql = "select * from product where ? >= plng and ? <= plng ? >= plat ? <= plat order by pdate";
+			String sql = "select * from product where ? >= plng and ? <= plng and ? >= plat and ? <= plat order by pdate";
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, east); ps.setString(2, west); ps.setString(3, south); ps.setString(4, north);
 			rs = ps.executeQuery();
 			while( rs.next() ) {list.add( findByPno( rs.getInt("pno")));} return list;
 		} catch (Exception e) {
