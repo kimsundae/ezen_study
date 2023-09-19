@@ -27,10 +27,17 @@ function findByPno( pno ){
 			    </div>`			
 			})
 			imgbox.innerHTML = html;
+			
+			// ----- 각 위치에 데이터 넣어주기 --- //
+			document.querySelector('.mid').innerHTML = `판매자 : ${ r.mid }`; 
+			document.querySelector('.pcname').innerHTML = `카테고리 : ${ r.pcname }`; 
+			document.querySelector('.pdate').innerHTML = `등록일 : ${ r.pdate }`; 
+			document.querySelector('.pname').innerHTML = ` ${ r.pname }`; 
+			document.querySelector('.pprice').innerHTML = ` ${ r.pprice.toLocaleString()}원`; 
+			document.querySelector('.pcontent').innerHTML = ` ${ r.pcontent }`; 
 		},
 		error: e=>{console.log(e)}
 	})
-	
 	
 }
 
