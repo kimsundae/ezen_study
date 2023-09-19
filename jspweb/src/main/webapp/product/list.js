@@ -16,23 +16,7 @@
     });
     
     
-$.ajax({
-	url: "/jspweb/ProductInfoController",
-	method: "get",
-	data : {type:'findByAll'},
-	success: r=>{
-		console.log(r);
-		
-	     var markers = r.map( (p) => {
-     	   return new kakao.maps.Marker({
-           	 position : new kakao.maps.LatLng(p.plat, p.plng)
-        	});
-  		 });
-         // 클러스터러에 마커들을 추가합니다
-        clusterer.addMarkers(markers);
-	},
-	error: e=>{console.log(e)}
-})
+
     
     
     
@@ -68,10 +52,10 @@ function getInfo() {
     var boundsStr = bounds.toString();
     console.log(boundsStr)
     
-    let 동 = neLatLng.getLng()
-    let 서 = swLatLng.getLng()
-    let 남 = swLatLng.getLat()
-    let 북 = neLatLng.getLat()
+    let 동 = map.getBounds().oa;
+    let 서 = map.getBounds().ha;
+    let 남 = map.getBounds().qa;
+    let 북 = map.getBounds().pa;
     console.log(동)
     console.log(서)
     console.log(남)
@@ -82,17 +66,50 @@ function getInfo() {
 }
 // 현재 보고 있는 범위만큼의 좌표
 function findByLatLng( east , west , south , north){
-
+	clusterer.clear(); // * 클러스터내 모든 마커를 초기화
 	$.ajax({
-		url: "/jspweb/ProductInfoController",
-		method: "get",
-		sasync : false,
-		data : {type:'findByLatLng', east: east , west : west , south : south , north: north },
-		success: r=>{
-			console.log(r)
-		},
-		error: e=>{console.log(e)}
-	})
+	url: "/jspweb/ProductInfoController",
+	method: "get",
+	data : {type:'findByLatLng', east: east , west : west , south : south , north: north},
+	success: r=>{
+		console.log("r" + r);
+		
+	     var markers = r.map( (p) => {
+     	   return new kakao.maps.Marker({
+           	 position : new kakao.maps.LatLng(p.plat, p.plng)
+        	});
+  		 });
+         // 클러스터러에 마커들을 추가합니다
+        clusterer.addMarkers(markers);
+        
+        // - --------- 2. 사이드바에 제품 출력 --------------//
+        let sidebar = document.querySelector('.sidebar');
+        let html = ``;
+        	
+        	r.forEach( (p) => {
+				html += `		
+						<div class="card mb-3" style="max-width: 540px;">
+						  <div class="row g-0">
+						    <div class="col-md-4">
+						      <img src="/jspweb/product/img/${Object.values(p.imgList)[0]}" class="img-fluid rounded-start" alt="...">
+						    </div>
+						    <div class="col-md-8">
+						      <div class="card-body">
+						        <h5 class="card-title">${p.pname}</h5>
+						        <p class="card-text">
+						        	<div>${p.pcontent}</div>
+						        	<div>${p.pprice.toLocaleString()}원</div>
+						        </p>
+						  
+						      </div>
+						    </div>
+						  </div>
+						</div>`
+			});
+			sidebar.innerHTML = html;
+	},
+	error: e=>{console.log(e)}
+})
 }
 // 3. 카카오지도에서 드래그를 하고 끝났을 때. 1번함수 재실행
 kakao.maps.event.addListener(map, 'dragend', function(){

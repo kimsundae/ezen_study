@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 	<link href="/jspweb/product/list.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <body>
 
 	<%@include file ="../header.jsp" %>
@@ -16,10 +17,11 @@
 		
 		<!-- 사이드바 구역 -->
 		<div class="sidebar"></div>
-	</div>
-
-
+			
+		</div>
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6627d92a562d0e01aed3c8ae1c67211e&libraries=clusterer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<script src="list.js" type="text/javascript"></script>		
 </body>
 </html>
