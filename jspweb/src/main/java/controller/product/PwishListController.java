@@ -1,14 +1,20 @@
 package controller.product;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import model.dao.ProductDao;
 import model.dto.MemberDto;
+import model.dto.ProductDto;
 
 /**
  * Servlet implementation class PwishListController
@@ -29,8 +35,22 @@ public class PwishListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String type = request.getParameter("type");
+		if( type.equals("findByWish") ) {
+			int pno = Integer.parseInt(request.getParameter("pno"));
+			int mno = ((MemberDto)request.getSession().getAttribute("loginDto")).getMno();
+			boolean result = ProductDao.getInstance().getWish(mno, pno);		
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(result);
+		}else if (type.equals("findByAll")) {
+			int mno = ((MemberDto)request.getSession().getAttribute("loginDto")).getMno();
+			List<ProductDto> result = new ArrayList<>();
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonArray = mapper.writeValueAsString(result);
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(jsonArray);
+		}
+		
 	}
 
 	/**

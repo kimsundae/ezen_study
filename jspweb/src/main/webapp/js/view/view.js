@@ -47,9 +47,27 @@ function setWish(){
 	$.ajax({
 		url : "/jspweb/PwishListController",
 		method : "post",
+		async : false,
 		data : { pno : pno },
-		success : result => {console.log(result);}	
+		success : result => {getWish();}	
 	})
 }
-
+getWish()
+// 3. 찜하기 상태 호출
+function getWish(){
+	let wish = document.querySelector('.wish'); //하트 구역 가져오기
+	
+	// 1. 비회원이면
+	if( loginState == false ){wish.innerHTML = `♡`}
+	// 2. 
+	$.ajax({
+		url : "/jspweb/PwishListController",
+		method : "get",
+		async : false,
+		data : {type:'findByWish', pno : pno },
+		success : result => {if(result){wish.innerHTML = `♥`}
+		else {wish.innerHTML = `♡` }}
+			
+	})
+}
 
