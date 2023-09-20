@@ -40,7 +40,7 @@
 				<br/> 노트북 팝니다. 노트북 팝니다. 노트북 팝니다
 			</div>
 			<div class="etcbtnbox">
-				<button type="button">찜하기♡</button>
+				<button onclick="setWish()" type="button">찜하기♡</button>
 				<button type="button">바로구매</button>
 			</div>
 			<!-- 1. 탭 목록 -->

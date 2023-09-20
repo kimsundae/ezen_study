@@ -170,4 +170,37 @@ select * from productimg;
 	# 1-1 제품 테이블 내 제품 정보 등록
 insert
 	into product( pcno, pname, pcontent, pprice, plat, plng, mno ) 
-    values( 1, '삼성노트북', '2023최신형')
+    values( 1, '삼성노트북', '2023최신형');
+select * from product where plat between 37 and 38;
+
+
+
+
+select * from product where  동 >= plng and 서 <= plng and 남 <= plat and 북 >= plat   order by pdate;
+
+# - 1. 찜하기 테이블[ pk 없는 경우 ]
+drop table if exists pwishlist;
+create table pwishlist(
+	mno int not null,
+    pno int not null,
+    foreign key(mno) references member(mno) on delete cascade on update cascade,	-- 회원이 탈퇴하면 찜하기 목록 같이 삭제
+    foreign key(pno) references product(pno) on delete set null on update cascade	-- 제품이 삭제되면 찜하기 목록에서 없는 제품으로 표시하기 위한 null 대입
+);
+# - 1. 찜하기 테이블[ pk 없는 경우 ]
+drop table if exists p;
+create table pwishlist(
+	pwno bigint unsigned  auto_increment,	# bigint[long]	unsigned[양수] vs signed[음수]
+    mno int not null,
+    pno int ,
+    primary key( pwno ),
+    foreign key(mno) references member(mno) on delete cascade on update cascade,	-- 회원이 탈퇴하면 찜하기 목록 같이 삭제
+    foreign key(pno) references product(pno) on delete set null on update cascade	-- 제품이 삭제되면 찜하기 목록에서 없는 제품으로 표시하기 위한 null 대입
+);
+
+
+
+
+
+
+
+
