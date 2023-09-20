@@ -41,10 +41,10 @@ public class PwishListController extends HttpServlet {
 			int mno = ((MemberDto)request.getSession().getAttribute("loginDto")).getMno();
 			boolean result = ProductDao.getInstance().getWish(mno, pno);		
 			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().print(result);
+			response.getWriter().print(result);	
 		}else if (type.equals("findByAll")) {
 			int mno = ((MemberDto)request.getSession().getAttribute("loginDto")).getMno();
-			List<ProductDto> result = new ArrayList<>();
+			List<ProductDto> result = ProductDao.getInstance().getWishProductList(mno);
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonArray = mapper.writeValueAsString(result);
 			response.setContentType("application/json;charset=UTF-8");

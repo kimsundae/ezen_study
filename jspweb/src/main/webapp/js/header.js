@@ -29,7 +29,8 @@ function getMemberInfo(){
 				loginState = true; loginMid = r.mid;
 				html += `
 							<li>${r.mid}님</li>
-							<li><img class="hmimg" src="/jspweb/member/img/${r.mimg}"></li>						
+							<li><img class="hmimg" src="/jspweb/member/img/${r.mimg}"></li>	
+							<li><a href="/jspweb/product/wishList/wishList.jsp">찜목록</a></li>					
 							<li><a href="/jspweb/member/mypage.jsp">마이페이지</a></li>
 							<li><a onclick="logout()" href="#">로그아웃</a></li>								
 						`	

@@ -22,15 +22,15 @@
 
 		    <tr>
 		      <td><input class="checkbox" type="checkbox"></td>
-		      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31IFBHgVxP_iQ06NEQkF1BddtLx6ONwBUfA&usqp=CAU" widtd="100%"></td>
-		      <td >팝니다111</td>
+		      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31IFBHgVxP_iQ06NEQkF1BddtLx6ONwBUfA&usqp=CAU" width="100%"/></td>
+		      <td>팝니다111</td>
 		      <td>33121</td>
 		      <td><button type="button">X</button></td>
 		    </tr>
 		    
 		    <tr>
 		      <td><input class="checkbox" type="checkbox"></td>
-		      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31IFBHgVxP_iQ06NEQkF1BddtLx6ONwBUfA&usqp=CAU" widtd="100%"></td>
+		      <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT31IFBHgVxP_iQ06NEQkF1BddtLx6ONwBUfA&usqp=CAU" width="100%"/></td>
 		      <td >팝니다</td>
 		      <td>33333</td>
 		      <td><button type="button">X</button></td>
@@ -47,7 +47,7 @@
 		
 	</div>
 
-
-	<script src="/jspweb//" type="text/javascript"></script>
+	<script src="/jspweb/js/wishList/wishList.js" type="text/javascript"></script>
+	
 </body>
 </html>
