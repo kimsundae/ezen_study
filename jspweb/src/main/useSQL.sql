@@ -155,6 +155,7 @@ create table product(
     foreign key( pcno ) references pcategory(pcno) on delete set null on update cascade , 
     foreign key( mno ) references member(mno) on delete cascade on update cascade
 );
+select * from product;
 # 3. 제품 이미지 
 drop table if exists productimg;
 create table productimg(  
@@ -182,10 +183,11 @@ select * from product where  동 >= plng and 서 <= plng and 남 <= plat and 북
 drop table if exists pwishlist;
 create table pwishlist(
 	mno int not null,
-    pno int not null,
+    pno int ,
     foreign key(mno) references member(mno) on delete cascade on update cascade,	-- 회원이 탈퇴하면 찜하기 목록 같이 삭제
     foreign key(pno) references product(pno) on delete set null on update cascade	-- 제품이 삭제되면 찜하기 목록에서 없는 제품으로 표시하기 위한 null 대입
 );
+
 # - 1. 찜하기 테이블[ pk 없는 경우 ]
 drop table if exists p;
 create table pwishlist(
@@ -197,9 +199,19 @@ create table pwishlist(
     foreign key(pno) references product(pno) on delete set null on update cascade	-- 제품이 삭제되면 찜하기 목록에서 없는 제품으로 표시하기 위한 null 대입
 );
 
+select * from pwishlist pw natural join product pr where pw.mno = 1;
 
-
-
+# 포인트 테이블
+drop table if exists mpoint;
+create table mpoint(
+	mpno varchar(40) ,								-- 포인트 내역, 식별번호
+	mno int ,							-- 
+    mpamount int unsigned default 0 , 	-- 대략 43억
+    mpcomment varchar(100),				-- 지급 내역
+    mpdata datetime default now() , 	-- 지급 날짜
+    primary key( mpno ),
+    foreign key( mno ) references member(mno) on delete set null on update cascade
+);
 
 
 

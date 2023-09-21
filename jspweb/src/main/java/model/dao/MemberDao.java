@@ -1,8 +1,10 @@
 package model.dao;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import model.dto.MemberDto;
+import model.dto.mpointDto;
 
 public class MemberDao extends Dao{
 	private static MemberDao memberDao = new MemberDao();
@@ -113,6 +115,42 @@ public class MemberDao extends Dao{
 		}catch(Exception e) {e.printStackTrace();}
 		return false;
 	}
-						
+	// 9. 포인트 지급/사용에 대한 함수
+	public boolean setPoint( mpointDto dto ) {
+		try {
+			String sql = "insert into mpoint( mpno , mno , mpamont, mpcomment) values(?,?,?,?) "; 
+			ps = conn.prepareStatement(sql);
+			ps.setString(1 , dto.getMpno()); ps.setInt(2, dto.getMno());
+			ps.setLong(3, dto.getMpamount()); ps.setString(4, dto.getMpcomment());
+			if( ps.executeUpdate() == 1) {return true;}
+		} catch (Exception e) {e.printStackTrace();}				
+		return false;
+	}
+	// 10. 내 포인트 수 확인 함수[ 로그인한 사람의 현재 포인트 합계 ]
+	public long getPoint( int mno ) {
+		try {
+			String sql = "select sum( mpamount ) from mpoint where mno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			rs = ps.executeQuery();
+			if( rs.next() ) return rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	// 11. 내 포인트 사용 내역 출력하는 함수 [ ]
+	public List< mpointDto > getPointList( int mno ){
+		try {
+			String sql = "select * from mpoint where mno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			rs = ps.executeQuery();
+			while(rs.next()) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 		
 }
