@@ -12,6 +12,15 @@ public class mpointDto {
 	public String getMpno() {
 		return mpno;
 	}
+	
+	public mpointDto(String mpno, int mno, long mpamount, String mpcomment, String mpdata) {
+		super();
+		this.mpno = mpno;
+		this.mno = mno;
+		this.mpamount = mpamount;
+		this.mpcomment = mpcomment;
+		this.mpdata = mpdata;
+	}
 
 	public void setMpno(String mpno) {
 		this.mpno = mpno;
