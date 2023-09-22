@@ -212,6 +212,7 @@ create table mpoint(
     primary key( mpno ),
     foreign key( mno ) references member(mno) on delete set null on update cascade
 );
+select * from mpoint;
 
 
 

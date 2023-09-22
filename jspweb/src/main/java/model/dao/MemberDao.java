@@ -119,7 +119,7 @@ public class MemberDao extends Dao{
 	// 9. 포인트 지급/사용에 대한 함수
 	public boolean setPoint( mpointDto dto ) {
 		try {
-			String sql = "insert into mpoint( mpno , mno , mpamont, mpcomment) values(?,?,?,?) "; 
+			String sql = "insert into mpoint( mpno , mno , mpamount, mpcomment) values( ?,?,?,?);"; 
 			ps = conn.prepareStatement(sql);
 			ps.setString(1 , dto.getMpno()); ps.setInt(2, dto.getMno());
 			ps.setLong(3, dto.getMpamount()); ps.setString(4, dto.getMpcomment());
