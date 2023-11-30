@@ -21,7 +21,7 @@
 	<div style="width:100%; background-color:purple;border:3px solid black;">
 		<div style="width:400px; display:flex; justify-content:space-between;margin-left:10px;padding:10px;">
 			<a href="./studentList.jsp">학생목록</a><a href="./registeScore.jsp">성적입력</a>
-			<a href="./">학생성적</a><a href="./index.jsp">홈으로</a>
+			<a href="./studentScoreList.jsp">학생성적</a><a href="./index.jsp">홈으로</a>
 		</div>
 	</div>
 </body>
