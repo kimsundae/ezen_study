@@ -41,3 +41,44 @@ insert into tbl_lab_test_202004( t_code, t_name )
 insert into tbl_lab_test_202004( t_code, t_name ) 
 	values( 'T005', '콜레라' );
 commit;
+
+create table tbl_result_202004(
+	p_no char(4) not null,
+	t_code char(4),
+	t_sdate date,
+	t_status char(1),
+	t_ldate date,
+	t_result char(1),
+	primary key(p_no, t_code, t_sdate)
+);
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1001', 'T001', '2020-01-01', '1', '2020-01-02', 'X' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1002', 'T002', '2020-01-01', '2', '2020-01-02', 'P' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1003', 'T003', '2020-01-01', '2', '2020-01-02', 'N' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1004', 'T004', '2020-01-01', '2', '2020-01-02', 'P' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1005', 'T005', '2020-01-01', '2', '2020-01-02', 'P' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1006', 'T001', '2020-01-01', '2', '2020-01-02', 'N' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1007', 'T002', '2020-01-01', '2', '2020-01-02', 'P' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1005', 'T003', '2020-01-01', '2', '2020-01-02', 'P' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1006', 'T004', '2020-01-01', '2', '2020-01-02', 'N' );
+insert into tbl_result_202004( p_no, t_code, t_sdate, t_status, t_ldate, t_result )
+	values( '1007', 'T005', '2020-01-01', '2', '2020-01-02', 'N' );
+
+select r.p_no, p.p_name, l.t_name, r.t_sdate, r.t_status, r.t_ldate, r.t_result from 
+	tbl_result_202004 r inner join tbl_patient_202004 p on r.p_no = p.p_no 
+	inner join tbl_lab_test_202004 l on r.t_code = l.t_code order by r.p_no asc;
+
+select p.p_city, case when p.p_city = '10' then '서울'
+		when p.p_city = '20' then '경기'
+		when p.p_city = '30' then '강원'
+		else '대구' end as p_city,
+count(*) from tbl_patient_202004 p inner join tbl_result_202004 r on p.p_no
+ = r.p_no group by p.p_city order by p.p_city asc;
