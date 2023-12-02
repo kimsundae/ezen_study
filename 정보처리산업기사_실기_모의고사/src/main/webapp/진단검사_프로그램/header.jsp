@@ -20,8 +20,8 @@ tr,th, td{padding:4px; text-align:center; border:1px solid gray;}
 	</center>
 		<div style="width:100%; background-color:purple;">
 			<div style="padding:10px;  width:600px;display:flex;justify-content:space-between;">
-				<a href="">환자조회</a><a href="">검사결과입력</a>
-				<a href="">검사결과조회</a><a href="">지역별검사건수통계</a><a href="./index.jsp">홈으로</a>
+				<a href="./searchPatient.jsp">환자조회</a><a href="./inputResultPage.jsp">검사결과입력</a>
+				<a href="./searchResult.jsp">검사결과조회</a><a href="./localSta.jsp">지역별검사건수통계</a><a href="./index.jsp">홈으로</a>
 			</div>
 		</div>
 	
